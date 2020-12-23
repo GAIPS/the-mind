@@ -10,19 +10,27 @@ public class GameManager : MonoBehaviour
     public GameObject LevelUI;
     public int Lives;
     public GameObject LivesUI;
-    public GameObject OverlayNextLevel;
-    public GameObject P0cards;
-    public GameObject P1cards;
-    public GameObject P2cards;
-    public GameObject Pile;
+    public GameObject OverlayNextLevelUI;
+    public GameObject P0cardsUI;
+    public GameObject P1cardsUI;
+    public GameObject P2cardsUI;
+    public GameObject PileUI;
     private List<int> pile;
+    public GameObject P0handUI;
+    public GameObject P1handUI;
+    public GameObject P2handUI;
+    public GameObject OverlaySyncingUI;
+    private bool p0Hand;
+    private bool p1Hand;
+    private bool p2Hand;
+    private bool syncing;
     private List<List<int>> players;
-    public GameObject OverlayMistake;
-    public GameObject ContinueButton;
-    public GameObject GameOverText;
-    public GameObject P0wrongCards;
-    public GameObject P1wrongCards;
-    public GameObject P2wrongCards;
+    public GameObject OverlayMistakeUI;
+    public GameObject ContinueButtonUI;
+    public GameObject GameOverTextUI;
+    public GameObject P0wrongCardsUI;
+    public GameObject P1wrongCardsUI;
+    public GameObject P2wrongCardsUI;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +48,33 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!OverlayNextLevel.activeSelf && !OverlayMistake.activeSelf)
+        if (!OverlayNextLevelUI.activeSelf && !OverlayMistakeUI.activeSelf)
         {
-            if (Input.GetKeyDown("a") && players[0].Count > 0)
+            //initiate syncing
+            if (Input.GetKeyDown("1") && !p0Hand)
+            {
+                p0Hand = true;
+                OverlaySyncingUI.SetActive(true);
+                P0handUI.SetActive(true);
+                CheckEndOfSync();
+            }
+            else if (Input.GetKeyDown("2") && !p1Hand)
+            {
+                p1Hand = true;
+                OverlaySyncingUI.SetActive(true);
+                P1handUI.SetActive(true);
+                CheckEndOfSync();
+            }
+            else if (Input.GetKeyDown("3") && !p2Hand)
+            {
+                p2Hand = true;
+                OverlaySyncingUI.SetActive(true);
+                P2handUI.SetActive(true);
+                CheckEndOfSync();
+            }
+
+            //normal play
+            if (!OverlaySyncingUI.activeSelf && Input.GetKeyDown("a") && players[0].Count > 0)
             {
                 int nextCard = players[0][0];
                 pile.Add(nextCard);
@@ -51,7 +83,7 @@ public class GameManager : MonoBehaviour
                 UpdatePileUI();
                 ValidateMove();
             }
-            else if (Input.GetKeyDown("l") && players[1].Count > 0)
+            else if (!OverlaySyncingUI.activeSelf && Input.GetKeyDown("l") && players[1].Count > 0)
             {
                 int nextCard = players[1][0];
                 pile.Add(nextCard);
@@ -60,7 +92,7 @@ public class GameManager : MonoBehaviour
                 UpdatePileUI();
                 ValidateMove();
             }
-            else if (Input.GetKeyDown("space") && players[2].Count > 0)
+            else if (!OverlaySyncingUI.activeSelf && Input.GetKeyDown("space") && players[2].Count > 0)
             {
                 int nextCard = players[2][0];
                 pile.Add(nextCard);
@@ -70,7 +102,7 @@ public class GameManager : MonoBehaviour
                 ValidateMove();
             }
         }
-        if (!OverlayNextLevel.activeSelf && !OverlayMistake.activeSelf)
+        if (!OverlayNextLevelUI.activeSelf && !OverlayMistakeUI.activeSelf && !OverlaySyncingUI.activeSelf)
         {
             UpdateCardsUI();
             UpdatePileUI();
@@ -102,18 +134,18 @@ public class GameManager : MonoBehaviour
         }
         if (mistake)
         {
-            P0wrongCards.GetComponent<Text>().text = wrongCardsUI[0];
-            P1wrongCards.GetComponent<Text>().text = wrongCardsUI[1];
-            P2wrongCards.GetComponent<Text>().text = wrongCardsUI[2];
+            P0wrongCardsUI.GetComponent<Text>().text = wrongCardsUI[0];
+            P1wrongCardsUI.GetComponent<Text>().text = wrongCardsUI[1];
+            P2wrongCardsUI.GetComponent<Text>().text = wrongCardsUI[2];
             Lives--;
             LivesUI.GetComponent<Text>().color = new Color(1, 0, 0);
-            Pile.GetComponent<Text>().color = new Color(1, 0, 0);
+            PileUI.GetComponent<Text>().color = new Color(1, 0, 0);
             UpdateLivesUI();
-            OverlayMistake.SetActive(true);
+            OverlayMistakeUI.SetActive(true);
             if (Lives == 0)
             {
-                ContinueButton.SetActive(false);
-                GameOverText.SetActive(true);
+                ContinueButtonUI.SetActive(false);
+                GameOverTextUI.SetActive(true);
             }
         }
     }
@@ -121,9 +153,9 @@ public class GameManager : MonoBehaviour
     public void ContinueAfterMistake()
     {
         LivesUI.GetComponent<Text>().color = new Color(0, 0, 0);
-        Pile.GetComponent<Text>().color = new Color(0, 0, 0);
+        PileUI.GetComponent<Text>().color = new Color(0, 0, 0);
         UpdateLivesUI();
-        OverlayMistake.SetActive(false);
+        OverlayMistakeUI.SetActive(false);
     }
 
     public void NextLevel()
@@ -132,14 +164,42 @@ public class GameManager : MonoBehaviour
         DealCards();
         UpdateCardsUI();
         UpdatePileUI();
-        OverlayNextLevel.SetActive(false);
+        OverlayNextLevelUI.SetActive(false);
     }
 
     void CheckEndOfLevel()
     {
         if (players[0].Count == 0 && players[1].Count == 0 && players[2].Count == 0)
         {
-            OverlayNextLevel.SetActive(true);
+            OverlayNextLevelUI.SetActive(true);
+        }
+    }
+
+    void CheckEndOfSync()
+    {
+        if (p0Hand && p1Hand && p2Hand)
+        {
+            p0Hand = false;
+            p1Hand = false;
+            p2Hand = false;
+        }
+    }
+
+    void ShrinkUntilDeactive()
+    {
+        if (OverlaySyncingUI.activeSelf)
+        {
+            Vector3 scaleChange = new Vector3(-0.01f, -0.01f, 0.00f);
+            OverlaySyncingUI.transform.localScale += scaleChange;
+            if (OverlaySyncingUI.transform.localScale.x <= 0.05 || OverlaySyncingUI.transform.localScale.y <= 0.05)
+            {
+                P0handUI.SetActive(false);
+                P1handUI.SetActive(false);
+                P2handUI.SetActive(false);
+                OverlaySyncingUI.SetActive(false);
+                OverlaySyncingUI.transform.localScale = new Vector3(1.0f, 1.0f, 0.00f);
+                CancelInvoke();
+            }
         }
     }
 
@@ -178,7 +238,7 @@ public class GameManager : MonoBehaviour
             }
         }
         text += "]";
-        P0cards.GetComponent<Text>().text = text;
+        P0cardsUI.GetComponent<Text>().text = text;
         
         text = "[";
         for (int i = 0; i < players[1].Count; i++)
@@ -190,7 +250,7 @@ public class GameManager : MonoBehaviour
             }
         }
         text += "]";
-        P1cards.GetComponent<Text>().text = text;
+        P1cardsUI.GetComponent<Text>().text = text;
 
         text = "[";
         for (int i = 0; i < players[2].Count; i++)
@@ -202,18 +262,18 @@ public class GameManager : MonoBehaviour
             }
         }
         text += "]";
-        P2cards.GetComponent<Text>().text = text;
+        P2cardsUI.GetComponent<Text>().text = text;
     }
 
     void UpdatePileUI()
     {
         if (pile.Count > 0)
         {
-            Pile.GetComponent<Text>().text = "" + pile[pile.Count - 1];
+            PileUI.GetComponent<Text>().text = "" + pile[pile.Count - 1];
         }
         else
         {
-            Pile.GetComponent<Text>().text = "-";
+            PileUI.GetComponent<Text>().text = "-";
         }
     }
 
