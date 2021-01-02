@@ -1,0 +1,65 @@
+(00:00:00.0502287) Tablet1[log]: Found Perception interface: 'IGMTablets'
+(00:00:00.0553923) Tablet1[log]: Subscribed to event 'IGMTablets.AllConnected'
+(00:00:00.0556236) Tablet1[log]: Subscribed to event 'IGMTablets.FinishRound'
+(00:00:00.0576261) Tablet1[log]: Attempt to start service on port '2000'
+(00:00:00.0580384) Tablet1[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0710814) Tablet1[log]: Creating publisher from type 'IThalamusTabletPublisher'
+(00:00:00.0712592) Tablet1[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0715972) Tablet1[log]: Announced event 'ITabletsGM.ConnectToGM'
+(00:00:00.0721653) Tablet1[log]: Registered action 'ITabletsGM.ConnectToGM' in publisher.
+(00:00:00.0722847) Tablet1[log]: Announced event 'ITabletsGM.SendBudgetAllocation'
+(00:00:00.0724133) Tablet1[log]: Registered action 'ITabletsGM.SendBudgetAllocation' in publisher.
+(00:00:00.0731210) Tablet1[log]: Announced event 'ITabletsGM.Disconnect'
+(00:00:00.0731779) Tablet1[log]: Registered action 'ITabletsGM.Disconnect' in publisher.
+(00:00:00.1152496) Tablet1[log]: XMLRPC Listening on http://*:7010/
+(00:00:00.2016359) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.2017633) Tablet1[log]: Attempt to start service on port '2001'
+(00:00:00.2018995) Tablet1[log]: Searching for Thalamus Character SERA...
+(00:00:00.2098775) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.2100012) Tablet1[log]: Attempt to start Slow service on port '2001'
+(00:00:00.2759748) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.2761026) Tablet1[log]: Attempt to start service on port '2002'
+(00:00:00.2818601) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.2819993) Tablet1[log]: Attempt to start Slow service on port '2002'
+(00:00:00.3490905) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.3492286) Tablet1[log]: Attempt to start service on port '2003'
+(00:00:00.3521959) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.3523195) Tablet1[log]: Attempt to start Slow service on port '2003'
+(00:00:00.4293966) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.4295240) Tablet1[log]: Attempt to start service on port '2004'
+(00:00:00.4293966) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.4301297) Tablet1[log]: Attempt to start Slow service on port '2004'
+(00:00:00.5111825) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.5113206) Tablet1[log]: Attempt to start service on port '2005'
+(00:00:00.5111825) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.5119346) Tablet1[log]: Attempt to start Slow service on port '2005'
+(00:00:00.5887640) Tablet1[log]: Slow XMLRPC Listening on port 2005
+(00:00:00.5890985) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.5893458) Tablet1[log]: Attempt to start service on port '2006'
+(00:00:00.6614516) Tablet1[log]: Fast XMLRPC Listening on port 2006 c: SERA
+(00:00:00.9872911) Tablet1[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:00.9909759) Tablet1[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:00.9915915) Tablet1[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:00.9918649) Tablet1[log]: Connecting... f: 2006 s: 2005
+(00:00:01.0394051) Tablet1[log]: Connected with clientId '27a2f0ca-f598-4fe3-8acd-333c698fce68'
+(00:00:01.0835972) Tablet1[log]: Performing registration...
+(00:00:01.0973585) Tablet1[log]: Cleared subscriptions of character SERA.
+(00:00:01.0974852) Tablet1[log]: Announcing event information...
+(00:00:01.1132502) Tablet1[log]: Done.
+(00:00:01.1134311) Tablet1[log]: Announcing and Subscribing to events...
+(00:00:01.1653653) Tablet1[log]: Done.
+(00:00:02.1628141) Tablet1[log]: 2.1623775::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=27a2f0ca-f598-4fe3-8acd-333c698fce68;port=2007;]
+(00:03:08.4866520) Tablet1[log]: 188.4866376::Received:IGMTablets.FinishRound:(IGMTablets.FinishRound):[envAllocations=123;]
+(00:03:23.1053497) Tablet1[log]: Sending Master a Disconnect message...
+(00:03:23.1735082) Tablet1[log]: Sent disconnect message.
+(00:03:23.1738533) Tablet1[log]: Set shutdown flag.
+(00:03:23.1892162) Tablet1[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(00:03:23.1892344) Tablet1[log]: Terminated SendMessagesDispatcher
+(00:03:23.1892234) Tablet1[log]: Terminated ReceiveMessagesDispatcher
+(00:03:23.1892155) Tablet1[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(00:03:23.3923225) Tablet1[log]: Terminated AutoDiscoveryClient
+(00:03:23.3929730) Tablet1[log]: Stopped Fast HTTP listener.
+(00:03:23.3931785) Tablet1[log]: Terminated FastHttpListenerThread
+(00:03:23.3932991) Tablet1[log]: Stopped Slow HTTP listener.
+(00:03:23.3934618) Tablet1[log]: Terminated SlowHttpListenerThread
+(00:03:23.4080511) Tablet1[log]: Dumped log to 'Logs\Tablet1.2021-1-2at14-20-19-662.log'

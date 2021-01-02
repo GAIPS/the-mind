@@ -1,0 +1,54 @@
+(00:00:00.0071220) GameMaster[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0124764) GameMaster[log]: Subscribed to event 'ITabletsGM.ConnectToGM'
+(00:00:00.0126368) GameMaster[log]: Subscribed to event 'ITabletsGM.SendBudgetAllocation'
+(00:00:00.0128219) GameMaster[log]: Subscribed to event 'ITabletsGM.Disconnect'
+(00:00:00.0148205) GameMaster[log]: Attempt to start service on port '2000'
+(00:00:00.0151524) GameMaster[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0182858) GameMaster[log]: Creating publisher from type 'IThalamusGameMasterPublisher'
+(00:00:00.0184163) GameMaster[log]: Found Perception interface: 'TheMindThalamusMessages.IGMTablets'
+(00:00:00.0187804) GameMaster[log]: Announced event 'IGMTablets.AllConnected'
+(00:00:00.0194384) GameMaster[log]: Registered perception 'IGMTablets.AllConnected' in publisher.
+(00:00:00.0197865) GameMaster[log]: Announced event 'IGMTablets.FinishRound'
+(00:00:00.0198673) GameMaster[log]: Registered perception 'IGMTablets.FinishRound' in publisher.
+(00:00:00.0606579) GameMaster[log]: XMLRPC Listening on http://*:7000/
+(00:00:00.1256355) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.1256682) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.1256841) GameMaster[log]: Searching for Thalamus Character SERA...
+(00:00:00.1261119) GameMaster[log]: Attempt to start service on port '2001'
+(00:00:00.1260228) GameMaster[log]: Attempt to start Slow service on port '2001'
+(00:00:00.2064923) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.2066387) GameMaster[log]: Attempt to start Slow service on port '2002'
+(00:00:00.2064965) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.2072762) GameMaster[log]: Attempt to start service on port '2002'
+(00:00:00.2869292) GameMaster[log]: Fast XMLRPC Listening on port 2002 c: SERA
+(00:00:00.2871526) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.2874579) GameMaster[log]: Attempt to start Slow service on port '2003'
+(00:00:00.3610132) GameMaster[log]: Slow XMLRPC Listening on port 2003
+(00:00:01.1070349) GameMaster[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:01.1111130) GameMaster[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:01.1118260) GameMaster[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:01.1123282) GameMaster[log]: Connecting... f: 2002 s: 2003
+(00:00:01.1588580) GameMaster[log]: Connected with clientId '1d972821-8992-4dec-aa50-0bdfc4e987dc'
+(00:00:01.2184548) GameMaster[log]: Performing registration...
+(00:00:01.2337062) GameMaster[log]: Cleared subscriptions of character SERA.
+(00:00:01.2340256) GameMaster[log]: Announcing event information...
+(00:00:01.2497124) GameMaster[log]: Done.
+(00:00:01.2499870) GameMaster[log]: Announcing and Subscribing to events...
+(00:00:01.3036290) GameMaster[log]: Done.
+(00:00:01.9766127) GameMaster[log]: 1.9761527::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=1d972821-8992-4dec-aa50-0bdfc4e987dc;port=2004;]
+(00:00:20.0824967) GameMaster[log]: 20.0824857::Received:IThalamusClient.NewClientConnected:(IThalamusClient.NewClientConnected):[name=Tablet1;newClientUid=27a2f0ca-f598-4fe3-8acd-333c698fce68;]
+(00:02:53.4022225) GameMaster[log]: 173.4022066::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[id=1;name=adwd;]
+(00:03:08.4597955) GameMaster[log]: 188.4597886:Sent::IGMTablets.FinishRound:(IGMTablets.FinishRound):[envAllocations=123;]
+(00:03:24.4473371) GameMaster[log]: Sending Master a Disconnect message...
+(00:03:24.4873442) GameMaster[log]: Sent disconnect message.
+(00:03:24.4877621) GameMaster[log]: Set shutdown flag.
+(00:03:24.5113500) GameMaster[log]: Terminated SendMessagesDispatcher
+(00:03:24.5113636) GameMaster[log]: Terminated ReceiveMessagesDispatcher
+(00:03:24.5113500) GameMaster[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(00:03:24.5113947) GameMaster[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(00:03:25.3395012) GameMaster[log]: Terminated AutoDiscoveryClient
+(00:03:25.3402461) GameMaster[log]: Stopped Fast HTTP listener.
+(00:03:25.3404384) GameMaster[log]: Terminated FastHttpListenerThread
+(00:03:25.3405920) GameMaster[log]: Stopped Slow HTTP listener.
+(00:03:25.3407592) GameMaster[log]: Terminated SlowHttpListenerThread
+(00:03:25.3552821) GameMaster[log]: Dumped log to 'Logs\GameMaster.2021-1-2at14-20-12-466.log'

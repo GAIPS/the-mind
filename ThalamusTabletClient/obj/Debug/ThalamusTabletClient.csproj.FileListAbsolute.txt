@@ -1,0 +1,11 @@
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\obj\Debug\ThalamusTabletClient.csprojAssemblyReference.cache
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\ThalamusTabletClient.exe.config
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\ThalamusTabletClient.exe
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\ThalamusTabletClient.pdb
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\CookComputing.XmlRpcV2.dll
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\Thalamus.dll
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\TheMindThalamusMessages.dll
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\bin\Debug\TheMindThalamusMessages.pdb
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\obj\Debug\ThalamusTabletClient.csproj.CopyComplete
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\obj\Debug\ThalamusTabletClient.exe
+C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\obj\Debug\ThalamusTabletClient.pdb
