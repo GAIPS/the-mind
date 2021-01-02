@@ -1,0 +1,52 @@
+(00:00:00.0143874) GameMaster[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0204571) GameMaster[log]: Subscribed to event 'ITabletsGM.ConnectToGM'
+(00:00:00.0205799) GameMaster[log]: Subscribed to event 'ITabletsGM.SendBudgetAllocation'
+(00:00:00.0207275) GameMaster[log]: Subscribed to event 'ITabletsGM.Disconnect'
+(00:00:00.0260359) GameMaster[log]: Attempt to start service on port '2000'
+(00:00:00.0277039) GameMaster[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0548647) GameMaster[log]: Creating publisher from type 'IThalamusGameMasterPublisher'
+(00:00:00.0550748) GameMaster[log]: Found Perception interface: 'TheMindThalamusMessages.IGMTablets'
+(00:00:00.0554769) GameMaster[log]: Announced event 'IGMTablets.AllConnected'
+(00:00:00.0564174) GameMaster[log]: Registered perception 'IGMTablets.AllConnected' in publisher.
+(00:00:00.0589315) GameMaster[log]: Announced event 'IGMTablets.FinishRound'
+(00:00:00.0591257) GameMaster[log]: Registered perception 'IGMTablets.FinishRound' in publisher.
+(00:00:00.3326975) GameMaster[log]: Searching for Thalamus Character SERA...
+(00:00:00.3678470) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.3680116) GameMaster[log]: Attempt to start Slow service on port '2001'
+(00:00:00.3710847) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.3713881) GameMaster[log]: Attempt to start service on port '2001'
+(00:00:00.5855896) GameMaster[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:01.0203046) GameMaster[log]: Port -1 unavaliable.
+(00:00:01.0379719) GameMaster[log]: Attempt to start service on port '2002'
+(00:00:01.0490397) GameMaster[log]: Slow Port unavaliable.
+(00:00:01.0494300) GameMaster[log]: Attempt to start Slow service on port '2002'
+(00:00:01.3278980) GameMaster[log]: Fast XMLRPC Listening on port 2002 c: SERA
+(00:00:01.3510649) GameMaster[log]: Slow Port unavaliable.
+(00:00:01.3512830) GameMaster[log]: Attempt to start Slow service on port '2003'
+(00:00:01.5938055) GameMaster[log]: Slow XMLRPC Listening on port 2003
+(00:00:01.6831932) GameMaster[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:01.6870404) GameMaster[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:01.6889481) GameMaster[log]: Connecting... f: 2002 s: 2003
+(00:00:02.0252308) GameMaster[log]: Connected with clientId '56c668b7-8b68-4756-9abb-5a7fa6d8973d'
+(00:00:02.1365653) GameMaster[log]: Performing registration...
+(00:00:02.1542542) GameMaster[log]: Cleared subscriptions of character SERA.
+(00:00:02.1682492) GameMaster[log]: Announcing event information...
+(00:00:02.1997817) GameMaster[log]: Done.
+(00:00:02.1999744) GameMaster[log]: Announcing and Subscribing to events...
+(00:00:02.2194234) GameMaster[log]: Done.
+(00:00:03.0936987) GameMaster[log]: 3.0912294::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=56c668b7-8b68-4756-9abb-5a7fa6d8973d;port=2004;]
+(00:11:50.2980821) GameMaster[log]: 710.29807::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[id=2;name=filipa;]
+(00:12:16.9443742) GameMaster[log]: XMLRPC Listening on http://*:9050/
+(00:12:37.2325212) GameMaster[log]: Sending Master a Disconnect message...
+(00:12:37.2590547) GameMaster[log]: Sent disconnect message.
+(00:12:37.2594006) GameMaster[log]: Set shutdown flag.
+(00:12:37.2629364) GameMaster[log]: Terminated ReceiveMessagesDispatcher
+(00:12:37.2629512) GameMaster[log]: Terminated SendMessagesDispatcher
+(00:12:37.2629524) GameMaster[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(00:12:37.2667901) GameMaster[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(00:12:38.1340377) GameMaster[log]: Terminated AutoDiscoveryClient
+(00:12:38.1359086) GameMaster[log]: Stopped Fast HTTP listener.
+(00:12:38.1414693) GameMaster[log]: Stopped Slow HTTP listener.
+(00:12:38.1521681) GameMaster[log]: Terminated FastHttpListenerThread
+(00:12:38.1590478) GameMaster[log]: Terminated SlowHttpListenerThread
+(00:12:38.1747183) GameMaster[log]: Dumped log to 'Logs\GameMaster.2021-1-2at11-58- 3-876.log'

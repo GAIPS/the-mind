@@ -1,0 +1,37 @@
+(00:00:00.0153727) GameMaster[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0216464) GameMaster[log]: Subscribed to event 'ITabletsGM.ConnectToGM'
+(00:00:00.0217818) GameMaster[log]: Subscribed to event 'ITabletsGM.SendBudgetAllocation'
+(00:00:00.0219214) GameMaster[log]: Subscribed to event 'ITabletsGM.Disconnect'
+(00:00:00.0662352) GameMaster[log]: Attempt to start service on port '2000'
+(00:00:00.0663960) GameMaster[log]: Attempt to start Slow service on port '2000'
+(00:00:00.1363731) GameMaster[log]: Creating publisher from type 'IThalamusGameMasterPublisher'
+(00:00:00.1365816) GameMaster[log]: Found Perception interface: 'TheMindThalamusMessages.IGMTablets'
+(00:00:00.1369950) GameMaster[log]: Announced event 'IGMTablets.AllConnected'
+(00:00:00.1375753) GameMaster[log]: Registered perception 'IGMTablets.AllConnected' in publisher.
+(00:00:00.1381135) GameMaster[log]: Announced event 'IGMTablets.FinishRound'
+(00:00:00.1382212) GameMaster[log]: Registered perception 'IGMTablets.FinishRound' in publisher.
+(00:00:00.4247662) GameMaster[log]: Searching for Thalamus Character SERA...
+(00:00:00.4619285) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.4620946) GameMaster[log]: Attempt to start Slow service on port '2001'
+(00:00:00.4658735) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.4660893) GameMaster[log]: Attempt to start service on port '2001'
+(00:00:00.7784591) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.7786639) GameMaster[log]: Attempt to start service on port '2002'
+(00:00:00.7784572) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.7806565) GameMaster[log]: Attempt to start Slow service on port '2002'
+(00:00:01.0529597) GameMaster[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:01.0929512) GameMaster[log]: Fast XMLRPC Listening on port 2002 c: SERA
+(00:00:01.2048770) GameMaster[log]: Slow Port unavaliable.
+(00:00:01.2185034) GameMaster[log]: Attempt to start Slow service on port '2003'
+(00:00:01.7629137) GameMaster[log]: Slow XMLRPC Listening on port 2003
+(00:00:01.9089988) GameMaster[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:01.9112440) GameMaster[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:01.9115270) GameMaster[log]: Connecting... f: 2002 s: 2003
+(00:00:02.2904468) GameMaster[log]: Connected with clientId '4904be5b-6550-494e-84c9-eeabcc2bf321'
+(00:00:02.3897100) GameMaster[log]: Performing registration...
+(00:00:02.4195003) GameMaster[log]: Cleared subscriptions of character SERA.
+(00:00:02.4216419) GameMaster[log]: Announcing event information...
+(00:00:02.4450515) GameMaster[log]: Done.
+(00:00:02.4467495) GameMaster[log]: Announcing and Subscribing to events...
+(00:00:02.5206962) GameMaster[log]: Done.
+(00:00:03.4014920) GameMaster[log]: 3.3935857::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=4904be5b-6550-494e-84c9-eeabcc2bf321;port=2004;]

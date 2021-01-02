@@ -1,0 +1,62 @@
+(00:00:00.0145334) GameMaster[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0207608) GameMaster[log]: Subscribed to event 'ITabletsGM.ConnectToGM'
+(00:00:00.0208981) GameMaster[log]: Subscribed to event 'ITabletsGM.SendBudgetAllocation'
+(00:00:00.0210369) GameMaster[log]: Subscribed to event 'ITabletsGM.Disconnect'
+(00:00:00.0769981) GameMaster[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0770664) GameMaster[log]: Attempt to start service on port '2000'
+(00:00:00.0838642) GameMaster[log]: Creating publisher from type 'IThalamusGameMasterPublisher'
+(00:00:00.0840739) GameMaster[log]: Found Perception interface: 'TheMindThalamusMessages.IGMTablets'
+(00:00:00.0844388) GameMaster[log]: Announced event 'IGMTablets.AllConnected'
+(00:00:00.0850096) GameMaster[log]: Registered perception 'IGMTablets.AllConnected' in publisher.
+(00:00:00.0856509) GameMaster[log]: Announced event 'IGMTablets.FinishRound'
+(00:00:00.1067277) GameMaster[log]: Registered perception 'IGMTablets.FinishRound' in publisher.
+(00:00:00.3903157) GameMaster[log]: Searching for Thalamus Character SERA...
+(00:00:00.4557875) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.4578587) GameMaster[log]: Attempt to start Slow service on port '2001'
+(00:00:00.5503806) GameMaster[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:00.5886874) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.5893492) GameMaster[log]: Attempt to start service on port '2001'
+(00:00:01.1983284) GameMaster[log]: Slow Port unavaliable.
+(00:00:01.1985321) GameMaster[log]: Attempt to start Slow service on port '2002'
+(00:00:01.2876767) GameMaster[log]: Port -1 unavaliable.
+(00:00:01.2878876) GameMaster[log]: Attempt to start service on port '2002'
+(00:00:01.5929241) GameMaster[log]: Fast XMLRPC Listening on port 2002 c: SERA
+(00:00:01.6149714) GameMaster[log]: Slow Port unavaliable.
+(00:00:01.6152342) GameMaster[log]: Attempt to start Slow service on port '2003'
+(00:00:01.8066303) GameMaster[log]: Slow XMLRPC Listening on port 2003
+(00:00:01.8729387) GameMaster[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:01.8834119) GameMaster[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:01.8837692) GameMaster[log]: Connecting... f: 2002 s: 2003
+(00:00:02.1528904) GameMaster[log]: Connected with clientId '879fba72-b349-445f-9282-a3180a142e05'
+(00:00:02.2515905) GameMaster[log]: Performing registration...
+(00:00:02.2762205) GameMaster[log]: Cleared subscriptions of character SERA.
+(00:00:02.2778077) GameMaster[log]: Announcing event information...
+(00:00:02.2881918) GameMaster[log]: Done.
+(00:00:02.2900827) GameMaster[log]: Announcing and Subscribing to events...
+(00:00:02.3408019) GameMaster[log]: Done.
+(00:00:03.2286576) GameMaster[log]: 3.2243147::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=879fba72-b349-445f-9282-a3180a142e05;port=2004;]
+(00:01:27.2442001) GameMaster[log]: 87.24415::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[id=2;name=filipa;]
+(00:01:28.4001812) GameMaster[error]: Exception in ReceiveEvent: Exception has been thrown by the target of an invocation.: System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.100:7002
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(Object clientObj, MethodInfo mi, Object[] parameters)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(MethodInfo mi, Object[] Parameters)
+   at XmlRpcProxy3c9bc576-9878-47df-8e64-ee254e82bb6a.ConnectToGM(Int32 id, String name)
+   at ThalamusConnector.ConnectToGM(Int32 id, String name) in C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\ThalamusConnector.cs:line 47.
+(00:01:46.4163142) GameMaster[log]: XMLRPC Listening on http://*:9050/
+(00:02:00.3671705) GameMaster[log]: Sending Master a Disconnect message...
+(00:02:00.3914330) GameMaster[log]: Sent disconnect message.
+(00:02:00.3917106) GameMaster[log]: Set shutdown flag.
+(00:02:00.3978163) GameMaster[log]: Terminated SendMessagesDispatcher
+(00:02:00.3978057) GameMaster[log]: Terminated ReceiveMessagesDispatcher
+(00:02:00.3978049) GameMaster[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(00:02:00.3978053) GameMaster[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(00:02:00.7031058) GameMaster[log]: Terminated AutoDiscoveryClient
+(00:02:00.7044612) GameMaster[log]: Stopped Fast HTTP listener.
+(00:02:00.7069886) GameMaster[log]: Stopped Slow HTTP listener.
+(00:02:00.7186534) GameMaster[log]: Terminated FastHttpListenerThread
+(00:02:00.7239580) GameMaster[log]: Terminated SlowHttpListenerThread
+(00:02:00.7423289) GameMaster[log]: Dumped log to 'Logs\GameMaster.2021-1-2at11-47-36-464.log'
