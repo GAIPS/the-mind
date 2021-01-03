@@ -14,17 +14,29 @@ public interface IUnityPublisher : IGMTablets
     [XmlRpcMethod]
     new void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
     [XmlRpcMethod]
-    new void FinishRound(int[] envAllocations);
+    new void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand);
+    [XmlRpcMethod]
+    new void FinishLevel(int level, int teamLives);
+    [XmlRpcMethod]
+    new void AllRefocused();
+    [XmlRpcMethod]
+    new void CardPlayed(int playerID, int card);
+    [XmlRpcMethod]
+    new void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    [XmlRpcMethod]
+    new void GameOver(int level);
+    [XmlRpcMethod]
+    new void GameCompleted();
 }
 
 public interface IUnitySubscriber : ITabletsGM
 {
     [XmlRpcMethod]
-    new void ConnectToGM(int id, string name);
+    new void ConnectToGM(int playerID, string name);
     [XmlRpcMethod]
-    new void SendBudgetAllocation(int economyAllocation, int environmentAllocation);
+    new void PlayCard(int playerID, int card);
     [XmlRpcMethod]
-    new void Disconnect(int id);
+    new void RefocusSignal(int playerID);
 }
 
 public abstract class ThalamusConnector
@@ -221,18 +233,18 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
             _thalamusConnector = connectorRef;
         }
 
-        public void ConnectToGM(int id, string name)
+        public void ConnectToGM(int playerID, string name)
         {
             //throw new NotImplementedException();
-            Debug.Log("------------ Received a ConnectToGM(" + id + ", " + name);
+            Debug.Log("------------ Received a ConnectToGM(" + playerID + ", " + name);
         }
 
-        public void Disconnect(int id)
+        public void PlayCard(int playerID, int card)
         {
             //throw new NotImplementedException();
         }
 
-        public void SendBudgetAllocation(int economyAllocation, int environmentAllocation)
+        public void RefocusSignal(int playerID)
         {
             //throw new NotImplementedException();
         }
@@ -262,10 +274,40 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
     public void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
     {
         _rpcProxy.AllConnected(p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
-        }
+    }
 
-    public void FinishRound(int[] envAllocations)
+    public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
     {
-        _rpcProxy.FinishRound(envAllocations);
+        _rpcProxy.StartLevel(level, teamLives, p0Hand, p1Hand, p2Hand);
+    }
+
+    public void FinishLevel(int level, int teamLives)
+    {
+        _rpcProxy.FinishLevel(level, teamLives);
+    }
+
+    public void AllRefocused()
+    {
+        _rpcProxy.AllRefocused();
+    }
+
+    public void CardPlayed(int playerID, int card)
+    {
+        _rpcProxy.CardPlayed(playerID, card);
+    }
+
+    public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    {
+        _rpcProxy.Mistake(playerID, p0WrongCards, p1WrongCards, p2wrongCards);
+    }
+
+    public void GameOver(int level)
+    {
+        _rpcProxy.GameOver(level);
+    }
+
+    public void GameCompleted()
+    {
+        _rpcProxy.GameCompleted();
     }
 }

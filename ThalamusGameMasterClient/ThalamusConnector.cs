@@ -23,9 +23,39 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
             _publisher.AllConnected(p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
         }
 
-        public void FinishRound(int[] envAllocations)
+        public void AllRefocused()
         {
-            _publisher.FinishRound(envAllocations);
+            _publisher.AllRefocused();
+        }
+
+        public void CardPlayed(int playerID, int card)
+        {
+            _publisher.CardPlayed(playerID, card);
+        }
+
+        public void FinishLevel(int level, int teamLives)
+        {
+            _publisher.FinishLevel(level, teamLives);
+        }
+
+        public void GameCompleted()
+        {
+            _publisher.GameCompleted();
+        }
+
+        public void GameOver(int level)
+        {
+            _publisher.GameOver(level);
+        }
+
+        public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+        {
+            _publisher.Mistake(playerID, p0WrongCards, p1WrongCards, p2wrongCards);
+        }
+
+        public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
+        {
+            _publisher.StartLevel(level, teamLives, p0Hand, p1Hand, p2Hand);
         }
     }
 
@@ -42,18 +72,18 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
         base.Dispose();
     }
 
-    public void ConnectToGM(int id, string name)
+    public void ConnectToGM(int playerID, string name)
     {
-        UnityConnector.RPCProxy.ConnectToGM(id, name);
+        UnityConnector.RPCProxy.ConnectToGM(playerID, name);
     }
 
-    public void SendBudgetAllocation(int tabletID, int envAllocation)
+    public void PlayCard(int playerID, int card)
     {
-        UnityConnector.RPCProxy.SendBudgetAllocation(tabletID, envAllocation);
+        UnityConnector.RPCProxy.PlayCard(playerID, card);
     }
 
-    public void Disconnect(int id)
+    public void RefocusSignal(int playerID)
     {
-        UnityConnector.RPCProxy.Disconnect(id);
+        UnityConnector.RPCProxy.RefocusSignal(playerID);
     }
 }

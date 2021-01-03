@@ -16,19 +16,19 @@ public class UnityListener : XmlRpcListenerService, IUnityTabletSubscriber
 
     public void Dispose() { }
 
-    public void ConnectToGM(int id, string name)
+    public void ConnectToGM(int playerID, string name)
     {
-        _thalamusCS.TypifiedPublisher.ConnectToGM(id, name);
+        _thalamusCS.TypifiedPublisher.ConnectToGM(playerID, name);
     }
 
-    public void SendBudgetAllocation(int tabletID, int envAllocation)
+    public void PlayCard(int playerID, int card)
     {
-        _thalamusCS.TypifiedPublisher.SendBudgetAllocation(tabletID, envAllocation);
+        _thalamusCS.TypifiedPublisher.PlayCard(playerID, card);
     }
 
-    public void Disconnect(int id)
+    public void RefocusSignal(int playerID)
     {
-        _thalamusCS.TypifiedPublisher.Disconnect(id);
+        _thalamusCS.TypifiedPublisher.RefocusSignal(playerID);
     }
 }
 

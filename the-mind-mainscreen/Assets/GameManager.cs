@@ -164,7 +164,6 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        _thalamusConnector.FinishRound(new int[3] { 1, 2, 3 });
         UpdateLevelUI();
         DealCards();
         UpdateCardsUI();

@@ -21,9 +21,39 @@ public class UnityListener : XmlRpcListenerService, IUnityThalamusSubscriber
         _thalamusCS.TypifiedPublisher.AllConnected(p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
     }
 
-    public void FinishRound(int[] envAllocations)
+    public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
     {
-        _thalamusCS.TypifiedPublisher.FinishRound(envAllocations);
+        _thalamusCS.TypifiedPublisher.StartLevel(level, teamLives, p0Hand, p1Hand, p2Hand);
+    }
+
+    public void FinishLevel(int level, int teamLives)
+    {
+        _thalamusCS.TypifiedPublisher.FinishLevel(level, teamLives);
+    }
+
+    public void AllRefocused()
+    {
+        _thalamusCS.TypifiedPublisher.AllRefocused();
+    }
+
+    public void CardPlayed(int playerID, int card)
+    {
+        _thalamusCS.TypifiedPublisher.CardPlayed(playerID, card);
+    }
+
+    public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    {
+        _thalamusCS.TypifiedPublisher.Mistake(playerID, p0WrongCards, p1WrongCards, p2wrongCards);
+    }
+
+    public void GameOver(int level)
+    {
+        _thalamusCS.TypifiedPublisher.GameOver(level);
+    }
+
+    public void GameCompleted()
+    {
+        _thalamusCS.TypifiedPublisher.GameCompleted();
     }
 }
 

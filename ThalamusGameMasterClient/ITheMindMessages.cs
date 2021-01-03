@@ -14,16 +14,28 @@ public interface IUnityThalamusSubscriber : IGMTablets
     [XmlRpcMethod]
     new void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
     [XmlRpcMethod]
-    new void FinishRound(int[] envAllocations);
+    new void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand);
+    [XmlRpcMethod]
+    new void FinishLevel(int level, int teamLives);
+    [XmlRpcMethod]
+    new void AllRefocused();
+    [XmlRpcMethod]
+    new void CardPlayed(int playerID, int card);
+    [XmlRpcMethod]
+    new void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    [XmlRpcMethod]
+    new void GameOver(int level);
+    [XmlRpcMethod]
+    new void GameCompleted();
 
 }
 
 public interface IUnityThalamusPublisher : ITabletsGM, IXmlRpcProxy
 {
     [XmlRpcMethod]
-    new void ConnectToGM(int id, string name);
+    new void ConnectToGM(int playerID, string name);
     [XmlRpcMethod]
-    new void SendBudgetAllocation(int tabletID, int envAllocation);
+    new void PlayCard(int playerID, int card);
     [XmlRpcMethod]
-    new void Disconnect(int id);
+    new void RefocusSignal(int playerID);
 }
