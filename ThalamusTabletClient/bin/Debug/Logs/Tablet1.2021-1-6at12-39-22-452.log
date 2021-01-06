@@ -1,0 +1,47 @@
+(00:00:00.0076124) Tablet1[log]: Found Perception interface: 'IGMTablets'
+(00:00:00.0127801) Tablet1[log]: Subscribed to event 'IGMTablets.AllConnected'
+(00:00:00.0130357) Tablet1[log]: Subscribed to event 'IGMTablets.StartLevel'
+(00:00:00.0131704) Tablet1[log]: Subscribed to event 'IGMTablets.FinishLevel'
+(00:00:00.0132902) Tablet1[log]: Subscribed to event 'IGMTablets.AllRefocused'
+(00:00:00.0134203) Tablet1[log]: Subscribed to event 'IGMTablets.RefocusRequest'
+(00:00:00.0135614) Tablet1[log]: Subscribed to event 'IGMTablets.CardPlayed'
+(00:00:00.0136941) Tablet1[log]: Subscribed to event 'IGMTablets.Mistake'
+(00:00:00.0138254) Tablet1[log]: Subscribed to event 'IGMTablets.GameOver'
+(00:00:00.0139433) Tablet1[log]: Subscribed to event 'IGMTablets.GameCompleted'
+(00:00:00.0161001) Tablet1[log]: Attempt to start service on port '2000'
+(00:00:00.0162367) Tablet1[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0197201) Tablet1[log]: Creating publisher from type 'IThalamusTabletPublisher'
+(00:00:00.0199773) Tablet1[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0203584) Tablet1[log]: Announced event 'ITabletsGM.ConnectToGM'
+(00:00:00.0208901) Tablet1[log]: Registered action 'ITabletsGM.ConnectToGM' in publisher.
+(00:00:00.0210384) Tablet1[log]: Announced event 'ITabletsGM.PlayCard'
+(00:00:00.0211916) Tablet1[log]: Registered action 'ITabletsGM.PlayCard' in publisher.
+(00:00:00.0216202) Tablet1[log]: Announced event 'ITabletsGM.RefocusSignal'
+(00:00:00.0218250) Tablet1[log]: Registered action 'ITabletsGM.RefocusSignal' in publisher.
+(00:00:00.0628438) Tablet1[log]: XMLRPC Listening on http://*:7010/
+(00:00:00.1380988) Tablet1[log]: Searching for Thalamus Character SERA...
+(00:00:00.1386211) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.1393185) Tablet1[log]: Attempt to start Slow service on port '2001'
+(00:00:00.1396758) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.1401620) Tablet1[log]: Attempt to start service on port '2001'
+(00:00:00.2200212) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.2201558) Tablet1[log]: Attempt to start service on port '2002'
+(00:00:00.2200212) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.2207342) Tablet1[log]: Attempt to start Slow service on port '2002'
+(00:00:00.3022079) Tablet1[log]: Fast XMLRPC Listening on port 2002 c: SERA
+(00:00:00.3027202) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.3028177) Tablet1[log]: Attempt to start Slow service on port '2003'
+(00:00:00.3707637) Tablet1[log]: Slow XMLRPC Listening on port 2003
+(00:00:00.7927096) Tablet1[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:00.8012262) Tablet1[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:00.8161461) Tablet1[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:00.8175664) Tablet1[log]: Connecting... f: 2002 s: 2003
+(00:00:00.8942050) Tablet1[log]: Connected with clientId 'cfd6178e-c462-46ea-9859-3e7f5987a123'
+(00:00:00.9358966) Tablet1[log]: Performing registration...
+(00:00:00.9506622) Tablet1[log]: Cleared subscriptions of character SERA.
+(00:00:00.9508233) Tablet1[log]: Announcing event information...
+(00:00:00.9784066) Tablet1[log]: Done.
+(00:00:00.9785936) Tablet1[log]: Announcing and Subscribing to events...
+(00:00:01.0133316) Tablet1[log]: Done.
+(00:00:01.6535829) Tablet1[log]: 1.6531563::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=cfd6178e-c462-46ea-9859-3e7f5987a123;port=2004;]
+(00:01:59.0201242) Tablet1[log]: 119.0201173:Sent::ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet0;]

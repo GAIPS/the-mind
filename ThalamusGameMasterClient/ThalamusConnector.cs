@@ -54,9 +54,9 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
             _publisher.GameOver(level);
         }
 
-        public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+        public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
         {
-            _publisher.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
+            _publisher.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2WrongCards);
         }
 
         public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)

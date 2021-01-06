@@ -1,0 +1,293 @@
+(00:00:00.0617633) GameMaster[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0676365) GameMaster[log]: Subscribed to event 'ITabletsGM.ConnectToGM'
+(00:00:00.0677878) GameMaster[log]: Subscribed to event 'ITabletsGM.PlayCard'
+(00:00:00.0678636) GameMaster[log]: Subscribed to event 'ITabletsGM.RefocusSignal'
+(00:00:00.0793991) GameMaster[log]: Attempt to start service on port '2000'
+(00:00:00.0825951) GameMaster[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0949095) GameMaster[log]: Creating publisher from type 'IThalamusGameMasterPublisher'
+(00:00:00.0950874) GameMaster[log]: Found Perception interface: 'TheMindThalamusMessages.IGMTablets'
+(00:00:00.0954371) GameMaster[log]: Announced event 'IGMTablets.AllConnected'
+(00:00:00.0959832) GameMaster[log]: Registered perception 'IGMTablets.AllConnected' in publisher.
+(00:00:00.0962476) GameMaster[log]: Announced event 'IGMTablets.StartLevel'
+(00:00:00.0963192) GameMaster[log]: Registered perception 'IGMTablets.StartLevel' in publisher.
+(00:00:00.0964250) GameMaster[log]: Announced event 'IGMTablets.FinishLevel'
+(00:00:00.0964903) GameMaster[log]: Registered perception 'IGMTablets.FinishLevel' in publisher.
+(00:00:00.0965912) GameMaster[log]: Announced event 'IGMTablets.AllRefocused'
+(00:00:00.0966534) GameMaster[log]: Registered perception 'IGMTablets.AllRefocused' in publisher.
+(00:00:00.0968255) GameMaster[log]: Announced event 'IGMTablets.RefocusRequest'
+(00:00:00.0972662) GameMaster[log]: Registered perception 'IGMTablets.RefocusRequest' in publisher.
+(00:00:00.0976049) GameMaster[log]: Announced event 'IGMTablets.CardPlayed'
+(00:00:00.0978469) GameMaster[log]: Registered perception 'IGMTablets.CardPlayed' in publisher.
+(00:00:00.0981764) GameMaster[log]: Announced event 'IGMTablets.Mistake'
+(00:00:00.0984010) GameMaster[log]: Registered perception 'IGMTablets.Mistake' in publisher.
+(00:00:00.0986983) GameMaster[log]: Announced event 'IGMTablets.GameOver'
+(00:00:00.0989380) GameMaster[log]: Registered perception 'IGMTablets.GameOver' in publisher.
+(00:00:00.0992277) GameMaster[log]: Announced event 'IGMTablets.GameCompleted'
+(00:00:00.0994708) GameMaster[log]: Registered perception 'IGMTablets.GameCompleted' in publisher.
+(00:00:00.1512787) GameMaster[log]: XMLRPC Listening on http://*:7000/
+(00:00:00.2382494) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.2384257) GameMaster[log]: Attempt to start service on port '2001'
+(00:00:00.2444343) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.2446569) GameMaster[log]: Attempt to start Slow service on port '2001'
+(00:00:00.2492167) GameMaster[log]: Searching for Thalamus Character SERA...
+(00:00:00.3325218) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.3326872) GameMaster[log]: Attempt to start service on port '2002'
+(00:00:00.3366743) GameMaster[log]: Slow Port unavaliable.
+(00:00:00.3368108) GameMaster[log]: Attempt to start Slow service on port '2002'
+(00:00:00.4387328) GameMaster[log]: Slow XMLRPC Listening on port 2002
+(00:00:00.4465812) GameMaster[log]: Port -1 unavaliable.
+(00:00:00.4467340) GameMaster[log]: Attempt to start service on port '2003'
+(00:00:00.5324307) GameMaster[log]: Fast XMLRPC Listening on port 2003 c: SERA
+(00:00:00.6593761) GameMaster[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:00.6617233) GameMaster[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:00.6620289) GameMaster[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:00.6622580) GameMaster[log]: Connecting... f: 2003 s: 2002
+(00:00:00.7798479) GameMaster[log]: Connected with clientId '7352e93a-10e7-4968-9619-04b5afed48de'
+(00:00:00.9053520) GameMaster[log]: Performing registration...
+(00:00:00.9688403) GameMaster[log]: Cleared subscriptions of character SERA.
+(00:00:00.9690030) GameMaster[log]: Announcing event information...
+(00:00:00.9835842) GameMaster[log]: Done.
+(00:00:00.9838053) GameMaster[log]: Announcing and Subscribing to events...
+(00:00:01.0333597) GameMaster[log]: Done.
+(00:00:02.1219774) GameMaster[log]: 2.1215352::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=7352e93a-10e7-4968-9619-04b5afed48de;port=2004;]
+(01:23:24.6990970) GameMaster[log]: 5004.6990849::Received:IThalamusClient.NewClientConnected:(IThalamusClient.NewClientConnected):[name=Tablet1;newClientUid=c9454dfb-4e19-443e-8741-661719238ce8;]
+(01:23:43.2667226) GameMaster[log]: 5023.2666797::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=a;]
+(01:23:44.7634741) GameMaster[log]: 5024.7634559::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=a;]
+(01:23:50.4595841) GameMaster[log]: 5030.4595715::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:23:50.6594334) GameMaster[log]: 5030.6594243:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=a;p2Id=2;p2Name=a;]
+(01:23:50.6934478) GameMaster[log]: 5030.6934387:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=4;p1Hand=64;p2Hand=99;]
+(01:23:56.4614778) GameMaster[log]: 5036.4614611::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:24:04.9081757) GameMaster[log]: 5044.9081647::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:24:07.3429124) GameMaster[log]: 5047.3429006::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:24:07.3873548) GameMaster[log]: 5047.3873475:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:24:15.5307602) GameMaster[log]: 5055.5307495::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=4;]
+(01:24:15.5635461) GameMaster[log]: 5055.5635393:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=4;]
+(01:24:28.4167613) GameMaster[log]: 5068.4167499::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=64;]
+(01:24:28.4367250) GameMaster[log]: 5068.436717:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=64;]
+(01:24:41.3466810) GameMaster[log]: 5081.3466693::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=99;]
+(01:24:41.3580458) GameMaster[log]: 5081.3580375:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=99;]
+(01:24:41.3705340) GameMaster[log]: 5081.3705287:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=5;]
+(01:24:43.2638146) GameMaster[log]: 5083.2638055:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=5;p0Hand=7381;p1Hand=5060;p2Hand=574;]
+(01:24:54.8267194) GameMaster[log]: 5094.8267053::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:24:58.6457329) GameMaster[log]: 5098.6457162::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:25:05.5025055) GameMaster[log]: 5105.5024937::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:25:05.5246935) GameMaster[log]: 5105.5246867:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:25:19.9741889) GameMaster[log]: 5119.9741791::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=5;]
+(01:25:20.0059774) GameMaster[log]: 5120.0059706:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=5;]
+(01:25:26.1228800) GameMaster[log]: 5126.1228649::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=50;]
+(01:25:26.1541228) GameMaster[log]: 5126.1541148:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=50;]
+(01:25:31.2764756) GameMaster[log]: 5131.2764646::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=60;]
+(01:25:31.3080847) GameMaster[log]: 5131.3080768:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=60;]
+(01:25:45.1586963) GameMaster[log]: 5145.1586834::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=73;]
+(01:25:45.1914238) GameMaster[log]: 5145.1914155:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=73;]
+(01:26:07.8584035) GameMaster[log]: 5167.858391::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:26:07.8913563) GameMaster[log]: 5167.8912801:Sent::IGMTablets.RefocusRequest:(IGMTablets.RefocusRequest):[playerID=0;]
+(01:26:21.0458759) GameMaster[log]: 5181.0458676::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:26:27.6980368) GameMaster[log]: 5187.6980258::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:26:27.7287505) GameMaster[log]: 5187.7287433:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:26:48.8328031) GameMaster[log]: 5208.8327902::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=81;]
+(01:26:48.8728927) GameMaster[log]: 5208.8728844:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=0;card=81;p0WrongCards=;p1WrongCards=;p2WrongCards=74;]
+(01:27:19.1587118) GameMaster[log]: 5239.1587027:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=2;teamLives=4;]
+(01:27:26.8763007) GameMaster[log]: 5246.8762935:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=3;teamLives=4;p0Hand=374575;p1Hand=7860;p2Hand=21276;]
+(01:27:33.4459321) GameMaster[log]: 5253.4458612::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:27:40.3625964) GameMaster[log]: 5260.362579::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:27:43.0600170) GameMaster[log]: 5263.0599996::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:27:43.0815140) GameMaster[log]: 5263.0814878:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:28:04.1824479) GameMaster[log]: 5284.182438::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=2;]
+(01:28:04.2161782) GameMaster[log]: 5284.2161713:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=2;]
+(01:28:07.8488225) GameMaster[log]: 5287.8488092::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=7;]
+(01:28:07.8725332) GameMaster[log]: 5287.8725264:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=7;]
+(01:28:11.0561900) GameMaster[log]: 5291.0561768::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=8;]
+(01:28:11.0919759) GameMaster[log]: 5291.0919671:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=8;]
+(01:28:15.0386515) GameMaster[log]: 5295.0386393::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=12;]
+(01:28:15.0594313) GameMaster[log]: 5295.0594233:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=12;]
+(01:28:30.9801300) GameMaster[log]: 5310.980119::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=60;]
+(01:28:31.0096103) GameMaster[log]: 5311.0095689:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=1;card=60;p0WrongCards=3745;p1WrongCards=;p2WrongCards=;]
+(01:35:30.3296944) GameMaster[log]: 5730.32968::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:35:37.6123588) GameMaster[log]: 5737.6123456::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=f;]
+(01:35:40.3831591) GameMaster[log]: 5740.38315::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=s;]
+(01:35:40.5269915) GameMaster[log]: 5740.5269817:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=f;p2Id=2;p2Name=s;]
+(01:35:40.5480084) GameMaster[log]: 5740.5479796:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=1;p1Hand=17;p2Hand=2;]
+(01:35:43.2530770) GameMaster[log]: 5743.2530365::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:36:02.9837696) GameMaster[log]: 5762.9837108::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:36:12.8079217) GameMaster[log]: 5772.8079062::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:36:12.8408935) GameMaster[log]: 5772.84084:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:36:32.2887406) GameMaster[log]: 5792.2887296::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=1;]
+(01:36:32.3332535) GameMaster[log]: 5792.3332455:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=1;]
+(01:36:42.7153679) GameMaster[log]: 5802.7153542::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=2;]
+(01:36:42.7471268) GameMaster[log]: 5802.747118:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=2;]
+(01:36:45.8197854) GameMaster[log]: 5805.8197703::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=17;]
+(01:36:45.8511313) GameMaster[log]: 5805.8511226:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=17;]
+(01:36:45.8642635) GameMaster[log]: 5805.8642589:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=5;]
+(01:36:47.7118852) GameMaster[log]: 5807.7118757:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=5;p0Hand=3147;p1Hand=5666;p2Hand=4451;]
+(01:36:55.1308130) GameMaster[log]: 5815.1307856::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:37:01.4116065) GameMaster[log]: 5821.4115871::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:37:02.7675250) GameMaster[log]: 5822.7675129::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:37:02.8022038) GameMaster[log]: 5822.8021954:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:37:23.2738933) GameMaster[log]: 5843.2738747::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=44;]
+(01:37:23.2995780) GameMaster[log]: 5843.2995697:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=44;p0WrongCards=31;p1WrongCards=;p2WrongCards=;]
+(01:43:38.8949370) GameMaster[log]: 6218.894912::Received:IThalamusClient.NewClientConnected:(IThalamusClient.NewClientConnected):[name=Tablet1;newClientUid=48b84672-1ee3-4d6e-86d6-9dbf136968b9;]
+(01:43:59.2619394) GameMaster[log]: 6239.2619269::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:44:04.3964393) GameMaster[log]: 6244.396423::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=a;]
+(01:44:06.1562124) GameMaster[log]: 6246.1562014::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=a;]
+(01:44:06.3002205) GameMaster[log]: 6246.3002102:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=a;p2Id=2;p2Name=a;]
+(01:44:06.3155716) GameMaster[log]: 6246.3155655:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=51;p1Hand=60;p2Hand=96;]
+(01:44:07.4490599) GameMaster[log]: 6247.4490246::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:44:11.6365388) GameMaster[log]: 6251.6365222::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:44:13.0489726) GameMaster[log]: 6253.0489608::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:44:13.0714424) GameMaster[log]: 6253.0714344:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:44:21.5126310) GameMaster[log]: 6261.5126178::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=51;]
+(01:44:21.5548949) GameMaster[log]: 6261.5548862:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=51;]
+(01:44:30.5190186) GameMaster[log]: 6270.5190072::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=60;]
+(01:44:30.5500159) GameMaster[log]: 6270.5500087:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=60;]
+(01:44:35.0915986) GameMaster[log]: 6275.0915865::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=96;]
+(01:44:35.1134271) GameMaster[log]: 6275.1134195:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=96;]
+(01:44:35.1211518) GameMaster[log]: 6275.1211465:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=5;]
+(01:44:36.3034558) GameMaster[log]: 6276.3034463:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=5;p0Hand=5295;p1Hand=647;p2Hand=5059;]
+(01:44:42.9053962) GameMaster[log]: 6282.9053863::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:44:49.5222502) GameMaster[log]: 6289.5222403::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:44:51.2153877) GameMaster[log]: 6291.2153559::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:44:51.2476305) GameMaster[log]: 6291.2476226:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:45:31.3491252) GameMaster[log]: 6331.3491123::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=50;]
+(01:45:31.3828426) GameMaster[log]: 6331.3828331:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=50;p0WrongCards=;p1WrongCards=647;p2WrongCards=;]
+(01:46:16.2929357) GameMaster[log]: 6376.2929224::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:47:06.8847140) GameMaster[log]: 6426.884698::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:47:08.3218631) GameMaster[log]: 6428.3218498::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:47:08.3536072) GameMaster[log]: 6428.3535996:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:47:25.1482868) GameMaster[log]: 6445.1482731::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=59;]
+(01:47:25.1766358) GameMaster[log]: 6445.1766271:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=59;p0WrongCards=52;p1WrongCards=;p2WrongCards=;]
+(01:53:23.0035730) GameMaster[log]: 6803.0035628::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:53:31.1726895) GameMaster[log]: 6811.1726762::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:53:38.2540792) GameMaster[log]: 6818.254061::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=s;]
+(01:53:39.4832377) GameMaster[log]: 6819.4832191::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=s;]
+(01:53:39.6281211) GameMaster[log]: 6819.6281131:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=s;p2Id=2;p2Name=s;]
+(01:53:39.6480984) GameMaster[log]: 6819.6480897:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=35;p1Hand=30;p2Hand=21;]
+(01:53:42.2979385) GameMaster[log]: 6822.2979298::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:53:43.6109173) GameMaster[log]: 6823.6109048::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:53:46.3195898) GameMaster[log]: 6826.3195731::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:53:46.3516555) GameMaster[log]: 6826.3516498:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:54:31.3334442) GameMaster[log]: 6871.3327592::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=30;]
+(01:54:31.3629488) GameMaster[log]: 6871.3629142:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=1;card=30;p0WrongCards=;p1WrongCards=;p2WrongCards=21;]
+(01:56:15.2791720) GameMaster[log]: 6975.2791591::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=35;]
+(01:56:15.3037012) GameMaster[log]: 6975.303694:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=35;]
+(01:56:15.3172478) GameMaster[log]: 6975.3172429:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=4;]
+(01:56:18.8901892) GameMaster[log]: 6978.8901346:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=4;p0Hand=1096;p1Hand=4169;p2Hand=2083;]
+(01:56:22.8121730) GameMaster[log]: 6982.8121604::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:56:30.1909805) GameMaster[log]: 6990.1909639::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:56:32.1160944) GameMaster[log]: 6992.1160842::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:56:32.1495323) GameMaster[log]: 6992.1495266:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:56:52.0600007) GameMaster[log]: 7012.0599885::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=20;]
+(01:56:52.1013821) GameMaster[log]: 7012.101373:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=20;p0WrongCards=10;p1WrongCards=;p2WrongCards=;]
+(01:57:56.7976196) GameMaster[log]: 7076.7976105::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:58:33.0710301) GameMaster[log]: 7113.0710191::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:58:34.9784890) GameMaster[log]: 7114.9784757::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:58:35.0122758) GameMaster[log]: 7115.0122667:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:59:02.6353582) GameMaster[log]: 7142.6353457::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=41;]
+(01:59:02.6681806) GameMaster[log]: 7142.6681737:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=41;]
+(01:59:06.0485627) GameMaster[log]: 7146.0485506::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=69;]
+(01:59:06.0722238) GameMaster[log]: 7146.0722162:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=69;]
+(01:59:09.5599378) GameMaster[log]: 7149.5599188::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=83;]
+(01:59:09.5896054) GameMaster[log]: 7149.5895967:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=83;]
+(01:59:12.2460922) GameMaster[log]: 7152.2460793::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=96;]
+(01:59:12.2777468) GameMaster[log]: 7152.2777381:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=96;]
+(01:59:12.3007251) GameMaster[log]: 7152.3007168:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=2;teamLives=3;]
+(01:59:15.8080844) GameMaster[log]: 7155.8080746:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=3;teamLives=3;p0Hand=233347;p1Hand=147379;p2Hand=788397;]
+(01:59:19.6315003) GameMaster[log]: 7159.6314893::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:59:26.3246025) GameMaster[log]: 7166.3245904::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(01:59:27.7156665) GameMaster[log]: 7167.7156555::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(01:59:27.7532159) GameMaster[log]: 7167.753184:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:59:50.0357890) GameMaster[log]: 7190.0357772::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=78;]
+(01:59:50.0725306) GameMaster[log]: 7190.0725199:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=78;p0WrongCards=233347;p1WrongCards=1473;p2WrongCards=;]
+(02:03:52.6673070) GameMaster[log]: 7432.667296::Received:IThalamusClient.NewClientConnected:(IThalamusClient.NewClientConnected):[name=Tablet1;newClientUid=64916e48-5114-49c4-91e7-130714ca6470;]
+(02:04:42.9712363) GameMaster[log]: 7482.9712238::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=s;]
+(02:04:46.8606864) GameMaster[log]: 7486.8606716::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=ff;]
+(02:04:53.0935922) GameMaster[log]: 7493.0935804::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(02:04:53.2375540) GameMaster[log]: 7493.2375441:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=s;p2Id=2;p2Name=ff;]
+(02:04:53.2592997) GameMaster[log]: 7493.259291:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=85;p1Hand=4;p2Hand=19;]
+(02:05:24.4843196) GameMaster[log]: 7524.4843052::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:05:30.0998080) GameMaster[log]: 7530.0997916::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:05:32.3161566) GameMaster[log]: 7532.3161418::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:05:32.3502323) GameMaster[log]: 7532.3502263:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:05:48.8251777) GameMaster[log]: 7548.825153::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=85;]
+(02:05:48.8459510) GameMaster[log]: 7548.8459427:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=0;card=85;p0WrongCards=;p1WrongCards=4;p2WrongCards=19;]
+(02:08:22.1094797) GameMaster[log]: 7702.1094641::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=zz;]
+(02:08:23.7871321) GameMaster[log]: 7703.7871223::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=zz;]
+(02:08:31.0842782) GameMaster[log]: 7711.0842661::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(02:08:31.2291442) GameMaster[log]: 7711.2291343:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=zz;p2Id=2;p2Name=zz;]
+(02:08:31.2491530) GameMaster[log]: 7711.2491431:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=95;p1Hand=5;p2Hand=59;]
+(02:08:32.7780332) GameMaster[log]: 7712.778018::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:08:39.2191232) GameMaster[log]: 7719.2191129::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:08:40.8269204) GameMaster[log]: 7720.8268089::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:08:40.8412453) GameMaster[log]: 7720.8412377:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:08:48.6950694) GameMaster[log]: 7728.6950595::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=95;]
+(02:08:48.7227748) GameMaster[log]: 7728.7227649:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=0;card=95;p0WrongCards=;p1WrongCards=5;p2WrongCards=59;]
+(02:09:35.6974499) GameMaster[log]: 7775.6974424:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=4;]
+(02:09:45.1864579) GameMaster[log]: 7785.1864485:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=4;p0Hand=5161;p1Hand=639;p2Hand=1972;]
+(02:09:50.7567166) GameMaster[log]: 7790.756703::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:09:57.2213729) GameMaster[log]: 7797.2213566::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:09:59.4660490) GameMaster[log]: 7799.4660357::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:09:59.4983635) GameMaster[log]: 7799.4983552:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:10:27.7027531) GameMaster[log]: 7827.7027349::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=6;]
+(02:10:27.7362626) GameMaster[log]: 7827.7362532:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=6;]
+(02:10:35.1420251) GameMaster[log]: 7835.1420088::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=19;]
+(02:10:35.1711004) GameMaster[log]: 7835.1710924:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=19;]
+(02:10:46.0891435) GameMaster[log]: 7846.0891302::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=72;]
+(02:10:46.1190990) GameMaster[log]: 7846.1190911:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=72;p0WrongCards=5161;p1WrongCards=39;p2WrongCards=;]
+(02:13:09.3130310) GameMaster[log]: 7989.3130216:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=2;teamLives=3;]
+(02:13:13.6838938) GameMaster[log]: 7993.6838832:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=3;teamLives=3;p0Hand=51235;p1Hand=405563;p2Hand=206881;]
+(02:13:16.9926777) GameMaster[log]: 7996.9926679::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:13:24.5498055) GameMaster[log]: 8004.5497896::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:13:25.5830545) GameMaster[log]: 8005.582951::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:13:25.6152860) GameMaster[log]: 8005.615278:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:13:37.5628703) GameMaster[log]: 8017.5628578::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:13:37.5968604) GameMaster[log]: 8017.5968517:Sent::IGMTablets.RefocusRequest:(IGMTablets.RefocusRequest):[playerID=0;]
+(02:13:45.2326046) GameMaster[log]: 8025.2325534::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:13:47.6579475) GameMaster[log]: 8027.6579324::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:13:47.6904320) GameMaster[log]: 8027.6904259:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:15:16.7111329) GameMaster[log]: 8116.71112::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=20;]
+(02:15:16.7544076) GameMaster[log]: 8116.7543981:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=20;p0WrongCards=512;p1WrongCards=;p2WrongCards=;]
+(02:15:48.3636367) GameMaster[log]: 8148.3636249::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:15:59.4588309) GameMaster[log]: 8159.4588184::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:16:01.0959227) GameMaster[log]: 8161.0959079::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:16:01.1367838) GameMaster[log]: 8161.1367773:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:16:57.4134761) GameMaster[log]: 8217.4134594::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=40;]
+(02:16:57.4547869) GameMaster[log]: 8217.4546921:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=1;card=40;p0WrongCards=35;p1WrongCards=;p2WrongCards=;]
+(02:17:58.6809442) GameMaster[log]: 8278.6809363::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:18:01.8887129) GameMaster[log]: 8281.8887031::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:18:18.9486410) GameMaster[log]: 8298.9486281::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:18:18.9810351) GameMaster[log]: 8298.9810291:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:18:38.0010205) GameMaster[log]: 8318.0009838::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=55;]
+(02:18:38.0331454) GameMaster[log]: 8318.0331371:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=55;]
+(02:18:40.5253883) GameMaster[log]: 8320.5253743::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=1;card=63;]
+(02:18:40.5505474) GameMaster[log]: 8320.550539:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=63;]
+(02:18:44.9373486) GameMaster[log]: 8324.9373338::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=68;]
+(02:18:44.9817659) GameMaster[log]: 8324.9817583:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=68;]
+(02:18:47.7298179) GameMaster[log]: 8327.7298061::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=81;]
+(02:18:47.7563711) GameMaster[log]: 8327.7563624:Sent::IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=81;]
+(02:18:47.7638819) GameMaster[log]: 8327.7638774:Sent::IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=3;teamLives=1;]
+(02:18:47.7853683) GameMaster[log]: 8327.7853615:Sent::IGMTablets.GameCompleted:(IGMTablets.GameCompleted):[]
+(02:19:56.0469192) GameMaster[log]: 8396.0464728::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=1;name=s;]
+(02:19:57.3751077) GameMaster[log]: 8397.3750921::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=2;name=s;]
+(02:20:05.7101132) GameMaster[log]: 8405.7100863::Received:ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(02:20:05.8788249) GameMaster[log]: 8405.8788162:Sent::IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=s;p2Id=2;p2Name=s;]
+(02:20:05.9067420) GameMaster[log]: 8405.906734:Sent::IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=93;p1Hand=43;p2Hand=57;]
+(02:20:07.4021585) GameMaster[log]: 8407.4021459::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:20:14.5302659) GameMaster[log]: 8414.5302488::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=2;]
+(02:20:15.8675395) GameMaster[log]: 8415.8675273::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=1;]
+(02:20:15.8871834) GameMaster[log]: 8415.887177:Sent::IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(02:20:36.2249389) GameMaster[log]: 8436.2249275::Received:ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=2;card=57;]
+(02:20:36.2495492) GameMaster[log]: 8436.2495412:Sent::IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=57;p0WrongCards=;p1WrongCards=43;p2WrongCards=;]
+(02:20:41.2143263) GameMaster[log]: 8441.2143137::Received:ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(02:21:37.1017741) GameMaster[log]: Sending Master a Disconnect message...
+(02:21:37.2236279) GameMaster[log]: Sent disconnect message.
+(02:21:37.2240975) GameMaster[log]: Set shutdown flag.
+(02:21:37.2251059) GameMaster[log]: Terminated SendMessagesDispatcher
+(02:21:37.2251351) GameMaster[log]: Terminated ReceiveMessagesDispatcher
+(02:21:37.2251700) GameMaster[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(02:21:37.2251457) GameMaster[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(02:21:37.6190050) GameMaster[log]: Terminated AutoDiscoveryClient
+(02:21:37.6194753) GameMaster[log]: Stopped Fast HTTP listener.
+(02:21:37.6196122) GameMaster[log]: Terminated FastHttpListenerThread
+(02:21:37.6196278) GameMaster[log]: Stopped Slow HTTP listener.
+(02:21:37.6197605) GameMaster[log]: Terminated SlowHttpListenerThread
+(02:21:37.6345872) GameMaster[log]: Dumped log to 'Logs\GameMaster.2021-1-6at15-55-24-154.log'

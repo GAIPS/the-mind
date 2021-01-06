@@ -46,9 +46,9 @@ public class UnityListener : XmlRpcListenerService, IUnityThalamusSubscriber
         _thalamusCS.TypifiedPublisher.CardPlayed(playerID, card);
     }
 
-    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
     {
-        _thalamusCS.TypifiedPublisher.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
+        _thalamusCS.TypifiedPublisher.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2WrongCards);
     }
 
     public void GameOver(int level)

@@ -34,7 +34,7 @@ public interface IUnitySubscriber : IGMTablets
     [XmlRpcMethod]
     new void CardPlayed(int playerID, int card);
     [XmlRpcMethod]
-    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards);
     [XmlRpcMethod]
     new void GameOver(int level);
     [XmlRpcMethod]
@@ -83,9 +83,9 @@ public abstract class ThalamusConnector
 
 
 
-    public ThalamusConnector(int remotePort = 7000)
+    public ThalamusConnector(string ip, int remotePort)
     {
-        _remoteAddress = "192.168.0.100";
+        _remoteAddress = ip;
         _remotePort = remotePort;
         _localPort = _remotePort + 1;
         _remoteUri = String.Format("http://{0}:{1}/", _remoteAddress, _remotePort);
@@ -225,6 +225,7 @@ public abstract class ThalamusConnector
 public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 {
     protected IUnityTabletPublisher _rpcProxy;
+    private GameManager _gameManager;
 
     public class UnityRPCListener : XmlRpcListenerService, IUnitySubscriber
     {
@@ -242,12 +243,12 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void AllRefocused()
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.AllPlayersRefocused();
         }
 
         public void RefocusRequest(int playerID)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.PlayerRequestedRefocus();
         }
 
         public void CardPlayed(int playerID, int card)
@@ -270,22 +271,23 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
             //throw new NotImplementedException();
         }
 
-        public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+        public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.MistakeOccurred(playerID, card, p0WrongCards, p1WrongCards, p2WrongCards);
         }
 
         public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.NewLevelHasStarted(p0Hand, p1Hand, p2Hand);
         }
     }
 
-    public TabletThalamusConnector(int remotePort = 7000) : base(remotePort)
+    public TabletThalamusConnector(GameManager gm, string ip, int remotePort) : base(ip, remotePort)
     {
         _rpcProxy = XmlRpcProxyGen.Create<IUnityTabletPublisher>();
         _rpcProxy.Timeout = 5000;
         _rpcProxy.Url = _remoteUri;
+        _gameManager = gm;
     }
 
     public override void ProcessRequestThalamus(object oContext)

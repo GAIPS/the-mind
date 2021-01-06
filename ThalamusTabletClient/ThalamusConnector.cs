@@ -1,4 +1,5 @@
-﻿using Thalamus;
+﻿using System;
+using Thalamus;
 using TheMindThalamusMessages;
 
 
@@ -30,7 +31,7 @@ public class ThalamusConnector : ThalamusClient, IGMTablets
 
         public void PlayCard(int playerID, int card)
         {
-            _publisher.RefocusSignal(playerID);
+            _publisher.PlayCard(playerID, card);
         }
 
         public void RefocusSignal(int playerID)
@@ -82,9 +83,21 @@ public class ThalamusConnector : ThalamusClient, IGMTablets
         UnityConnector.RPCProxy.CardPlayed(playerID, card);
     }
 
-    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
     {
-        UnityConnector.RPCProxy.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
+        if (p0WrongCards == null)
+        {
+            p0WrongCards = new int[] { };
+        }
+        if (p1WrongCards == null)
+        {
+            p1WrongCards = new int[] { };
+        }
+        if (p2WrongCards == null)
+        {
+            p2WrongCards = new int[] { };
+        }
+        UnityConnector.RPCProxy.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2WrongCards);
     }
 
     public void GameOver(int level)

@@ -24,7 +24,7 @@ public interface IUnityPublisher : IGMTablets
     [XmlRpcMethod]
     new void CardPlayed(int playerID, int card);
     [XmlRpcMethod]
-    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards);
     [XmlRpcMethod]
     new void GameOver(int level);
     [XmlRpcMethod]
@@ -304,9 +304,9 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
         _rpcProxy.CardPlayed(playerID, card);
     }
 
-    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
     {
-        _rpcProxy.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
+        _rpcProxy.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2WrongCards);
     }
 
     public void GameOver(int level)

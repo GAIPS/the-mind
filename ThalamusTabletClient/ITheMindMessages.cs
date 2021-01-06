@@ -31,9 +31,11 @@ public interface IUnityTabletPublisher : IGMTablets, IXmlRpcProxy
     [XmlRpcMethod]
     new void AllRefocused();
     [XmlRpcMethod]
+    new void RefocusRequest(int playerID);
+    [XmlRpcMethod]
     new void CardPlayed(int playerID, int card);
     [XmlRpcMethod]
-    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards);
     [XmlRpcMethod]
     new void GameOver(int level);
     [XmlRpcMethod]

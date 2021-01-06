@@ -1,0 +1,138 @@
+(00:00:00.0653719) Tablet1[log]: Found Perception interface: 'IGMTablets'
+(00:00:00.0713232) Tablet1[log]: Subscribed to event 'IGMTablets.AllConnected'
+(00:00:00.0716073) Tablet1[log]: Subscribed to event 'IGMTablets.StartLevel'
+(00:00:00.0717074) Tablet1[log]: Subscribed to event 'IGMTablets.FinishLevel'
+(00:00:00.0717806) Tablet1[log]: Subscribed to event 'IGMTablets.AllRefocused'
+(00:00:00.0718568) Tablet1[log]: Subscribed to event 'IGMTablets.RefocusRequest'
+(00:00:00.0719460) Tablet1[log]: Subscribed to event 'IGMTablets.CardPlayed'
+(00:00:00.0720264) Tablet1[log]: Subscribed to event 'IGMTablets.Mistake'
+(00:00:00.0721045) Tablet1[log]: Subscribed to event 'IGMTablets.GameOver'
+(00:00:00.0721720) Tablet1[log]: Subscribed to event 'IGMTablets.GameCompleted'
+(00:00:00.1097172) Tablet1[log]: Attempt to start service on port '2000'
+(00:00:00.1214685) Tablet1[log]: Attempt to start Slow service on port '2000'
+(00:00:00.1540090) Tablet1[log]: Creating publisher from type 'IThalamusTabletPublisher'
+(00:00:00.1551710) Tablet1[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.1556011) Tablet1[log]: Announced event 'ITabletsGM.ConnectToGM'
+(00:00:00.1562421) Tablet1[log]: Registered action 'ITabletsGM.ConnectToGM' in publisher.
+(00:00:00.1564457) Tablet1[log]: Announced event 'ITabletsGM.PlayCard'
+(00:00:00.1565280) Tablet1[log]: Registered action 'ITabletsGM.PlayCard' in publisher.
+(00:00:00.1566441) Tablet1[log]: Announced event 'ITabletsGM.RefocusSignal'
+(00:00:00.1566998) Tablet1[log]: Registered action 'ITabletsGM.RefocusSignal' in publisher.
+(00:00:00.2027859) Tablet1[log]: XMLRPC Listening on http://*:7010/
+(00:00:00.3129423) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.3131289) Tablet1[log]: Attempt to start Slow service on port '2001'
+(00:00:00.3726570) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.3728174) Tablet1[log]: Attempt to start service on port '2001'
+(00:00:00.4034658) Tablet1[log]: Searching for Thalamus Character SERA...
+(00:00:00.4712616) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.4715810) Tablet1[log]: Attempt to start Slow service on port '2002'
+(00:00:00.4823469) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.4824941) Tablet1[log]: Attempt to start service on port '2002'
+(00:00:00.5718593) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.5720068) Tablet1[log]: Attempt to start Slow service on port '2003'
+(00:00:00.5761597) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.5763034) Tablet1[log]: Attempt to start service on port '2003'
+(00:00:00.6546152) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.6550764) Tablet1[log]: Attempt to start Slow service on port '2004'
+(00:00:00.6576311) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.6577726) Tablet1[log]: Attempt to start service on port '2004'
+(00:00:00.7451186) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.7451167) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.7461438) Tablet1[log]: Attempt to start Slow service on port '2005'
+(00:00:00.7454160) Tablet1[log]: Attempt to start service on port '2005'
+(00:00:00.8308480) Tablet1[log]: Fast XMLRPC Listening on port 2005 c: SERA
+(00:00:00.8326236) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.8327605) Tablet1[log]: Attempt to start Slow service on port '2006'
+(00:00:00.8441830) Tablet1[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:00.9092538) Tablet1[log]: Slow XMLRPC Listening on port 2006
+(00:00:00.9550566) Tablet1[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:00.9553395) Tablet1[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:00.9555659) Tablet1[log]: Connecting... f: 2005 s: 2006
+(00:00:00.9900119) Tablet1[log]: Connected with clientId 'c9454dfb-4e19-443e-8741-661719238ce8'
+(00:00:01.0343765) Tablet1[log]: Performing registration...
+(00:00:01.0480176) Tablet1[log]: Cleared subscriptions of character SERA.
+(00:00:01.0481806) Tablet1[log]: Announcing event information...
+(00:00:01.0644488) Tablet1[log]: Done.
+(00:00:01.0645884) Tablet1[log]: Announcing and Subscribing to events...
+(00:00:01.1016857) Tablet1[log]: Done.
+(00:00:02.3091763) Tablet1[log]: 2.3087428::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=c9454dfb-4e19-443e-8741-661719238ce8;port=2007;]
+(01:23:50.4296796) Tablet1[log]: 5030.4296709:Sent::ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:23:50.7276852) Tablet1[log]: 5030.7276522::Received:IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=a;p2Id=2;p2Name=a;]
+(01:23:50.7500400) Tablet1[log]: 5030.7500207::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=4;p1Hand=64;p2Hand=99;]
+(01:23:56.4190273) Tablet1[log]: 5036.4190204:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:24:07.4197897) Tablet1[log]: 5047.4197833::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:24:15.5061402) Tablet1[log]: 5055.5061322:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=4;]
+(01:24:15.6114202) Tablet1[log]: 5055.6114065::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=4;]
+(01:24:28.4737381) Tablet1[log]: 5068.4737203::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=64;]
+(01:24:41.3911690) Tablet1[log]: 5081.3911432::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=99;]
+(01:24:41.4026942) Tablet1[log]: 5081.4026802::Received:IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=5;]
+(01:24:43.3040798) Tablet1[log]: 5083.3040635::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=5;p0Hand=7381;p1Hand=5060;p2Hand=574;]
+(01:24:58.6219277) Tablet1[log]: 5098.6219205:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:25:05.5421394) Tablet1[log]: 5105.5421325::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:25:20.0462445) Tablet1[log]: 5120.0462335::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=5;]
+(01:25:26.1779474) Tablet1[log]: 5126.1779352::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=50;]
+(01:25:31.3492801) Tablet1[log]: 5131.3492672::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=60;]
+(01:25:45.1339277) Tablet1[log]: 5145.1339201:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=73;]
+(01:25:45.2395221) Tablet1[log]: 5145.2395103::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=73;]
+(01:26:07.8302954) Tablet1[log]: 5167.8302901:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:26:07.9297064) Tablet1[log]: 5167.9296571::Received:IGMTablets.RefocusRequest:(IGMTablets.RefocusRequest):[playerID=0;]
+(01:26:27.7562434) Tablet1[log]: 5187.7560671::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:26:48.7633298) Tablet1[log]: 5208.7633241:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=81;]
+(01:26:48.9258080) Tablet1[log]: 5208.9257943::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=0;card=81;p0WrongCards=;p1WrongCards=;p2WrongCards=74;]
+(01:26:48.9525569) Tablet1[error]: Exception in ReceiveEvent: Exception has been thrown by the target of an invocation.: CookComputing.XmlRpc.XmlRpcNullParameterException: Null method parameter #3
+   at CookComputing.XmlRpc.XmlRpcSerializer.SerializeParams(XmlTextWriter xtw, XmlRpcRequest request, MappingAction mappingAction)
+   at CookComputing.XmlRpc.XmlRpcSerializer.SerializeRequest(Stream stm, XmlRpcRequest request)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(Object clientObj, MethodInfo mi, Object[] parameters)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(MethodInfo mi, Object[] Parameters)
+   at XmlRpcProxyaf569a91-d80c-49e1-925b-02d31a021c30.Mistake(Int32 playerID, Int32 card, Int32[] p0WrongCards, Int32[] p1WrongCards, Int32[] p2WrongCards)
+   at ThalamusConnector.Mistake(Int32 playerID, Int32 card, Int32[] p0WrongCards, Int32[] p1WrongCards, Int32[] p2WrongCards) in C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\ThalamusConnector.cs:line 87.
+(01:27:19.1803985) Tablet1[log]: 5239.180389::Received:IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=2;teamLives=4;]
+(01:27:26.9223171) Tablet1[log]: 5246.9223004::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=3;teamLives=4;p0Hand=374575;p1Hand=7860;p2Hand=21276;]
+(01:27:33.4039161) Tablet1[log]: 5253.4039078:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:27:43.1119623) Tablet1[log]: 5263.1119297::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:28:04.2490707) Tablet1[log]: 5284.2490597::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=2;]
+(01:28:07.9083847) Tablet1[log]: 5287.9083733::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=7;]
+(01:28:11.1144609) Tablet1[log]: 5291.1144488::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=8;]
+(01:28:15.1061933) Tablet1[log]: 5295.1061807::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=12;]
+(01:28:31.0432651) Tablet1[log]: 5311.0432492::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=1;card=60;p0WrongCards=3745;p1WrongCards=;p2WrongCards=;]
+(01:28:31.0508988) Tablet1[error]: Exception in ReceiveEvent: Exception has been thrown by the target of an invocation.: CookComputing.XmlRpc.XmlRpcNullParameterException: Null method parameter #4
+   at CookComputing.XmlRpc.XmlRpcSerializer.SerializeParams(XmlTextWriter xtw, XmlRpcRequest request, MappingAction mappingAction)
+   at CookComputing.XmlRpc.XmlRpcSerializer.SerializeRequest(Stream stm, XmlRpcRequest request)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(Object clientObj, MethodInfo mi, Object[] parameters)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(MethodInfo mi, Object[] Parameters)
+   at XmlRpcProxyaf569a91-d80c-49e1-925b-02d31a021c30.Mistake(Int32 playerID, Int32 card, Int32[] p0WrongCards, Int32[] p1WrongCards, Int32[] p2WrongCards)
+   at ThalamusConnector.Mistake(Int32 playerID, Int32 card, Int32[] p0WrongCards, Int32[] p1WrongCards, Int32[] p2WrongCards) in C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\ThalamusConnector.cs:line 87.
+(01:35:30.2882383) Tablet1[log]: 5730.2882307:Sent::ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:35:40.5661243) Tablet1[log]: 5740.566113::Received:IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=f;p2Id=2;p2Name=s;]
+(01:35:40.5948765) Tablet1[log]: 5740.5948579::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=1;p1Hand=17;p2Hand=2;]
+(01:35:43.2363896) Tablet1[log]: 5743.2363802:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:36:12.8768438) Tablet1[log]: 5772.8768362::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:36:32.2557811) Tablet1[log]: 5792.2557742:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=1;]
+(01:36:32.3799927) Tablet1[log]: 5792.3799821::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=1;]
+(01:36:42.7708568) Tablet1[log]: 5802.7708386::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=2;]
+(01:36:45.8838636) Tablet1[log]: 5805.8838511::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=17;]
+(01:36:45.8973029) Tablet1[log]: 5805.897287::Received:IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=5;]
+(01:36:47.7684835) Tablet1[log]: 5807.7684684::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=5;p0Hand=3147;p1Hand=5666;p2Hand=4451;]
+(01:36:55.0916806) Tablet1[log]: 5815.0916722:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:37:02.8418471) Tablet1[log]: 5822.8418308::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:37:23.3554567) Tablet1[log]: 5843.3554435::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=44;p0WrongCards=31;p1WrongCards=;p2WrongCards=;]
+(01:37:23.3673073) Tablet1[error]: Exception in ReceiveEvent: Exception has been thrown by the target of an invocation.: CookComputing.XmlRpc.XmlRpcNullParameterException: Null method parameter #4
+   at CookComputing.XmlRpc.XmlRpcSerializer.SerializeParams(XmlTextWriter xtw, XmlRpcRequest request, MappingAction mappingAction)
+   at CookComputing.XmlRpc.XmlRpcSerializer.SerializeRequest(Stream stm, XmlRpcRequest request)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(Object clientObj, MethodInfo mi, Object[] parameters)
+   at CookComputing.XmlRpc.XmlRpcClientProtocol.Invoke(MethodInfo mi, Object[] Parameters)
+   at XmlRpcProxyaf569a91-d80c-49e1-925b-02d31a021c30.Mistake(Int32 playerID, Int32 card, Int32[] p0WrongCards, Int32[] p1WrongCards, Int32[] p2WrongCards)
+   at ThalamusConnector.Mistake(Int32 playerID, Int32 card, Int32[] p0WrongCards, Int32[] p1WrongCards, Int32[] p2WrongCards) in C:\Users\Filipa\Devel\the-mind\ThalamusTabletClient\ThalamusConnector.cs:line 87.
+(01:41:44.6397669) Tablet1[log]: Sending Master a Disconnect message...
+(01:41:44.7339908) Tablet1[log]: Sent disconnect message.
+(01:41:44.7345001) Tablet1[log]: Set shutdown flag.
+(01:41:44.7542283) Tablet1[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(01:41:44.7542537) Tablet1[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(01:41:44.7542723) Tablet1[log]: Terminated SendMessagesDispatcher
+(01:41:44.7544759) Tablet1[log]: Terminated ReceiveMessagesDispatcher
+(01:41:45.6606120) Tablet1[log]: Terminated AutoDiscoveryClient
+(01:41:45.6612609) Tablet1[log]: Stopped Fast HTTP listener.
+(01:41:45.6614679) Tablet1[log]: Terminated FastHttpListenerThread
+(01:41:45.6617941) Tablet1[log]: Terminated SlowHttpListenerThread
+(01:41:45.6616246) Tablet1[log]: Stopped Slow HTTP listener.
+(01:41:45.6763022) Tablet1[log]: Dumped log to 'Logs\Tablet1.2021-1-6at15-55-25-990.log'

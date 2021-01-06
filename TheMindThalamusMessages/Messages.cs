@@ -10,7 +10,7 @@ namespace TheMindThalamusMessages
         void AllRefocused();
         void RefocusRequest(int playerID);
         void CardPlayed(int playerID, int card);
-        void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+        void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards);
         void GameOver(int level);
         void GameCompleted();
     }

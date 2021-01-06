@@ -1,0 +1,114 @@
+(00:00:00.0500921) Tablet1[log]: Found Perception interface: 'IGMTablets'
+(00:00:00.0553277) Tablet1[log]: Subscribed to event 'IGMTablets.AllConnected'
+(00:00:00.0555852) Tablet1[log]: Subscribed to event 'IGMTablets.StartLevel'
+(00:00:00.0557377) Tablet1[log]: Subscribed to event 'IGMTablets.FinishLevel'
+(00:00:00.0558666) Tablet1[log]: Subscribed to event 'IGMTablets.AllRefocused'
+(00:00:00.0559941) Tablet1[log]: Subscribed to event 'IGMTablets.RefocusRequest'
+(00:00:00.0561367) Tablet1[log]: Subscribed to event 'IGMTablets.CardPlayed'
+(00:00:00.0562671) Tablet1[log]: Subscribed to event 'IGMTablets.Mistake'
+(00:00:00.0564348) Tablet1[log]: Subscribed to event 'IGMTablets.GameOver'
+(00:00:00.0565558) Tablet1[log]: Subscribed to event 'IGMTablets.GameCompleted'
+(00:00:00.0585541) Tablet1[log]: Attempt to start service on port '2000'
+(00:00:00.0588119) Tablet1[log]: Attempt to start Slow service on port '2000'
+(00:00:00.0625491) Tablet1[log]: Creating publisher from type 'IThalamusTabletPublisher'
+(00:00:00.0627539) Tablet1[log]: Found Action interface: 'TheMindThalamusMessages.ITabletsGM'
+(00:00:00.0631958) Tablet1[log]: Announced event 'ITabletsGM.ConnectToGM'
+(00:00:00.0637396) Tablet1[log]: Registered action 'ITabletsGM.ConnectToGM' in publisher.
+(00:00:00.0640089) Tablet1[log]: Announced event 'ITabletsGM.PlayCard'
+(00:00:00.0640908) Tablet1[log]: Registered action 'ITabletsGM.PlayCard' in publisher.
+(00:00:00.0642641) Tablet1[log]: Announced event 'ITabletsGM.RefocusSignal'
+(00:00:00.0643718) Tablet1[log]: Registered action 'ITabletsGM.RefocusSignal' in publisher.
+(00:00:00.1126204) Tablet1[log]: XMLRPC Listening on http://*:7010/
+(00:00:00.1816336) Tablet1[log]: Searching for Thalamus Character SERA...
+(00:00:00.1821965) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.1822348) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.1840207) Tablet1[log]: Attempt to start Slow service on port '2001'
+(00:00:00.1834476) Tablet1[log]: Attempt to start service on port '2001'
+(00:00:00.2676083) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.2677597) Tablet1[log]: Attempt to start service on port '2002'
+(00:00:00.2677782) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.2683748) Tablet1[log]: Attempt to start Slow service on port '2002'
+(00:00:00.3621159) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.3622847) Tablet1[log]: Attempt to start service on port '2003'
+(00:00:00.3621155) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.3630166) Tablet1[log]: Attempt to start Slow service on port '2003'
+(00:00:00.4928743) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.4930404) Tablet1[log]: Attempt to start Slow service on port '2004'
+(00:00:00.4938342) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.4939267) Tablet1[log]: Attempt to start service on port '2004'
+(00:00:00.5792415) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.5795612) Tablet1[log]: Attempt to start Slow service on port '2005'
+(00:00:00.5797964) Tablet1[log]: Port -1 unavaliable.
+(00:00:00.5805242) Tablet1[log]: Attempt to start service on port '2005'
+(00:00:00.6067801) Tablet1[log]: Found Thalamus Master for character 'SERA' at '192.168.0.100:2000/2001'.
+(00:00:00.6679969) Tablet1[log]: Fast XMLRPC Listening on port 2005 c: SERA
+(00:00:00.6682188) Tablet1[log]: Slow Port unavaliable.
+(00:00:00.6686697) Tablet1[log]: Attempt to start Slow service on port '2006'
+(00:00:00.7418752) Tablet1[log]: Slow XMLRPC Listening on port 2006
+(00:00:00.8282751) Tablet1[log]: Set Master fast endpoint to 192.168.0.100:2000
+(00:00:00.8288318) Tablet1[log]: Set Master slow endpoint to 192.168.0.100:2001
+(00:00:00.8293271) Tablet1[log]: Connecting... f: 2005 s: 2006
+(00:00:00.8781742) Tablet1[log]: Connected with clientId '48b84672-1ee3-4d6e-86d6-9dbf136968b9'
+(00:00:00.9216127) Tablet1[log]: Performing registration...
+(00:00:00.9355078) Tablet1[log]: Cleared subscriptions of character SERA.
+(00:00:00.9356702) Tablet1[log]: Announcing event information...
+(00:00:00.9520252) Tablet1[log]: Done.
+(00:00:00.9522281) Tablet1[log]: Announcing and Subscribing to events...
+(00:00:01.0267747) Tablet1[log]: Done.
+(00:00:02.0504710) Tablet1[log]: 2.0501346::Received:IThalamusClient.Connected:(IThalamusClient.Connected):[uid=48b84672-1ee3-4d6e-86d6-9dbf136968b9;port=2007;]
+(01:43:59.2217483) Tablet1[log]: 6239.2217407:Sent::ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:44:06.3366205) Tablet1[log]: 6246.3365883::Received:IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=a;p2Id=2;p2Name=a;]
+(01:44:06.3621846) Tablet1[log]: 6246.3621668::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=51;p1Hand=60;p2Hand=96;]
+(01:44:07.4049143) Tablet1[log]: 6247.4049078:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:44:13.1198413) Tablet1[log]: 6253.1198311::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:44:21.4598260) Tablet1[log]: 6261.4598184:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=51;]
+(01:44:21.5830470) Tablet1[log]: 6261.5830349::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=51;]
+(01:44:30.5831178) Tablet1[log]: 6270.5831076::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=60;]
+(01:44:35.1444217) Tablet1[log]: 6275.1444069::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=96;]
+(01:44:35.1561248) Tablet1[log]: 6275.1560792::Received:IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=5;]
+(01:44:36.3494535) Tablet1[log]: 6276.3494407::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=5;p0Hand=5295;p1Hand=647;p2Hand=5059;]
+(01:44:42.8687281) Tablet1[log]: 6282.8687224:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:44:51.2790986) Tablet1[log]: 6291.2790891::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:45:31.4149298) Tablet1[log]: 6331.4149161::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=50;p0WrongCards=;p1WrongCards=647;p2WrongCards=;]
+(01:46:16.2605911) Tablet1[log]: 6376.2605407:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:47:08.3926665) Tablet1[log]: 6428.3926514::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:47:25.2395564) Tablet1[log]: 6445.2394813::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=59;p0WrongCards=52;p1WrongCards=;p2WrongCards=;]
+(01:53:22.9617466) Tablet1[log]: 6802.9617391:Sent::ITabletsGM.ConnectToGM:(ITabletsGM.ConnectToGM):[playerID=0;name=Tablet1;]
+(01:53:39.6681557) Tablet1[log]: 6819.6681466::Received:IGMTablets.AllConnected:(IGMTablets.AllConnected):[p0Id=0;p0Name=Tablet1;p1Id=1;p1Name=s;p2Id=2;p2Name=s;]
+(01:53:39.6933979) Tablet1[log]: 6819.6933819::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=1;teamLives=5;p0Hand=35;p1Hand=30;p2Hand=21;]
+(01:53:46.2767158) Tablet1[log]: 6826.2767089:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:53:46.3869166) Tablet1[log]: 6826.3863101::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:54:31.4202826) Tablet1[log]: 6871.4202678::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=1;card=30;p0WrongCards=;p1WrongCards=;p2WrongCards=21;]
+(01:56:11.3500187) Tablet1[log]: 6971.3500096::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:56:15.2576965) Tablet1[log]: 6975.2576877:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=35;]
+(01:56:15.3366424) Tablet1[log]: 6975.3366322::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=35;]
+(01:56:15.3500628) Tablet1[log]: 6975.3500537::Received:IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=1;teamLives=4;]
+(01:56:18.9212377) Tablet1[log]: 6978.9212252::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=2;teamLives=4;p0Hand=1096;p1Hand=4169;p2Hand=2083;]
+(01:56:22.7713942) Tablet1[log]: 6982.7713779:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:56:32.1887818) Tablet1[log]: 6992.1887727::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:56:52.1145115) Tablet1[log]: 7012.1144955::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=20;p0WrongCards=10;p1WrongCards=;p2WrongCards=;]
+(01:57:56.7592590) Tablet1[log]: 7076.7592506:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:58:35.0422660) Tablet1[log]: 7115.0422565::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:59:02.6907728) Tablet1[log]: 7142.6907606::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=41;]
+(01:59:06.1316251) Tablet1[log]: 7146.131611::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=1;card=69;]
+(01:59:09.6207978) Tablet1[log]: 7149.6207785::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=2;card=83;]
+(01:59:12.2126940) Tablet1[log]: 7152.2126853:Sent::ITabletsGM.PlayCard:(ITabletsGM.PlayCard):[playerID=0;card=96;]
+(01:59:12.3146479) Tablet1[log]: 7152.3146339::Received:IGMTablets.CardPlayed:(IGMTablets.CardPlayed):[playerID=0;card=96;]
+(01:59:12.3479781) Tablet1[log]: 7152.3479648::Received:IGMTablets.FinishLevel:(IGMTablets.FinishLevel):[level=2;teamLives=3;]
+(01:59:15.8623260) Tablet1[log]: 7155.8623105::Received:IGMTablets.StartLevel:(IGMTablets.StartLevel):[level=3;teamLives=3;p0Hand=233347;p1Hand=147379;p2Hand=788397;]
+(01:59:19.5925727) Tablet1[log]: 7159.5925655:Sent::ITabletsGM.RefocusSignal:(ITabletsGM.RefocusSignal):[playerID=0;]
+(01:59:27.8012257) Tablet1[log]: 7167.8012173::Received:IGMTablets.AllRefocused:(IGMTablets.AllRefocused):[]
+(01:59:50.1047607) Tablet1[log]: 7190.1047474::Received:IGMTablets.Mistake:(IGMTablets.Mistake):[playerID=2;card=78;p0WrongCards=233347;p1WrongCards=1473;p2WrongCards=;]
+(02:00:41.6026301) Tablet1[log]: Sending Master a Disconnect message...
+(02:00:41.7144583) Tablet1[log]: Sent disconnect message.
+(02:00:41.7148857) Tablet1[log]: Set shutdown flag.
+(02:00:41.7339733) Tablet1[log]: Terminated ReceiveSlowHttpRequestsDispatcher
+(02:00:41.7340283) Tablet1[log]: Terminated SendMessagesDispatcher
+(02:00:41.7340363) Tablet1[log]: Terminated ReceiveMessagesDispatcher
+(02:00:41.7340397) Tablet1[log]: Terminated ReceiveFastHttpRequestsDispatcher
+(02:00:42.0621417) Tablet1[log]: Terminated AutoDiscoveryClient
+(02:00:42.0645761) Tablet1[log]: Stopped Fast HTTP listener.
+(02:00:42.0648139) Tablet1[log]: Terminated FastHttpListenerThread
+(02:00:42.0812403) Tablet1[log]: Stopped Slow HTTP listener.
+(02:00:42.0819999) Tablet1[log]: Terminated SlowHttpListenerThread
+(02:00:42.0949542) Tablet1[log]: Dumped log to 'Logs\Tablet1.2021-1-6at16-15-40-433.log'

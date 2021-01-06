@@ -1,23 +1,197 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
+public enum GameState
+{
+    Connection,
+    Syncing,
+    Game,
+    Mistake,
+    NextLevel,
+    GameFinished
+}
+
 
 public class GameManager : MonoBehaviour
 {
 
-    public GameObject UITextInfo;
+    public GameObject ConfigsScreen;
+    public GameObject IpInputField;
+    public GameObject PortInputField;
+    public GameObject PlayerIDInputField;
+    public GameObject ConnectButton;
+    public GameObject GameScreen;
+    public GameObject PlayButtonUI;
+    public GameObject RefocusButtonUI;
+    public GameObject CardsUI;
+    private int ID;
+    private List<int> cards;
+    private bool HasSignalledRefocus;
     private TabletThalamusConnector _thalamusConnector;
 
+    public static GameState GameState;
 
     // Start is called before the first frame update
     void Start()
     {
-        _thalamusConnector = new TabletThalamusConnector(7010);
+        GameState = GameState.Connection;
+        HasSignalledRefocus = false;
+        ConfigsScreen.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameState != GameState.Connection)
+        {
+            GameScreen.SetActive(true);
+
+            UpdateCardsUI();
+            UpdatePlayButtonUI();
+            UpdateRefocusButtonUI();
+        }
+    }
+
+    void UpdatePlayButtonUI()
+    {
+
+        if (GameState == GameState.Game && cards.Count > 0)
+        {
+            PlayButtonUI.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            PlayButtonUI.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    void UpdateRefocusButtonUI()
+    {
+        if (cards.Count == 0 || (GameState == GameState.Syncing && HasSignalledRefocus))
+        {
+            RefocusButtonUI.GetComponent<Button>().interactable = false;
+        }
+        else if (GameState == GameState.Mistake && HasSignalledRefocus)
+        {
+            RefocusButtonUI.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            RefocusButtonUI.GetComponent<Button>().interactable = true;
+        }
+    }
+
+    void UpdateCardsUI()
+    {
+        if (GameState == GameState.Syncing || GameState == GameState.Game || GameState == GameState.Mistake)
+        {
+            string text = "[";
+            for (int i = 0; i < cards.Count; i++)
+            {
+                text += cards[i];
+                if (i != cards.Count - 1)
+                {
+                    text += ",";
+                }
+            }
+            text += "]";
+            CardsUI.GetComponent<Text>().text = text;
+
+        }
+    }
+
+    public void AllPlayersRefocused()
+    {
+        GameState = GameState.Game;
+        HasSignalledRefocus = false;
+    }
+
+    public void ConnectOnClick()
+    {
+        ConfigsScreen.SetActive(false);
+        ID = int.Parse(PlayerIDInputField.GetComponent<InputField>().text);
+        string IP = IpInputField.GetComponent<InputField>().text;
+        int port = int.Parse(PortInputField.GetComponent<InputField>().text);
+        _thalamusConnector = new TabletThalamusConnector(this, IP, port);
+        _thalamusConnector.ConnectToGM(ID, "Tablet" + (ID + 1));
+    }
+
+    public void NewLevelHasStarted(int[] p0Hand, int[] p1Hand, int[] p2Hand)
+    {
+        cards = new List<int>();
+        if (ID == 0)
+        {
+            foreach (int card in p0Hand)
+            {
+                cards.Add(card);
+            }
+        }
+        else if (ID == 1)
+        {
+            foreach (int card in p1Hand)
+            {
+                cards.Add(card);
+            }
+        }
+        else if (ID == 1)
+        {
+            foreach (int card in p2Hand)
+            {
+                cards.Add(card);
+            }
+        }
+        GameState = GameState.Syncing;
+    }
+
+    public void PlayerRequestedRefocus()
+    {
+        GameState = GameState.Syncing;
+    }
+
+    public void MistakeOccurred(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
+    {
+        GameState = GameState.Mistake;
+        //mistake by another player
+        if (playerID != ID)
+        {
+            if (ID == 0)
+            {
+                foreach (int wrongCard in p0WrongCards)
+                {
+                    cards.Remove(wrongCard);
+                }
+            }
+            else if (ID == 1)
+            {
+                foreach (int wrongCard in p1WrongCards)
+                {
+                    cards.Remove(wrongCard);
+                }
+            }
+            else if (ID == 2)
+            {
+                foreach (int wrongCard in p2WrongCards)
+                {
+                    cards.Remove(wrongCard);
+                }
+            }
+        }
+    }
+
+    public void PlayButton()
+    {
+        int cardToPlay = cards[0];
+        cards.RemoveAt(0);
+        _thalamusConnector.PlayCard(ID, cardToPlay);
+    }
+
+    public void RefocusButton()
+    {
+        HasSignalledRefocus = true;
+        _thalamusConnector.RefocusSignal(ID);
     }
 }
