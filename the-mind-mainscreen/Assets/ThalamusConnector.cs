@@ -20,9 +20,11 @@ public interface IUnityPublisher : IGMTablets
     [XmlRpcMethod]
     new void AllRefocused();
     [XmlRpcMethod]
+    new void RefocusRequest(int playerID);
+    [XmlRpcMethod]
     new void CardPlayed(int playerID, int card);
     [XmlRpcMethod]
-    new void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
     [XmlRpcMethod]
     new void GameOver(int level);
     [XmlRpcMethod]
@@ -223,6 +225,7 @@ public abstract class ThalamusConnector
 public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
 {
     protected IUnityGMPublisher _rpcProxy;
+    private GameManager _gameManager;
 
     public class UnityRPCListener : XmlRpcListenerService, IUnitySubscriber
     {
@@ -235,26 +238,26 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void ConnectToGM(int playerID, string name)
         {
-            //throw new NotImplementedException();
-            Debug.Log("------------ Received a ConnectToGM(" + playerID + ", " + name);
+            _thalamusConnector._gameManager.players[playerID].ConnectionReceived(name);
         }
 
         public void PlayCard(int playerID, int card)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.players[playerID].CardPlayed(card);
         }
 
         public void RefocusSignal(int playerID)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.players[playerID].RefocusSignal();
         }
     }
 
-    public GameMasterThalamusConnector(int remotePort = 7000) : base(remotePort)
+    public GameMasterThalamusConnector(GameManager gm, int remotePort = 7000) : base(remotePort)
     {
         _rpcProxy = XmlRpcProxyGen.Create<IUnityGMPublisher>();
         _rpcProxy.Timeout = 5000;
         _rpcProxy.Url = _remoteUri;
+        _gameManager = gm;
     }
 
     public override void ProcessRequestThalamus(object oContext)
@@ -291,14 +294,19 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
         _rpcProxy.AllRefocused();
     }
 
+    public void RefocusRequest(int playerID)
+    {
+        _rpcProxy.RefocusRequest(playerID);
+    }
+
     public void CardPlayed(int playerID, int card)
     {
         _rpcProxy.CardPlayed(playerID, card);
     }
 
-    public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
     {
-        _rpcProxy.Mistake(playerID, p0WrongCards, p1WrongCards, p2wrongCards);
+        _rpcProxy.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
     }
 
     public void GameOver(int level)

@@ -8,8 +8,9 @@ namespace TheMindThalamusMessages
         void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand);
         void FinishLevel(int level, int teamLives);
         void AllRefocused();
+        void RefocusRequest(int playerID);
         void CardPlayed(int playerID, int card);
-        void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+        void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
         void GameOver(int level);
         void GameCompleted();
     }

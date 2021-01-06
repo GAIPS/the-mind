@@ -1,4 +1,5 @@
-﻿using Thalamus;
+﻿using System;
+using Thalamus;
 using TheMindThalamusMessages;
 
 
@@ -28,6 +29,11 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
             _publisher.AllRefocused();
         }
 
+        public void RefocusRequest(int playerID)
+        {
+            _publisher.RefocusRequest(playerID);
+        }
+
         public void CardPlayed(int playerID, int card)
         {
             _publisher.CardPlayed(playerID, card);
@@ -48,9 +54,9 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
             _publisher.GameOver(level);
         }
 
-        public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+        public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
         {
-            _publisher.Mistake(playerID, p0WrongCards, p1WrongCards, p2wrongCards);
+            _publisher.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
         }
 
         public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)

@@ -30,9 +30,11 @@ public interface IUnitySubscriber : IGMTablets
     [XmlRpcMethod]
     new void AllRefocused();
     [XmlRpcMethod]
+    new void RefocusRequest(int playerID);
+    [XmlRpcMethod]
     new void CardPlayed(int playerID, int card);
     [XmlRpcMethod]
-    new void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
+    new void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards);
     [XmlRpcMethod]
     new void GameOver(int level);
     [XmlRpcMethod]
@@ -243,6 +245,11 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
             //throw new NotImplementedException();
         }
 
+        public void RefocusRequest(int playerID)
+        {
+            //throw new NotImplementedException();
+        }
+
         public void CardPlayed(int playerID, int card)
         {
             //throw new NotImplementedException();
@@ -263,7 +270,7 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
             //throw new NotImplementedException();
         }
 
-        public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+        public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
         {
             //throw new NotImplementedException();
         }

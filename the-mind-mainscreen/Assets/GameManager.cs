@@ -3,212 +3,208 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public enum GameState
+{
+    Connection,
+    Syncing,
+    Game,
+    Mistake,
+    NextLevel,
+    GameFinished
+}
+
 public class GameManager : MonoBehaviour
 {
+    public int LastLevel;
     public int NumPlayers;
     public int Level;
     public GameObject LevelUI;
     public int Lives;
     public GameObject LivesUI;
     public GameObject OverlayNextLevelUI;
-    public GameObject P0cardsUI;
-    public GameObject P1cardsUI;
-    public GameObject P2cardsUI;
-    public GameObject PileUI;
-    private List<int> pile;
-    public GameObject P0handUI;
-    public GameObject P1handUI;
-    public GameObject P2handUI;
     public GameObject OverlaySyncingUI;
-    private bool p0Hand;
-    private bool p1Hand;
-    private bool p2Hand;
-    private bool syncing;
-    private List<List<int>> players;
     public GameObject OverlayMistakeUI;
     public GameObject ContinueButtonUI;
-    public GameObject GameOverTextUI;
-    public GameObject P0wrongCardsUI;
-    public GameObject P1wrongCardsUI;
-    public GameObject P2wrongCardsUI;
+    public GameObject GameFinishedTextUI;
+    public static GameState GameState;
+
+    public Player[] players;
+    public Pile pile;
+    private int topOfThePile;
 
     private GameMasterThalamusConnector _thalamusConnector;
 
     // Start is called before the first frame update
     void Start()
     {
-        players = new List<List<int>>();
-        players.Add(new List<int>());
-        players.Add(new List<int>());
-        players.Add(new List<int>());
-        pile = new List<int>();
+        topOfThePile = -1;
+        _thalamusConnector = new GameMasterThalamusConnector(this);
+        GameState = GameState.Connection;
+        StartNewGame();
+    }
 
-        DealCards();
-        UpdateCardsUI();
+    void StartNewGame()
+    {
+        OverlaySyncingUI.SetActive(true);
 
-        _thalamusConnector = new GameMasterThalamusConnector();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!OverlayNextLevelUI.activeSelf && !OverlayMistakeUI.activeSelf)
+        if (GameState == GameState.Connection)
         {
-            //initiate syncing
-            if (Input.GetKeyDown("1") && !p0Hand)
+            if (players[0].IsConnected && players[1].IsConnected && players[2].IsConnected)
             {
-                p0Hand = true;
-                OverlaySyncingUI.SetActive(true);
-                P0handUI.SetActive(true);
-                CheckEndOfSync();
+                _thalamusConnector.AllConnected(players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
+                StartNewLevel();
             }
-            else if (Input.GetKeyDown("2") && !p1Hand)
+        }
+
+        if (GameState == GameState.Syncing)
+        {
+            OverlaySyncingUI.SetActive(true);
+            if (players[0].HasSignaledRefocus && players[1].HasSignaledRefocus && players[2].HasSignaledRefocus)
             {
-                p1Hand = true;
-                OverlaySyncingUI.SetActive(true);
-                P1handUI.SetActive(true);
-                CheckEndOfSync();
+                _thalamusConnector.AllRefocused();
+                for (int i = 0; i < players.Length; i++)
+                {
+                    players[i].HasSignaledRefocus = false;
+                }
+                InvokeRepeating("ShrinkUntilDeactive", 0, 0.006f);
+                GameState = GameState.Game;
             }
-            else if (Input.GetKeyDown("3") && !p2Hand)
+        }
+
+        if (GameState == GameState.Game)
+        {
+            int updatedTopOfThePile = pile.GetTopCard();
+            if (topOfThePile != updatedTopOfThePile)
             {
-                p2Hand = true;
-                OverlaySyncingUI.SetActive(true);
-                P2handUI.SetActive(true);
-                CheckEndOfSync();
+                topOfThePile = updatedTopOfThePile;
+                ValidateMove();
+            }
+            else if (players[0].HowManyCardsLeft() == 0 && players[1].HowManyCardsLeft() == 0 && players[2].HowManyCardsLeft() == 0)
+            {
+                _thalamusConnector.FinishLevel(Level, Lives);
+                if (Level == LastLevel)
+                {
+                    OverlayMistakeUI.SetActive(true);
+                    ContinueButtonUI.SetActive(false);
+                    GameFinishedTextUI.SetActive(true);
+                    GameFinishedTextUI.GetComponent<Text>().text = "Game Completed!";
+                    GameState = GameState.GameFinished;
+                    _thalamusConnector.GameCompleted();
+                }
+                else
+                {
+                    LevelUp();
+                    OverlayNextLevelUI.SetActive(true);
+                    GameState = GameState.NextLevel;
+                }
+            }
+            
+            if (players[0].HasSignaledRefocus || players[1].HasSignaledRefocus || players[2].HasSignaledRefocus)
+            {
+                GameState = GameState.Syncing;
+                int requester = players[0].HasSignaledRefocus ? 0 : (players[1].HasSignaledRefocus ? 1 : 2);
+                _thalamusConnector.RefocusRequest(requester);
             }
 
-            //normal play
-            if (!OverlaySyncingUI.activeSelf && Input.GetKeyDown("a") && players[0].Count > 0)
-            {
-                int nextCard = players[0][0];
-                pile.Add(nextCard);
-                players[0].RemoveAt(0);
-                UpdateCardsUI();
-                UpdatePileUI();
-                ValidateMove();
-            }
-            else if (!OverlaySyncingUI.activeSelf && Input.GetKeyDown("l") && players[1].Count > 0)
-            {
-                int nextCard = players[1][0];
-                pile.Add(nextCard);
-                players[1].RemoveAt(0);
-                UpdateCardsUI();
-                UpdatePileUI();
-                ValidateMove();
-            }
-            else if (!OverlaySyncingUI.activeSelf && Input.GetKeyDown("space") && players[2].Count > 0)
-            {
-                int nextCard = players[2][0];
-                pile.Add(nextCard);
-                players[2].RemoveAt(0);
-                UpdateCardsUI();
-                UpdatePileUI();
-                ValidateMove();
-            }
         }
-        if (!OverlayNextLevelUI.activeSelf && !OverlayMistakeUI.activeSelf && !OverlaySyncingUI.activeSelf)
-        {
-            UpdateCardsUI();
-            UpdatePileUI();
-            CheckEndOfLevel();
-        }
+
     }
 
     void ValidateMove()
     {
-        int lastCard = pile[pile.Count - 1];
         bool mistake = false;
-        List<string> wrongCardsUI = new List<string>();
+        List<List<int>> wrongCards = new List<List<int>>();
 
-        for (int i = 0; i < NumPlayers; i++)
+        foreach (Player p in players)
         {
-            string wrongCards = "[";
-            while (players[i].Count > 0 && players[i][0] < lastCard)
-            {
-                mistake = true;
-                if (wrongCards != "[")
-                {
-                    wrongCards += ",";
-                }
-                wrongCards += players[i][0];
-                players[i].RemoveAt(0);
-            }
-            wrongCards += "]";
-            wrongCardsUI.Add(wrongCards);
+            List<int> playerWrongCards = p.GetWrongCards(topOfThePile);
+            wrongCards.Add(playerWrongCards);
+            mistake = playerWrongCards.Count > 0 || mistake;
         }
+
         if (mistake)
         {
-            P0wrongCardsUI.GetComponent<Text>().text = wrongCardsUI[0];
-            P1wrongCardsUI.GetComponent<Text>().text = wrongCardsUI[1];
-            P2wrongCardsUI.GetComponent<Text>().text = wrongCardsUI[2];
+            _thalamusConnector.Mistake(pile.LastPlayer, topOfThePile, wrongCards[0].ToArray(), wrongCards[1].ToArray(), wrongCards[2].ToArray());
             Lives--;
             LivesUI.GetComponent<Text>().color = new Color(1, 0, 0);
-            PileUI.GetComponent<Text>().color = new Color(1, 0, 0);
             UpdateLivesUI();
             OverlayMistakeUI.SetActive(true);
             if (Lives == 0)
             {
                 ContinueButtonUI.SetActive(false);
-                GameOverTextUI.SetActive(true);
+                GameFinishedTextUI.GetComponent<Text>().text = "Game Over";
+                GameFinishedTextUI.SetActive(true);
+                GameState = GameState.GameFinished;
+                _thalamusConnector.GameOver(Level);
+            }
+            else
+            {
+                GameState = GameState.Mistake;
             }
         }
+        else
+        {
+            _thalamusConnector.CardPlayed(pile.LastPlayer, topOfThePile);
+        }
+    }
+
+    private int HowManyPlayersLeft()
+    {
+        int countFinishedPlayers = 0;
+        foreach (Player p in players)
+        {
+            if (p.HowManyCardsLeft() == 0)
+            {
+                countFinishedPlayers++;
+            }
+        }
+        return NumPlayers - countFinishedPlayers;
     }
 
     public void ContinueAfterMistake()
     {
+        if (HowManyPlayersLeft() > 1)
+        {
+            GameState = GameState.Syncing;
+        }
+        else
+        {
+            GameState = GameState.Game;
+        }
         LivesUI.GetComponent<Text>().color = new Color(0, 0, 0);
-        PileUI.GetComponent<Text>().color = new Color(0, 0, 0);
         UpdateLivesUI();
         OverlayMistakeUI.SetActive(false);
     }
 
     public void NextLevel()
     {
-        UpdateLevelUI();
-        DealCards();
-        UpdateCardsUI();
-        UpdatePileUI();
+        StartNewLevel();
+        topOfThePile = pile.GetTopCard();
+        LevelUI.GetComponent<Text>().color = new Color(0, 0, 0);
         OverlayNextLevelUI.SetActive(false);
-    }
-
-    void CheckEndOfLevel()
-    {
-        if (players[0].Count == 0 && players[1].Count == 0 && players[2].Count == 0)
-        {
-            OverlayNextLevelUI.SetActive(true);
-        }
-    }
-
-    void CheckEndOfSync()
-    {
-        if (p0Hand && p1Hand && p2Hand)
-        {
-            p0Hand = false;
-            p1Hand = false;
-            p2Hand = false;
-        }
     }
 
     void ShrinkUntilDeactive()
     {
-        if (OverlaySyncingUI.activeSelf)
+        Vector3 scaleChange = new Vector3(-0.01f, -0.01f, 0.00f);
+        OverlaySyncingUI.transform.localScale += scaleChange;
+        if (OverlaySyncingUI.transform.localScale.x <= 0.02 || OverlaySyncingUI.transform.localScale.y <= 0.02)
         {
-            Vector3 scaleChange = new Vector3(-0.01f, -0.01f, 0.00f);
-            OverlaySyncingUI.transform.localScale += scaleChange;
-            if (OverlaySyncingUI.transform.localScale.x <= 0.05 || OverlaySyncingUI.transform.localScale.y <= 0.05)
-            {
-                P0handUI.SetActive(false);
-                P1handUI.SetActive(false);
-                P2handUI.SetActive(false);
-                OverlaySyncingUI.SetActive(false);
-                OverlaySyncingUI.transform.localScale = new Vector3(1.0f, 1.0f, 0.00f);
-                CancelInvoke();
-            }
+            OverlaySyncingUI.SetActive(false);
+            OverlaySyncingUI.transform.localScale = new Vector3(1.0f, 1.0f, 0.00f);
+            CancelInvoke();
         }
     }
 
-    void DealCards()
+    List<List<int>> DealCards()
     {
+        List<List<int>> hands = new List<List<int>>();
         List<int> cards = new List<int>();
         while (cards.Count < NumPlayers * Level)
         {
@@ -220,77 +216,34 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < NumPlayers; i++)
         {
-            for (int j = 0; j < Level; j++)
-            {
-                int nextCard = cards[0];
-                cards.RemoveAt(0);
-                players[i].Add(nextCard);
-            }
-            players[i].Sort();
+            List<int> hand = cards.GetRange(i * Level, Level);
+            hands.Add(hand);
         }
+        return hands;
     }
 
-    void UpdateCardsUI()
-    {
-        string text = "[";
-        for (int i = 0; i < players[0].Count; i++)
-        {
-            text += players[0][i];
-            if (i != players[0].Count - 1)
-            {
-                text += ",";
-            }
-        }
-        text += "]";
-        P0cardsUI.GetComponent<Text>().text = text;
-        
-        text = "[";
-        for (int i = 0; i < players[1].Count; i++)
-        {
-            text += players[1][i];
-            if (i != players[1].Count - 1)
-            {
-                text += ",";
-            }
-        }
-        text += "]";
-        P1cardsUI.GetComponent<Text>().text = text;
-
-        text = "[";
-        for (int i = 0; i < players[2].Count; i++)
-        {
-            text += players[2][i];
-            if (i != players[2].Count - 1)
-            {
-                text += ",";
-            }
-        }
-        text += "]";
-        P2cardsUI.GetComponent<Text>().text = text;
-    }
-
-    void UpdatePileUI()
-    {
-        if (pile.Count > 0)
-        {
-            PileUI.GetComponent<Text>().text = "" + pile[pile.Count - 1];
-        }
-        else
-        {
-            PileUI.GetComponent<Text>().text = "-";
-        }
-    }
-
-    void UpdateLevelUI()
+    void LevelUp()
     {
         Level++;
-        pile = new List<int>();
         LevelUI.GetComponent<Text>().text = "Level: " + Level;
+        LevelUI.GetComponent<Text>().color = new Color(1, 1, 1);
 
     }
 
     void UpdateLivesUI()
     {
         LivesUI.GetComponent<Text>().text = "Lives: " + Lives;
+    }
+
+    void StartNewLevel()
+    {
+        List<List<int>> hands = DealCards();
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].ReceiveCards(hands[i]);
+        }
+        pile.StartNewLevel();
+        _thalamusConnector.StartLevel(Level, Lives, hands[0].ToArray(), hands[1].ToArray(), hands[2].ToArray());
+        GameState = GameState.Syncing;
     }
 }

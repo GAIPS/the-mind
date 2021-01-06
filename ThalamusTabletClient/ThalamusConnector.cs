@@ -72,14 +72,19 @@ public class ThalamusConnector : ThalamusClient, IGMTablets
         UnityConnector.RPCProxy.AllRefocused();
     }
 
+    public void RefocusRequest(int playerID)
+    {
+        UnityConnector.RPCProxy.RefocusRequest(playerID);
+    }
+
     public void CardPlayed(int playerID, int card)
     {
         UnityConnector.RPCProxy.CardPlayed(playerID, card);
     }
 
-    public void Mistake(int playerID, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
+    public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2wrongCards)
     {
-        UnityConnector.RPCProxy.Mistake(playerID, p0WrongCards, p1WrongCards, p2wrongCards);
+        UnityConnector.RPCProxy.Mistake(playerID, card, p0WrongCards, p1WrongCards, p2wrongCards);
     }
 
     public void GameOver(int level)
