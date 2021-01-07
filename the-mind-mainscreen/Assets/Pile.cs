@@ -50,6 +50,7 @@ public class Pile : MonoBehaviour
     {
         if (GameManager.GameState == GameState.Game || GameManager.GameState == GameState.Mistake || GameManager.GameState == GameState.Syncing)
         {
+            PileUI.SetActive(true);
             if (pile.Count > 0)
             {
                 PileUI.GetComponent<Text>().text = "" + pile[pile.Count - 1];
@@ -67,6 +68,10 @@ public class Pile : MonoBehaviour
             {
                 PileUI.GetComponent<Text>().color = new Color(0, 0, 0);
             }
+        }
+        else
+        {
+            PileUI.SetActive(false);
         }
     }
 

@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     private List<int> cards;
     private bool HasSignalledRefocus;
     private bool IsReady;
+    private bool ShouldAckMistake;
+    public int MaxLevel;
     private TabletThalamusConnector _thalamusConnector;
 
     public static GameState GameState;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         GameState = GameState.Connection;
         HasSignalledRefocus = false;
         IsReady = false;
+        ShouldAckMistake = false;
         ConfigsScreen.SetActive(true);
     }
 
@@ -63,9 +66,15 @@ public class GameManager : MonoBehaviour
     void UpdateReadyButtonUI()
     {
 
-        if ((GameState == GameState.NextLevel || (GameState == GameState.Mistake && cards.Count > 0)) && !IsReady)
+        if (GameState == GameState.NextLevel && !IsReady)
         {
             ReadyButtonUI.GetComponent<Button>().interactable = true;
+            ReadyButtonUI.GetComponentInChildren<Text>().text = "Ready";
+        }
+        else if (GameState == GameState.Mistake && (cards.Count > 0 || ShouldAckMistake) && !IsReady)
+        {
+            ReadyButtonUI.GetComponent<Button>().interactable = true;
+            ReadyButtonUI.GetComponentInChildren<Text>().text = "Continue";
         }
         else
         {
@@ -126,6 +135,7 @@ public class GameManager : MonoBehaviour
         GameState = GameState.Game;
         HasSignalledRefocus = false;
         IsReady = false;
+        ShouldAckMistake = false;
     }
 
     public void ConnectOnClick()
@@ -141,6 +151,7 @@ public class GameManager : MonoBehaviour
     public void WaitForNewLevel()
     {
         IsReady = false;
+        ShouldAckMistake = false;
         GameState = GameState.NextLevel;
     }
 
@@ -198,6 +209,7 @@ public class GameManager : MonoBehaviour
             {
                 foreach (int wrongCard in p0WrongCards)
                 {
+                    ShouldAckMistake = true;
                     cards.Remove(wrongCard);
                 }
             }
@@ -205,6 +217,7 @@ public class GameManager : MonoBehaviour
             {
                 foreach (int wrongCard in p1WrongCards)
                 {
+                    ShouldAckMistake = true;
                     cards.Remove(wrongCard);
                 }
             }
@@ -212,6 +225,7 @@ public class GameManager : MonoBehaviour
             {
                 foreach (int wrongCard in p2WrongCards)
                 {
+                    ShouldAckMistake = true;
                     cards.Remove(wrongCard);
                 }
             }

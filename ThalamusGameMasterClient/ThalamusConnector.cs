@@ -19,9 +19,9 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
             _publisher = publisher;
         }
 
-        public void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
+        public void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
         {
-            _publisher.AllConnected(p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
+            _publisher.AllConnected(maxLevel, p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
         }
 
         public void AllRefocused()

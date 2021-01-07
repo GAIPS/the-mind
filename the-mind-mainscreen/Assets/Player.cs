@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public bool IsReadyForNextLevel;
     public bool IsReadyToContinue;
     private int cardBeingPlayed;
-    private string wrongCards;
+    public string WrongCards;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         IsReadyToContinue = false;
         cards = new List<int>();
         cardBeingPlayed = -1;
-        wrongCards = "[]";
+        WrongCards = "[]";
     }
 
     // Update is called once per frame
@@ -127,28 +127,28 @@ public class Player : MonoBehaviour
     public List<int> GetWrongCards(int topOfThePile)
     {
         List<int> wrongCardsList = new List<int>();
-        wrongCards = "[";
+        WrongCards = "[";
         while (cards.Count > 0 && cards[0] < topOfThePile)
         {
-            if (wrongCards != "[")
+            if (WrongCards != "[")
             {
-                wrongCards += ",";
+                WrongCards += ",";
             }
             wrongCardsList.Add(cards[0]);
-            wrongCards += cards[0];
+            WrongCards += cards[0];
             cards.RemoveAt(0);
         }
-        wrongCards += "]";
-        WrongCardsUI.GetComponent<Text>().text = wrongCards;
+        WrongCards += "]";
+        WrongCardsUI.GetComponent<Text>().text = WrongCards;
         return wrongCardsList;
     }
 
     public void UpdateWrongCardsUI()
     {
-        if (GameManager.GameState == GameState.Mistake || GameManager.GameState == GameState.GameFinished)
+        if (GameManager.GameState == GameState.Mistake)
         {
             WrongCardsUI.SetActive(true);
-            WrongCardsUI.GetComponent<Text>().text = wrongCards;
+            WrongCardsUI.GetComponent<Text>().text = WrongCards;
         }
         else
         {
@@ -217,5 +217,10 @@ public class Player : MonoBehaviour
         cards = hand;
         cards.Sort();
         UpdateCardsUI();
+    }
+
+    public bool IsReady()
+    {
+        return ((IsReadyToContinue && (cards.Count > 0 || WrongCards != "[]")) || (cards.Count == 0 && WrongCards == "[]"));
     }
 }

@@ -12,7 +12,7 @@ public interface IUnityThalamusSubscriber : IGMTablets
     void Dispose();
 
     [XmlRpcMethod]
-    new void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
+    new void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
     [XmlRpcMethod]
     new void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand);
     [XmlRpcMethod]

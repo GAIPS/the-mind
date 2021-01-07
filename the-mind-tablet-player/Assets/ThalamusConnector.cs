@@ -26,7 +26,7 @@ public interface IUnityPublisher : ITabletsGM
 public interface IUnitySubscriber : IGMTablets
 {
     [XmlRpcMethod]
-    new void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
+    new void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
     [XmlRpcMethod]
     new void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand);
     [XmlRpcMethod]
@@ -240,8 +240,9 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
             _thalamusConnector = connectorRef;
         }
 
-        public void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
+        public void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
         {
+            _thalamusConnector._gameManager.MaxLevel = maxLevel;
             _thalamusConnector._gameManager.WaitForNewLevel();
         }
 
@@ -262,7 +263,10 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void FinishLevel(int level, int teamLives)
         {
-            _thalamusConnector._gameManager.WaitForNewLevel();
+            if (level < _thalamusConnector._gameManager.MaxLevel)
+            {
+                _thalamusConnector._gameManager.WaitForNewLevel();
+            }
         }
 
         public void GameCompleted()

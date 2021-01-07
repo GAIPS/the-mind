@@ -16,9 +16,9 @@ public class UnityListener : XmlRpcListenerService, IUnityThalamusSubscriber
 
     public void Dispose() { }
 
-    public void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
+    public void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
     {
-        _thalamusCS.TypifiedPublisher.AllConnected(p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
+        _thalamusCS.TypifiedPublisher.AllConnected(maxLevel, p0Id, p0Name, p1Id, p1Name, p2Id, p2Name);
     }
 
     public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)

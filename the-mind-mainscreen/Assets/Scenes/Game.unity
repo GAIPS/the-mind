@@ -1300,6 +1300,7 @@ MonoBehaviour:
   HasSignaledRefocus: 0
   IsReadyForNextLevel: 0
   IsReadyToContinue: 0
+  WrongCards: 
 --- !u!1 &583310617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,6 +2105,7 @@ MonoBehaviour:
   HasSignaledRefocus: 0
   IsReadyForNextLevel: 0
   IsReadyToContinue: 0
+  WrongCards: 
 --- !u!1 &1423304477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,6 +2378,7 @@ MonoBehaviour:
   HasSignaledRefocus: 0
   IsReadyForNextLevel: 0
   IsReadyToContinue: 0
+  WrongCards: 
 --- !u!1 &1843667646
 GameObject:
   m_ObjectHideFlags: 0

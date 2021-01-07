@@ -4,7 +4,7 @@ namespace TheMindThalamusMessages
 {
     public interface IGMTablets : IPerception
     {
-        void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
+        void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name);
         void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand);
         void FinishLevel(int level, int teamLives);
         void AllRefocused();

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             if (players[0].IsConnected && players[1].IsConnected && players[2].IsConnected)
             {
-                _thalamusConnector.AllConnected(players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
+                _thalamusConnector.AllConnected(MaxLevels, players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
                 OverlayNextLevelUI.SetActive(true);
                 GameState = GameState.NextLevel;
             }
@@ -122,12 +122,22 @@ public class GameManager : MonoBehaviour
 
         if (GameState == GameState.Mistake)
         {
-            if ((players[0].IsReadyToContinue || players[0].HowManyCardsLeft() == 0) && (players[1].IsReadyToContinue || players[1].HowManyCardsLeft() == 0) && (players[2].IsReadyToContinue || players[2].HowManyCardsLeft() == 0))
+            if (players[0].IsReady() && players[1].IsReady() && players[2].IsReady())
             {
-                ContinueAfterMistake();
-                for (int i = 0; i < players.Length; i++)
+                if (Lives == 0)
                 {
-                    players[i].IsReadyToContinue = false;
+                    GameFinishedTextUI.GetComponent<Text>().text = "Game Over";
+                    GameFinishedTextUI.SetActive(true);
+                    GameState = GameState.GameFinished;
+                    _thalamusConnector.GameOver(Level);
+                }
+                else
+                {
+                    ContinueAfterMistake();
+                    for (int i = 0; i < players.Length; i++)
+                    {
+                        players[i].IsReadyToContinue = false;
+                    }
                 }
             }
         }
@@ -171,17 +181,7 @@ public class GameManager : MonoBehaviour
             LivesUI.GetComponent<Text>().color = new Color(1, 0, 0);
             UpdateLivesUI();
             OverlayMistakeUI.SetActive(true);
-            if (Lives == 0)
-            {
-                GameFinishedTextUI.GetComponent<Text>().text = "Game Over";
-                GameFinishedTextUI.SetActive(true);
-                GameState = GameState.GameFinished;
-                _thalamusConnector.GameOver(Level);
-            }
-            else
-            {
-                GameState = GameState.Mistake;
-            }
+            GameState = GameState.Mistake;
         }
         else
         {
@@ -293,9 +293,10 @@ public class GameManager : MonoBehaviour
     public void StartFromLevelOne()
     {
         Level = 1;
+        Lives = 5;
         OverlayMistakeUI.SetActive(false);
         GameFinishedTextUI.SetActive(false);
-        _thalamusConnector.AllConnected(players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
+        _thalamusConnector.AllConnected(MaxLevels, players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
         OverlayNextLevelUI.SetActive(true);
         GameState = GameState.NextLevel;
     }
