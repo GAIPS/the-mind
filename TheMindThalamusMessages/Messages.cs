@@ -21,5 +21,7 @@ namespace TheMindThalamusMessages
         void ConnectToGM(int playerID, string name);
         void PlayCard(int playerID, int card);
         void RefocusSignal(int playerID);
+        void ReadyForNextLevel(int playerID);
+        void ContinueAfterMistake(int playerID);
     }
 }

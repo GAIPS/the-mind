@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public bool IsConnected;
     private List<int> cards;
     public bool HasSignaledRefocus;
+    public bool IsReadyForNextLevel;
+    public bool IsReadyToContinue;
     private int cardBeingPlayed;
     private string wrongCards;
 
@@ -25,6 +27,8 @@ public class Player : MonoBehaviour
     {
         IsConnected = false;
         HasSignaledRefocus = false;
+        IsReadyForNextLevel = false;
+        IsReadyToContinue = false;
         cards = new List<int>();
         cardBeingPlayed = -1;
         wrongCards = "[]";
@@ -62,6 +66,30 @@ public class Player : MonoBehaviour
         if (GameManager.GameState == GameState.Syncing || GameManager.GameState == GameState.Game)
         {
             HasSignaledRefocus = true;
+        }
+        else
+        {
+            Debug.Log("----- Received a refocus signal and the GameState is not GAME or SYNCING!!!");
+        }
+    }
+
+    public void ReadyForNextLevel()
+    {
+        if (GameManager.GameState == GameState.NextLevel)
+        {
+            IsReadyForNextLevel = true;
+        }
+        else
+        {
+            Debug.Log("----- Received a refocus signal and the GameState is not GAME or SYNCING!!!");
+        }
+    }
+
+    public void ContinueAfterMistake()
+    {
+        if (GameManager.GameState == GameState.Mistake)
+        {
+            IsReadyToContinue = true;
         }
         else
         {

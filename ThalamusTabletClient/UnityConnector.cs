@@ -30,6 +30,16 @@ public class UnityListener : XmlRpcListenerService, IUnityTabletSubscriber
     {
         _thalamusCS.TypifiedPublisher.RefocusSignal(playerID);
     }
+
+    public void ReadyForNextLevel(int playerID)
+    { 
+        _thalamusCS.TypifiedPublisher.ReadyForNextLevel(playerID);
+    }
+
+    public void ContinueAfterMistake(int playerID)
+    {
+        _thalamusCS.TypifiedPublisher.ContinueAfterMistake(playerID);
+    }
 }
 
 public class UnityConnector

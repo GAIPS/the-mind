@@ -92,4 +92,14 @@ public class ThalamusConnector : ThalamusClient, ITabletsGM
     {
         UnityConnector.RPCProxy.RefocusSignal(playerID);
     }
+
+    public void ReadyForNextLevel(int playerID)
+    {
+        UnityConnector.RPCProxy.ReadyForNextLevel(playerID);
+    }
+
+    public void ContinueAfterMistake(int playerID)
+    {
+        UnityConnector.RPCProxy.ContinueAfterMistake(playerID);
+    }
 }

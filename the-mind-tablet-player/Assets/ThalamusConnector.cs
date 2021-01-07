@@ -17,6 +17,10 @@ public interface IUnityPublisher : ITabletsGM
     new void PlayCard(int playerID, int card);
     [XmlRpcMethod]
     new void RefocusSignal(int playerID);
+    [XmlRpcMethod]
+    new void ReadyForNextLevel(int playerID);
+    [XmlRpcMethod]
+    new void ContinueAfterMistake(int playerID);
 }
 
 public interface IUnitySubscriber : IGMTablets
@@ -238,7 +242,7 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void AllConnected(int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.WaitForNewLevel();
         }
 
         public void AllRefocused()
@@ -258,7 +262,7 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void FinishLevel(int level, int teamLives)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.WaitForNewLevel();
         }
 
         public void GameCompleted()
@@ -317,5 +321,15 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
     public void RefocusSignal(int playerID)
     {
         _rpcProxy.RefocusSignal(playerID);
+    }
+
+    public void ReadyForNextLevel(int playerID)
+    {
+        _rpcProxy.ReadyForNextLevel(playerID);
+    }
+
+    public void ContinueAfterMistake(int playerID)
+    {
+        _rpcProxy.ContinueAfterMistake(playerID);
     }
 }

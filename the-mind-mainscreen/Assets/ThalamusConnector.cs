@@ -39,6 +39,10 @@ public interface IUnitySubscriber : ITabletsGM
     new void PlayCard(int playerID, int card);
     [XmlRpcMethod]
     new void RefocusSignal(int playerID);
+    [XmlRpcMethod]
+    new void ReadyForNextLevel(int playerID);
+    [XmlRpcMethod]
+    new void ContinueAfterMistake(int playerID);
 }
 
 public abstract class ThalamusConnector
@@ -249,6 +253,16 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
         public void RefocusSignal(int playerID)
         {
             _thalamusConnector._gameManager.players[playerID].RefocusSignal();
+        }
+
+        public void ReadyForNextLevel(int playerID)
+        {
+            _thalamusConnector._gameManager.players[playerID].ReadyForNextLevel();
+        }
+
+        public void ContinueAfterMistake(int playerID)
+        {
+            _thalamusConnector._gameManager.players[playerID].ContinueAfterMistake();
         }
     }
 

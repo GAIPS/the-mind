@@ -41,13 +41,6 @@ public class GameManager : MonoBehaviour
         topOfThePile = -1;
         _thalamusConnector = new GameMasterThalamusConnector(this);
         GameState = GameState.Connection;
-        StartNewGame();
-    }
-
-    void StartNewGame()
-    {
-        OverlaySyncingUI.SetActive(true);
-
     }
 
     // Update is called once per frame
@@ -58,14 +51,15 @@ public class GameManager : MonoBehaviour
             if (players[0].IsConnected && players[1].IsConnected && players[2].IsConnected)
             {
                 _thalamusConnector.AllConnected(players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
-                StartNewLevel();
+                OverlayNextLevelUI.SetActive(true);
+                GameState = GameState.NextLevel;
             }
         }
 
         if (GameState == GameState.Syncing)
         {
             OverlaySyncingUI.SetActive(true);
-            if (players[0].HasSignaledRefocus && players[1].HasSignaledRefocus && players[2].HasSignaledRefocus)
+            if ((players[0].HasSignaledRefocus || players[0].HowManyCardsLeft() == 0) && (players[1].HasSignaledRefocus || players[1].HowManyCardsLeft() == 0) && (players[2].HasSignaledRefocus || players[2].HowManyCardsLeft() == 0))
             {
                 _thalamusConnector.AllRefocused();
                 for (int i = 0; i < players.Length; i++)
@@ -112,6 +106,30 @@ public class GameManager : MonoBehaviour
                 _thalamusConnector.RefocusRequest(requester);
             }
 
+        }
+
+        if (GameState == GameState.NextLevel)
+        {
+            if (players[0].IsReadyForNextLevel && players[1].IsReadyForNextLevel && players[2].IsReadyForNextLevel)
+            {
+                NextLevel();
+                for (int i = 0; i < players.Length; i++)
+                {
+                    players[i].IsReadyForNextLevel = false;
+                }
+            }
+        }
+
+        if (GameState == GameState.Mistake)
+        {
+            if ((players[0].IsReadyToContinue || players[0].HowManyCardsLeft() == 0) && (players[1].IsReadyToContinue || players[1].HowManyCardsLeft() == 0) && (players[2].IsReadyToContinue || players[2].HowManyCardsLeft() == 0))
+            {
+                ContinueAfterMistake();
+                for (int i = 0; i < players.Length; i++)
+                {
+                    players[i].IsReadyToContinue = false;
+                }
+            }
         }
 
     }
@@ -167,11 +185,12 @@ public class GameManager : MonoBehaviour
         return NumPlayers - countFinishedPlayers;
     }
 
-    public void ContinueAfterMistake()
+    private void ContinueAfterMistake()
     {
         if (HowManyPlayersLeft() > 1)
         {
             GameState = GameState.Syncing;
+            _thalamusConnector.RefocusRequest(-1);
         }
         else
         {
@@ -182,7 +201,7 @@ public class GameManager : MonoBehaviour
         OverlayMistakeUI.SetActive(false);
     }
 
-    public void NextLevel()
+    private void NextLevel()
     {
         StartNewLevel();
         topOfThePile = pile.GetTopCard();
@@ -197,7 +216,7 @@ public class GameManager : MonoBehaviour
         if (OverlaySyncingUI.transform.localScale.x <= 0.02 || OverlaySyncingUI.transform.localScale.y <= 0.02)
         {
             OverlaySyncingUI.SetActive(false);
-            OverlaySyncingUI.transform.localScale = new Vector3(1.0f, 1.0f, 0.00f);
+            OverlaySyncingUI.transform.localScale = new Vector3(1.2f, 1.0f, 0.00f);
             CancelInvoke();
         }
     }

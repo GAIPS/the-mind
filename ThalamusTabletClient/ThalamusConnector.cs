@@ -38,6 +38,16 @@ public class ThalamusConnector : ThalamusClient, IGMTablets
         {
             _publisher.RefocusSignal(playerID);
         }
+
+        public void ReadyForNextLevel(int playerID)
+        { 
+            _publisher.ReadyForNextLevel(playerID);
+        }
+
+        public void ContinueAfterMistake(int playerID)
+        {
+            _publisher.ContinueAfterMistake(playerID);
+        }
     }
 
     public ThalamusConnector(string clientName, string character)

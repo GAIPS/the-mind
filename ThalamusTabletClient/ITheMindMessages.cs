@@ -17,6 +17,10 @@ public interface IUnityTabletSubscriber : ITabletsGM
     new void PlayCard(int playerID, int card);
     [XmlRpcMethod]
     new void RefocusSignal(int playerID);
+    [XmlRpcMethod]
+    new void ReadyForNextLevel(int playerID);
+    [XmlRpcMethod]
+    new void ContinueAfterMistake(int playerID);
 
 }
 

@@ -27,10 +27,12 @@ public class GameManager : MonoBehaviour
     public GameObject GameScreen;
     public GameObject PlayButtonUI;
     public GameObject RefocusButtonUI;
+    public GameObject ReadyButtonUI;
     public GameObject CardsUI;
     private int ID;
     private List<int> cards;
     private bool HasSignalledRefocus;
+    private bool IsReady;
     private TabletThalamusConnector _thalamusConnector;
 
     public static GameState GameState;
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.Connection;
         HasSignalledRefocus = false;
+        IsReady = false;
         ConfigsScreen.SetActive(true);
     }
 
@@ -53,6 +56,20 @@ public class GameManager : MonoBehaviour
             UpdateCardsUI();
             UpdatePlayButtonUI();
             UpdateRefocusButtonUI();
+            UpdateReadyButtonUI();
+        }
+    }
+
+    void UpdateReadyButtonUI()
+    {
+
+        if ((GameState == GameState.NextLevel || (GameState == GameState.Mistake && cards.Count > 0)) && !IsReady)
+        {
+            ReadyButtonUI.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            ReadyButtonUI.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -71,11 +88,11 @@ public class GameManager : MonoBehaviour
 
     void UpdateRefocusButtonUI()
     {
-        if (cards.Count == 0 || (GameState == GameState.Syncing && HasSignalledRefocus))
+        if (GameState == GameState.NextLevel || GameState == GameState.Mistake)
         {
             RefocusButtonUI.GetComponent<Button>().interactable = false;
         }
-        else if (GameState == GameState.Mistake && HasSignalledRefocus)
+        else if (cards.Count == 0 || (GameState == GameState.Syncing && HasSignalledRefocus))
         {
             RefocusButtonUI.GetComponent<Button>().interactable = false;
         }
@@ -108,6 +125,7 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.Game;
         HasSignalledRefocus = false;
+        IsReady = false;
     }
 
     public void ConnectOnClick()
@@ -118,6 +136,12 @@ public class GameManager : MonoBehaviour
         int port = int.Parse(PortInputField.GetComponent<InputField>().text);
         _thalamusConnector = new TabletThalamusConnector(this, IP, port);
         _thalamusConnector.ConnectToGM(ID, "Tablet" + (ID + 1));
+    }
+
+    public void WaitForNewLevel()
+    {
+        IsReady = false;
+        GameState = GameState.NextLevel;
     }
 
     public void NewLevelHasStarted(int[] p0Hand, int[] p1Hand, int[] p2Hand)
@@ -193,5 +217,18 @@ public class GameManager : MonoBehaviour
     {
         HasSignalledRefocus = true;
         _thalamusConnector.RefocusSignal(ID);
+    }
+
+    public void ReadyButton()
+    {
+        IsReady = true;
+        if (GameState == GameState.NextLevel)
+        {
+            _thalamusConnector.ReadyForNextLevel(ID);
+        }
+        else if (GameState == GameState.Mistake)
+        {
+            _thalamusConnector.ContinueAfterMistake(ID);
+        }
     }
 }
