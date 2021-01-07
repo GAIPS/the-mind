@@ -16,7 +16,7 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    public int LastLevel;
+    public int MaxLevels;
     public int NumPlayers;
     public int Level;
     public GameObject LevelUI;
@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
     public GameObject OverlayNextLevelUI;
     public GameObject OverlaySyncingUI;
     public GameObject OverlayMistakeUI;
-    public GameObject ContinueButtonUI;
     public GameObject GameFinishedTextUI;
+    public GameObject MaxLevelsInputFieldUI;
     public static GameState GameState;
 
     public Player[] players;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateNumLevelsSetupUI();
         if (GameState == GameState.Connection)
         {
             if (players[0].IsConnected && players[1].IsConnected && players[2].IsConnected)
@@ -82,10 +83,9 @@ public class GameManager : MonoBehaviour
             else if (players[0].HowManyCardsLeft() == 0 && players[1].HowManyCardsLeft() == 0 && players[2].HowManyCardsLeft() == 0)
             {
                 _thalamusConnector.FinishLevel(Level, Lives);
-                if (Level == LastLevel)
+                if (Level == MaxLevels)
                 {
                     OverlayMistakeUI.SetActive(true);
-                    ContinueButtonUI.SetActive(false);
                     GameFinishedTextUI.SetActive(true);
                     GameFinishedTextUI.GetComponent<Text>().text = "Game Completed!";
                     GameState = GameState.GameFinished;
@@ -134,6 +134,24 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void UpdateNumLevelsSetupUI()
+    {
+        if (GameState == GameState.Connection)
+        {
+            MaxLevelsInputFieldUI.SetActive(true);
+            MaxLevelsInputFieldUI.GetComponentInChildren<Button>().interactable = false;
+        }
+        else if (GameState == GameState.GameFinished)
+        {
+            MaxLevelsInputFieldUI.SetActive(true);
+            MaxLevelsInputFieldUI.GetComponentInChildren<Button>().interactable = true;
+        }
+        else
+        {
+            MaxLevelsInputFieldUI.SetActive(false);
+        }
+    }
+
     void ValidateMove()
     {
         bool mistake = false;
@@ -155,7 +173,6 @@ public class GameManager : MonoBehaviour
             OverlayMistakeUI.SetActive(true);
             if (Lives == 0)
             {
-                ContinueButtonUI.SetActive(false);
                 GameFinishedTextUI.GetComponent<Text>().text = "Game Over";
                 GameFinishedTextUI.SetActive(true);
                 GameState = GameState.GameFinished;
@@ -190,11 +207,12 @@ public class GameManager : MonoBehaviour
         if (HowManyPlayersLeft() > 1)
         {
             GameState = GameState.Syncing;
-            _thalamusConnector.RefocusRequest(-1);
+            _thalamusConnector.RefocusRequest(4);
         }
         else
         {
             GameState = GameState.Game;
+            _thalamusConnector.RefocusRequest(-1);
         }
         LivesUI.GetComponent<Text>().color = new Color(0, 0, 0);
         UpdateLivesUI();
@@ -264,5 +282,20 @@ public class GameManager : MonoBehaviour
         pile.StartNewLevel();
         _thalamusConnector.StartLevel(Level, Lives, hands[0].ToArray(), hands[1].ToArray(), hands[2].ToArray());
         GameState = GameState.Syncing;
+    }
+
+    public void ChangeMaxLevel()
+    {
+        int max = int.Parse(MaxLevelsInputFieldUI.GetComponent<InputField>().text);
+        MaxLevels = max;
+    }
+
+    public void StartFromLevelOne()
+    {
+        Level = 1;
+        OverlayMistakeUI.SetActive(false);
+        GameFinishedTextUI.SetActive(false);
+        OverlayNextLevelUI.SetActive(true);
+        GameState = GameState.NextLevel;
     }
 }

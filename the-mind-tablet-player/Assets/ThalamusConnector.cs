@@ -252,7 +252,7 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void RefocusRequest(int playerID)
         {
-            _thalamusConnector._gameManager.PlayerRequestedRefocus();
+            _thalamusConnector._gameManager.PlayerRequestedRefocus(playerID);
         }
 
         public void CardPlayed(int playerID, int card)
@@ -267,12 +267,12 @@ public class TabletThalamusConnector : ThalamusConnector, IUnityPublisher
 
         public void GameCompleted()
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.GameFinished();
         }
 
         public void GameOver(int level)
         {
-            //throw new NotImplementedException();
+            _thalamusConnector._gameManager.GameFinished();
         }
 
         public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)

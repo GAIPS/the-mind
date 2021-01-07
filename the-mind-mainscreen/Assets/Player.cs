@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("----- Received a refocus signal and the GameState is not GAME or SYNCING!!!");
+            Debug.Log("----- Received a ReadyForNextLevel and the GameState is not NEXT_LEVEL!!!");
         }
     }
 
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("----- Received a refocus signal and the GameState is not GAME or SYNCING!!!");
+            Debug.Log("----- Received a ContinueAfterMistake and the GameState is not MISTAKE!!!");
         }
     }
 

@@ -144,6 +144,11 @@ public class GameManager : MonoBehaviour
         GameState = GameState.NextLevel;
     }
 
+    public void GameFinished()
+    {
+        GameState = GameState.GameFinished;
+    }
+
     public void NewLevelHasStarted(int[] p0Hand, int[] p1Hand, int[] p2Hand)
     {
         cards = new List<int>();
@@ -171,9 +176,16 @@ public class GameManager : MonoBehaviour
         GameState = GameState.Syncing;
     }
 
-    public void PlayerRequestedRefocus()
+    public void PlayerRequestedRefocus(int playerID)
     {
-        GameState = GameState.Syncing;
+        if (playerID == -1)
+        {
+            GameState = GameState.Game;
+        }
+        else
+        {
+            GameState = GameState.Syncing;
+        }
     }
 
     public void MistakeOccurred(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
