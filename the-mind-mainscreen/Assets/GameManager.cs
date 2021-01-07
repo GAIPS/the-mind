@@ -295,6 +295,7 @@ public class GameManager : MonoBehaviour
         Level = 1;
         OverlayMistakeUI.SetActive(false);
         GameFinishedTextUI.SetActive(false);
+        _thalamusConnector.AllConnected(players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
         OverlayNextLevelUI.SetActive(true);
         GameState = GameState.NextLevel;
     }
