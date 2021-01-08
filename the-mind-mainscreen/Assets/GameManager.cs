@@ -212,7 +212,10 @@ public class GameManager : MonoBehaviour
         else
         {
             GameState = GameState.Game;
-            _thalamusConnector.RefocusRequest(-1);
+            if (HowManyPlayersLeft() == 1)
+            {
+                _thalamusConnector.RefocusRequest(-1);
+            }
         }
         LivesUI.GetComponent<Text>().color = new Color(0, 0, 0);
         UpdateLivesUI();
@@ -298,6 +301,7 @@ public class GameManager : MonoBehaviour
         GameFinishedTextUI.SetActive(false);
         _thalamusConnector.AllConnected(MaxLevels, players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
         OverlayNextLevelUI.SetActive(true);
+        UpdateLivesUI();
         GameState = GameState.NextLevel;
     }
 }

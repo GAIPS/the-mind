@@ -127,6 +127,7 @@ namespace RoboticPlayer
                 }
                 if (_gameState == GameState.Game)
                 {
+                    mut.WaitOne();
                     if (nextTimeToPlay == -1)
                     {
                         if (cards.Count > 0)
@@ -150,13 +151,14 @@ namespace RoboticPlayer
                             Console.WriteLine("---- No more cards!!!!!");
                         }
                     }
-                    else if (stopWatch.ElapsedMilliseconds >= nextTimeToPlay)
+                    else if (stopWatch.IsRunning && stopWatch.ElapsedMilliseconds >= nextTimeToPlay)
                     {
                         stopWatch.Stop();
                         theMindPublisher.PlayCard(ID, cards[0]);
                         cards.RemoveAt(0);
                         nextTimeToPlay = -1;
                     }
+                    mut.ReleaseMutex();
                 }
             }
         }
@@ -243,19 +245,24 @@ namespace RoboticPlayer
                 eventsList.Add(GameState.Game);
                 mut.ReleaseMutex();
             }
+            else if (cards.Count > 0)
+            {
+                _gameState = GameState.Syncing;
+            }
             else
             {
-                mut.WaitOne();
-                eventsList.Add(GameState.Syncing);
-                mut.ReleaseMutex();
+                _gameState = GameState.Waiting;
             }
         }
 
         public void CardPlayed(int playerID, int card)
         {
+            mut.WaitOne();
             TopOfThePile = card;
             nextTimeToPlay = -1;
             cardsLeft[playerID]--;
+            stopWatch.Stop();
+            mut.ReleaseMutex();
         }
 
         public void Mistake(int playerID, int card, int[] p0WrongCards, int[] p1WrongCards, int[] p2WrongCards)
