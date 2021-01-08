@@ -27,10 +27,10 @@ namespace RoboticPlayer
 
     class AutonomousAgent : ThalamusClient, IGMTablets
     {
-        private class WindowShopPublisher : IAutonomousAgentPublisher
+        protected class TheMindPublisher : IAutonomousAgentPublisher
         {
             dynamic publisher;
-            public WindowShopPublisher(dynamic publisher)
+            public TheMindPublisher(dynamic publisher)
             {
                 this.publisher = publisher;
             }
@@ -61,31 +61,35 @@ namespace RoboticPlayer
             }
         }
 
-        private WindowShopPublisher theMindPublisher;
-        private int ID;
-        private GameState _gameState;
-        private List<GameState> eventsList;
-        private static Mutex mut = new Mutex();
-        private Random randomNums;
-        private int MaxLevel;
-        private int TopOfThePile;
-        private List<int> cards;
-        private List<int> cardsLeft;
-        private Stopwatch stopWatch;
-        private int nextTimeToPlay;
+        protected TheMindPublisher theMindPublisher;
+        protected int ID;
+        protected GameState _gameState;
+        protected List<GameState> eventsList;
+        protected static Mutex mut = new Mutex();
+        protected Random randomNums;
+        protected int MaxLevel;
+        protected int TopOfThePile;
+        protected float Pace;
+        protected List<int> cards;
+        protected List<int> cardsLeft;
+        protected Stopwatch stopWatch;
+        protected Stopwatch lastCardStopWatch;
+        protected int nextTimeToPlay;
 
         public AutonomousAgent(string clientName, string character, int playerID)
             : base(clientName, character)
         {
 
             SetPublisher<IAutonomousAgentPublisher>();
-            theMindPublisher = new WindowShopPublisher(Publisher);
+            theMindPublisher = new TheMindPublisher(Publisher);
             ID = playerID;
             TopOfThePile = 0;
+            Pace = 1000;
             _gameState = GameState.Waiting;
             eventsList = new List<GameState>();
             randomNums = new Random();
             stopWatch = new Stopwatch();
+            lastCardStopWatch = new Stopwatch();
             nextTimeToPlay = -1;
             Thread thread = new Thread(MainLoop);
             thread.Start();
@@ -140,9 +144,9 @@ namespace RoboticPlayer
                             else
                             {
                                 stopWatch.Restart();
-                                int lowestCard = cards[0];
-                                nextTimeToPlay = (lowestCard - TopOfThePile) * 1000;
-                                Console.WriteLine(">>>>> NextTimeToPlay in " + (lowestCard - TopOfThePile) + "s : " + lowestCard + " - " + TopOfThePile + " / " + cardsLeft[0] + " / " + cardsLeft[1] + " / " + cardsLeft[2]);
+                                nextTimeToPlay = EstimateTimeToPlay();
+                                //Console.WriteLine(">>>>> NextTimeToPlay in " + (lowestCard - TopOfThePile) + "s : " + lowestCard + " - " + TopOfThePile + " / " + cardsLeft[0] + " / " + cardsLeft[1] + " / " + cardsLeft[2]);
+                                Console.WriteLine(">>>>> NextTimeToPlay in " + nextTimeToPlay);
                             }
                         }
                         else
@@ -161,6 +165,11 @@ namespace RoboticPlayer
                     mut.ReleaseMutex();
                 }
             }
+        }
+
+        public virtual int EstimateTimeToPlay()
+        {
+            return (cards[0] - TopOfThePile) * 1000;
         }
 
         public void ConnectToGM()
@@ -184,6 +193,7 @@ namespace RoboticPlayer
         public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
         {
             TopOfThePile = 0;
+            Pace = 1000;
             cards = new List<int>();
             cardsLeft = new List<int>();
             for (int i = 0; i < 3; i++)
@@ -233,6 +243,7 @@ namespace RoboticPlayer
             {
                 mut.WaitOne();
                 eventsList.Add(GameState.Game);
+                lastCardStopWatch.Restart();
                 mut.ReleaseMutex();
             }
         }
@@ -258,6 +269,11 @@ namespace RoboticPlayer
         public void CardPlayed(int playerID, int card)
         {
             mut.WaitOne();
+            long timeDelta = lastCardStopWatch.ElapsedMilliseconds;
+            int cardsDelta = card - TopOfThePile;
+            Pace = timeDelta / cardsDelta;
+            Console.WriteLine("New PACE: " + Pace);
+            lastCardStopWatch.Restart();
             TopOfThePile = card;
             nextTimeToPlay = -1;
             cardsLeft[playerID]--;
@@ -279,7 +295,6 @@ namespace RoboticPlayer
             {
                 p2WrongCards = new int[] { };
             }
-
             TopOfThePile = card;
             cardsLeft[playerID]--;
             bool shouldAckMistake = false;
