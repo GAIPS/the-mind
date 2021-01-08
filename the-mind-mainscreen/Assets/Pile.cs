@@ -71,7 +71,7 @@ public class Pile : MonoBehaviour
         }
         else
         {
-            PileUI.SetActive(false);
+            PileUI.GetComponent<Text>().text = "-";
         }
     }
 
