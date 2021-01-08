@@ -158,17 +158,25 @@ public class Player : MonoBehaviour
 
     public void UpdateCardsUI()
     {
-        string text = "[";
-        for (int i = 0; i < cards.Count; i++)
+        if (GameManager.DebugMode)
         {
-            text += cards[i];
-            if (i != cards.Count - 1)
+            string text = "[";
+            for (int i = 0; i < cards.Count; i++)
             {
-                text += ",";
+                text += cards[i];
+                if (i != cards.Count - 1)
+                {
+                    text += ",";
+                }
             }
+            text += "]";
+            CardsUI.GetComponent<Text>().text = text;
         }
-        text += "]";
-        CardsUI.GetComponent<Text>().text = text;
+        else
+        {
+            string text = "" + cards.Count + " cards left";
+            CardsUI.GetComponent<Text>().text = text;
+        }
     }
 
     private void UpdateConnectionUI()

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject OverlayMistakeUI;
     public GameObject GameFinishedTextUI;
     public GameObject MaxLevelsInputFieldUI;
+    public static bool DebugMode = true;
     public static GameState GameState;
 
     public Player[] players;
@@ -291,6 +292,11 @@ public class GameManager : MonoBehaviour
     {
         int max = int.Parse(MaxLevelsInputFieldUI.GetComponent<InputField>().text);
         MaxLevels = max;
+    }
+
+    public void ChangeDebugMode()
+    {
+        DebugMode = MaxLevelsInputFieldUI.GetComponentInChildren<Toggle>().isOn;
     }
 
     public void StartFromLevelOne()
