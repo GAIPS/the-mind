@@ -89,7 +89,7 @@ public abstract class ThalamusConnector
 
     public ThalamusConnector(int remotePort = 7000)
     {
-        _remoteAddress = "192.168.0.100";
+        _remoteAddress = "192.168.0.101";
         _remotePort = remotePort;
         _localPort = _remotePort + 1;
         _remoteUri = String.Format("http://{0}:{1}/", _remoteAddress, _remotePort);

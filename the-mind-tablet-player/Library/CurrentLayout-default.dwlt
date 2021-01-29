@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 342}
   m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
-  controlID: 56
+  controlID: 92
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 342}
   m_MaxSize: {x: 12004, y: 8042}
   vertical: 1
-  controlID: 57
+  controlID: 93
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 455
+    width: 454
     height: 610
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 455
+    x: 454
     y: 0
     width: 1146
     height: 610
@@ -236,9 +236,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1601
+    x: 1600
     y: 0
-    width: 319
+    width: 320
     height: 610
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
@@ -295,7 +295,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 455
+    x: 454
     y: 73
     width: 1144
     height: 589
@@ -386,7 +386,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 454
+    width: 453
     height: 589
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
@@ -394,7 +394,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: def9fffff0f9fffff2f9ffff24faffff36faffffc8faffff6cfbffff
+      m_ExpandedIDs: 6cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -644,9 +644,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1601
+    x: 1600
     y: 73
-    width: 318
+    width: 319
     height: 589
   m_ViewDataDictionary: {fileID: 0}
   m_OpenAddComponentMenu: 0

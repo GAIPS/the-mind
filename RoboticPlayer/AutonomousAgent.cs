@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Thalamus;
 using TheMindThalamusMessages;
+using GazeOFMessages;
+using EmoteCommonMessages;
 
 namespace RoboticPlayer
 {
@@ -23,11 +25,11 @@ namespace RoboticPlayer
         StopMainLoop
     }
 
-    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM { }
+    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, ITargetEvents { }
 
-    class AutonomousAgent : ThalamusClient, IGMTablets
+    class AutonomousAgent : ThalamusClient, IGMTablets, IGazeOpenFacePerceptions
     {
-        protected class TheMindPublisher : IAutonomousAgentPublisher
+        public class TheMindPublisher : IAutonomousAgentPublisher
         {
             dynamic publisher;
             public TheMindPublisher(dynamic publisher)
@@ -59,9 +61,45 @@ namespace RoboticPlayer
             {
                 this.publisher.RefocusSignal(playerID);
             }
+
+            public void GazeAtScreen(double x, double y)
+            {
+                publisher.GazeAtScreen(x, y);
+            }
+
+            public void GazeAtTarget(string targetName)
+            {
+                publisher.GazeAtTarget(targetName);
+            }
+
+            public void GlanceAtScreen(double x, double y)
+            {
+                publisher.GlanceAtScreen(x, y);
+            }
+
+            public void GlanceAtTarget(string targetName)
+            {
+                publisher.GlanceAtTarget(targetName);
+            }
+
+            public void TargetAngleInfo(string targetName, int X, int Y)
+            {
+                publisher.TargetAngleInfo(targetName, X, Y);
+            }
+
+            public void TargetLink(string targetName, string linkedTargetName)
+            {
+                publisher.TargetLink(targetName, linkedTargetName);
+            }
+
+            public void TargetScreenInfo(string targetName, int X, int Y)
+            {
+                publisher.TargetScreenInfo(targetName, X, Y);
+            }
         }
 
-        protected TheMindPublisher theMindPublisher;
+        public TheMindPublisher TMPublisher;
+        protected GazeController gazeController;
         protected int ID;
         protected GameState _gameState;
         protected List<GameState> eventsList;
@@ -81,7 +119,8 @@ namespace RoboticPlayer
         {
 
             SetPublisher<IAutonomousAgentPublisher>();
-            theMindPublisher = new TheMindPublisher(Publisher);
+            TMPublisher = new TheMindPublisher(base.Publisher);
+            gazeController = new GazeController(this);
             ID = playerID;
             TopOfThePile = 0;
             Pace = 1000;
@@ -111,21 +150,21 @@ namespace RoboticPlayer
                 {
                     int randomWait = randomNums.Next(2000, 5000);
                     Thread.Sleep(randomWait);
-                    theMindPublisher.ReadyForNextLevel(ID);
+                    TMPublisher.ReadyForNextLevel(ID);
                     _gameState = GameState.Waiting;
                 }
                 if (_gameState == GameState.Syncing)
                 {
                     int randomWait = randomNums.Next(2000, 5000);
                     Thread.Sleep(randomWait);
-                    theMindPublisher.RefocusSignal(ID);
+                    TMPublisher.RefocusSignal(ID);
                     _gameState = GameState.Waiting;
                 }
                 if (_gameState == GameState.Mistake)
                 {
                     int randomWait = randomNums.Next(2000, 5000);
                     Thread.Sleep(randomWait);
-                    theMindPublisher.ContinueAfterMistake(ID);
+                    TMPublisher.ContinueAfterMistake(ID);
                     nextTimeToPlay = -1;
                     _gameState = GameState.Waiting;
                 }
@@ -158,7 +197,7 @@ namespace RoboticPlayer
                     else if (stopWatch.IsRunning && stopWatch.ElapsedMilliseconds >= nextTimeToPlay)
                     {
                         stopWatch.Stop();
-                        theMindPublisher.PlayCard(ID, cards[0]);
+                        TMPublisher.PlayCard(ID, cards[0]);
                         cards.RemoveAt(0);
                         nextTimeToPlay = -1;
                     }
@@ -174,12 +213,18 @@ namespace RoboticPlayer
 
         public void ConnectToGM()
         {
-            theMindPublisher.ConnectToGM(ID, "Agent" + ID);
+            TMPublisher.ConnectToGM(ID, "Agent" + ID);
         }
 
         public void StopMainLoop()
         {
             _gameState = GameState.StopMainLoop;
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            gazeController.Dispose();
         }
 
         public void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)
@@ -361,6 +406,50 @@ namespace RoboticPlayer
         public void GameCompleted()
         {
             //throw new NotImplementedException();
+        }
+
+        public void GazeOpenFace(int faceId, double angleX, double angleY, string target, double timeMiliseconds)
+        {
+            if (faceId != ID && gazeController.SessionStarted)
+            {
+                if (gazeController.Player0.ID == faceId)
+                {
+                    gazeController.Player0.GazeEvent(target, timeMiliseconds);
+                }
+                else if (gazeController.Player1.ID == faceId)
+                {
+                    gazeController.Player1.GazeEvent(target, timeMiliseconds);
+                }
+
+            }
+        }
+
+        public void TargetCalibrationStarted(int faceId, string target)
+        {
+            //DO SOMETHING
+        }
+
+        public void TargetCalibrationFinished(int faceId, string target)
+        {
+            //DO SOMETHING
+        }
+
+        public void CalibrationPhaseFinished(int faceId)
+        {
+            if (faceId == gazeController.Player0.ID)
+            {
+                gazeController.Player0.SessionStarted = true;
+                gazeController.SessionStarted = true;
+            }
+            else if (faceId == gazeController.Player1.ID)
+            {
+                gazeController.Player1.SessionStarted = true;
+            }
+
+            if (gazeController.Player0.SessionStarted && gazeController.Player1.SessionStarted)
+            {
+                gazeController.SessionStarted = true;
+            }
         }
     }
 }
