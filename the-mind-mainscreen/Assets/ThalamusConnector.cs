@@ -87,9 +87,9 @@ public abstract class ThalamusConnector
 
 
 
-    public ThalamusConnector(int remotePort = 7000)
+    public ThalamusConnector(string ip, int remotePort = 7000)
     {
-        _remoteAddress = "192.168.0.101";
+        _remoteAddress = ip;
         _remotePort = remotePort;
         _localPort = _remotePort + 1;
         _remoteUri = String.Format("http://{0}:{1}/", _remoteAddress, _remotePort);
@@ -266,7 +266,7 @@ public class GameMasterThalamusConnector : ThalamusConnector, IUnityPublisher
         }
     }
 
-    public GameMasterThalamusConnector(GameManager gm, int remotePort = 7000) : base(remotePort)
+    public GameMasterThalamusConnector(GameManager gm, string ip, int remotePort = 7000) : base(ip, remotePort)
     {
         _rpcProxy = XmlRpcProxyGen.Create<IUnityGMPublisher>();
         _rpcProxy.Timeout = 5000;

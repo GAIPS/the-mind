@@ -16,6 +16,7 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    private string IPadress;
     public int MaxLevels;
     public int NumPlayers;
     public int Level;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject OverlayMistakeUI;
     public GameObject GameFinishedTextUI;
     public GameObject MaxLevelsInputFieldUI;
+    public GameObject IPinputField;
     public static bool DebugMode = true;
     public static GameState GameState;
 
@@ -39,19 +41,26 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        IPadress = "";
         topOfThePile = -1;
-        _thalamusConnector = new GameMasterThalamusConnector(this);
+        _thalamusConnector = null;
         GameState = GameState.Connection;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_thalamusConnector == null && IPadress != "")
+        {
+            IPinputField.GetComponent<InputField>().interactable = false;
+            _thalamusConnector = new GameMasterThalamusConnector(this, IPadress);
+        }
         UpdateNumLevelsSetupUI();
         if (GameState == GameState.Connection)
         {
             if (players[0].IsConnected && players[1].IsConnected && players[2].IsConnected)
             {
+                IPinputField.SetActive(false);
                 _thalamusConnector.AllConnected(MaxLevels, players[0].ID, players[0].Name, players[1].ID, players[1].Name, players[2].ID, players[2].Name);
                 OverlayNextLevelUI.SetActive(true);
                 GameState = GameState.NextLevel;
@@ -286,6 +295,11 @@ public class GameManager : MonoBehaviour
         pile.StartNewLevel();
         _thalamusConnector.StartLevel(Level, Lives, hands[0].ToArray(), hands[1].ToArray(), hands[2].ToArray());
         GameState = GameState.Syncing;
+    }
+
+    public void ChangeThalamusClientIP()
+    {
+        IPadress = IPinputField.GetComponent<InputField>().text;
     }
 
     public void ChangeMaxLevel()
