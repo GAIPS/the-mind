@@ -25,7 +25,7 @@ namespace RoboticPlayer
         StopMainLoop
     }
 
-    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, ITargetEvents { }
+    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, IGazeStateActions, ITargetEvents { }
 
     class AutonomousAgent : ThalamusClient, IGMTablets, IGazeOpenFacePerceptions
     {

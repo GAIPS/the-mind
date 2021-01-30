@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     public GameObject IPinputField;
     public static bool DebugMode = true;
     public static GameState GameState;
+    public AudioClip playingCardSound;
+    public AudioClip errorSound;
+    private AudioSource audioSource;
 
     public Player[] players;
     public Pile pile;
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
         topOfThePile = -1;
         _thalamusConnector = null;
         GameState = GameState.Connection;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -187,6 +191,7 @@ public class GameManager : MonoBehaviour
         if (mistake)
         {
             _thalamusConnector.Mistake(pile.LastPlayer, topOfThePile, wrongCards[0].ToArray(), wrongCards[1].ToArray(), wrongCards[2].ToArray());
+            audioSource.PlayOneShot(errorSound);
             Lives--;
             LivesUI.GetComponent<Text>().color = new Color(1, 0, 0);
             UpdateLivesUI();
@@ -196,6 +201,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _thalamusConnector.CardPlayed(pile.LastPlayer, topOfThePile);
+            audioSource.PlayOneShot(playingCardSound);
         }
     }
 
