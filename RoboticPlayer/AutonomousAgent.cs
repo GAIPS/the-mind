@@ -130,8 +130,8 @@ namespace RoboticPlayer
             stopWatch = new Stopwatch();
             lastCardStopWatch = new Stopwatch();
             nextTimeToPlay = -1;
-            Thread thread = new Thread(MainLoop);
-            thread.Start();
+            Thread mainLoopThread = new Thread(MainLoop);
+            mainLoopThread.Start();
         }
 
         private void MainLoop()
@@ -223,8 +223,9 @@ namespace RoboticPlayer
 
         public override void Dispose()
         {
-            base.Dispose();
+            _gameState = GameState.StopMainLoop;
             gazeController.Dispose();
+            base.Dispose();
         }
 
         public void AllConnected(int maxLevel, int p0Id, string p0Name, int p1Id, string p1Name, int p2Id, string p2Name)

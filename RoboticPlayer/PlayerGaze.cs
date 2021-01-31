@@ -14,9 +14,10 @@ namespace RoboticPlayer
         public string Name;
         public GazeBehavior CurrentGazeBehaviour;
         private double lastEventTime;
-        public double GazeShiftPeriod;
-        public double GazeRobotAvgDur;
-        public double GazeRobotPeriod;
+        public double GAZE_ROBOT_AVG_DUR;
+        public double GAZE_SCREEN_AVG_DUR;
+        public double GAZE_ROBOT_PERIOD;
+        public double GAZE_SCREEN_PERIOD;
         public int PERIOD_TIME_WINDOW = 10; //5 seconds
         private List<GazeBehavior> gazeBehaviors;
         private List<GazeEvent> gazeEvents;
@@ -38,8 +39,8 @@ namespace RoboticPlayer
             gazeEvents = new List<GazeEvent>();
             GazeEventsDispatcher = new Thread(DispacthGazeEvents);
             GazeEventsDispatcher.Start();
-            UpdatesDispatcher = new Thread(Updates);
-            UpdatesDispatcher.Start();
+            //UpdatesDispatcher = new Thread(Updates);
+            //UpdatesDispatcher.Start();
         }
 
         public bool IsGazingAtRobot()
@@ -71,7 +72,7 @@ namespace RoboticPlayer
             lastEventTime = timeMiliseconds;
         }
 
-        private void Updates()
+        /*private void Updates()
         {
             while (true)
             {
@@ -81,63 +82,73 @@ namespace RoboticPlayer
                 }
                 Thread.Sleep(1000);
             }
-        }
+        }*/
 
-        private void UpdateGazeShiftRate()
+        public void UpdateRhythms()
         {
             if (SessionStarted && gazeBehaviors.Count > 0)
             {
-                GazeBehavior gb = gazeBehaviors.Last();
                 double timeThreshold = lastEventTime - PERIOD_TIME_WINDOW;
-                //Console.WriteLine("lastEventTime " + lastEventTime + " timeThreshold " + timeThreshold);
-                int numGazeShifts = 0;
                 int numGazeAtRobot = 0;
                 double durGazeAtRobot = 0;
+                int numGazeAtMainscreen = 0;
+                double durGazeAtMainscreen = 0;
                 if (CurrentGazeBehaviour.Target == PlayerGazeAtRobot)
                 {
                     numGazeAtRobot++;
                     durGazeAtRobot += CurrentGazeBehaviour.Duration;
                 }
+                if (CurrentGazeBehaviour.Target == "mainscreen")
+                {
+                    numGazeAtMainscreen++;
+                    durGazeAtMainscreen += CurrentGazeBehaviour.Duration;
+                }
                 for (int i = gazeBehaviors.Count - 1; i >= 0 && gazeBehaviors[i].EndingTime > timeThreshold; i--)
                 {
-                    numGazeShifts++;
                     if (gazeBehaviors[i].Target == PlayerGazeAtRobot)
                     {
                         numGazeAtRobot++;
                         durGazeAtRobot += gazeBehaviors[i].Duration;
                     }
+                    else if (gazeBehaviors[i].Target == "mainscreen")
+                    {
+                        numGazeAtMainscreen++;
+                        durGazeAtMainscreen += gazeBehaviors[i].Duration;
+                    }
                 }
-                if (numGazeShifts != 0)
-                {
-                    GazeShiftPeriod = PERIOD_TIME_WINDOW / numGazeShifts;
-                }
-                else
-                {
-                    GazeShiftPeriod = PERIOD_TIME_WINDOW;
-                }
-                //Console.WriteLine("PLAYER " + ID + " - GazeShiftRate " + GazeShiftPeriod + " count: " + numGazeShifts);
 
                 if (numGazeAtRobot != 0)
                 {
                     durGazeAtRobot /= numGazeAtRobot;
-                    GazeRobotAvgDur = durGazeAtRobot;
-                    GazeRobotPeriod = PERIOD_TIME_WINDOW / numGazeAtRobot;
+                    GAZE_ROBOT_AVG_DUR = durGazeAtRobot;
+                    GAZE_ROBOT_PERIOD = PERIOD_TIME_WINDOW / numGazeAtRobot;
                 }
                 else
                 {
-                    GazeRobotAvgDur = 1;
-                    GazeRobotPeriod = PERIOD_TIME_WINDOW;
+                    GAZE_ROBOT_AVG_DUR = durGazeAtRobot;
+                    GAZE_ROBOT_PERIOD = PERIOD_TIME_WINDOW;
                 }
-                //Console.WriteLine("PLAYER " + ID + " ------ numGazeAtRobot " + numGazeAtRobot + " durGazeAtRobot: " + durGazeAtRobot);
-            }
+                GAZE_ROBOT_AVG_DUR = durGazeAtRobot;
 
+                if (numGazeAtMainscreen != 0)
+                {
+                    durGazeAtMainscreen /= numGazeAtMainscreen;
+                    GAZE_SCREEN_AVG_DUR = durGazeAtMainscreen;
+                    GAZE_SCREEN_PERIOD = PERIOD_TIME_WINDOW / numGazeAtMainscreen;
+                }
+                else
+                {
+                    GAZE_SCREEN_AVG_DUR = durGazeAtMainscreen;
+                    GAZE_SCREEN_AVG_DUR = PERIOD_TIME_WINDOW;
+                }
+            }
         }
 
         internal void Dispose()
         {
             Console.WriteLine("------------------------- gazeBehaviors.size - " + gazeBehaviors.Count);
             GazeEventsDispatcher.Join();
-            UpdatesDispatcher.Join();
+            //UpdatesDispatcher.Join();
         }
 
         private void DispacthGazeEvents()
