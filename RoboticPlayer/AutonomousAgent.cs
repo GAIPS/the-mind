@@ -110,8 +110,9 @@ namespace RoboticPlayer
         protected float Pace;
         protected List<int> cards;
         protected List<int> cardsLeft;
-        protected Stopwatch stopWatch;
+        protected Stopwatch PlayStopWatch;
         protected Stopwatch lastCardStopWatch;
+        protected Stopwatch sessionStartStopWatch;
         protected int nextTimeToPlay;
 
         public AutonomousAgent(string clientName, string character, int playerID)
@@ -127,8 +128,10 @@ namespace RoboticPlayer
             _gameState = GameState.Waiting;
             eventsList = new List<GameState>();
             randomNums = new Random();
-            stopWatch = new Stopwatch();
+            PlayStopWatch = new Stopwatch();
             lastCardStopWatch = new Stopwatch();
+            sessionStartStopWatch = new Stopwatch();
+            sessionStartStopWatch.Start();
             nextTimeToPlay = -1;
             Thread mainLoopThread = new Thread(MainLoop);
             mainLoopThread.Start();
@@ -177,12 +180,12 @@ namespace RoboticPlayer
                         {
                             if (ID == 2 && cardsLeft[0] == 0 && cardsLeft[1] == 0)
                             {
-                                stopWatch.Restart();
+                                PlayStopWatch.Restart();
                                 nextTimeToPlay = 1500;
                             }
                             else
                             {
-                                stopWatch.Restart();
+                                PlayStopWatch.Restart();
                                 nextTimeToPlay = EstimateTimeToPlay();
                                 //Console.WriteLine(">>>>> NextTimeToPlay in " + (lowestCard - TopOfThePile) + "s : " + lowestCard + " - " + TopOfThePile + " / " + cardsLeft[0] + " / " + cardsLeft[1] + " / " + cardsLeft[2]);
                                 Console.WriteLine(">>>>> NextTimeToPlay in " + nextTimeToPlay);
@@ -194,9 +197,9 @@ namespace RoboticPlayer
                             Console.WriteLine("---- No more cards!!!!!");
                         }
                     }
-                    else if (stopWatch.IsRunning && stopWatch.ElapsedMilliseconds >= nextTimeToPlay)
+                    else if (PlayStopWatch.IsRunning && PlayStopWatch.ElapsedMilliseconds >= nextTimeToPlay)
                     {
-                        stopWatch.Stop();
+                        PlayStopWatch.Stop();
                         TMPublisher.PlayCard(ID, cards[0]);
                         cards.RemoveAt(0);
                         nextTimeToPlay = -1;
@@ -234,6 +237,7 @@ namespace RoboticPlayer
             mut.WaitOne();
             eventsList.Add(GameState.NextLevel);
             mut.ReleaseMutex();
+            sessionStartStopWatch.Restart();
         }
 
         public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
@@ -323,7 +327,7 @@ namespace RoboticPlayer
             TopOfThePile = card;
             nextTimeToPlay = -1;
             cardsLeft[playerID]--;
-            stopWatch.Stop();
+            PlayStopWatch.Stop();
             mut.ReleaseMutex();
         }
 
@@ -415,11 +419,11 @@ namespace RoboticPlayer
             {
                 if (gazeController.Player0.ID == faceId)
                 {
-                    gazeController.Player0.GazeEvent(target, timeMiliseconds);
+                    gazeController.Player0.GazeEvent(target, sessionStartStopWatch.ElapsedMilliseconds);
                 }
                 else if (gazeController.Player1.ID == faceId)
                 {
-                    gazeController.Player1.GazeEvent(target, timeMiliseconds);
+                    gazeController.Player1.GazeEvent(target, sessionStartStopWatch.ElapsedMilliseconds);
                 }
 
             }

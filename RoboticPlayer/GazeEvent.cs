@@ -9,9 +9,9 @@ namespace RoboticPlayer
     class GazeEvent
     {
         public string Target;
-        public double Timestamp;
+        public long Timestamp;
 
-        public GazeEvent(string target, double timestamp)
+        public GazeEvent(string target, long timestamp)
         {
             Target = target;
             Timestamp = timestamp;

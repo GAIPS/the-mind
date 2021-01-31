@@ -10,11 +10,11 @@ namespace RoboticPlayer
     {
         public int GazerID;
         public string Target;
-        public double StartingTime;
-        public double EndingTime;
-        public double Duration;
+        public long StartingTime;
+        public long EndingTime;
+        public long Duration;
 
-        public GazeBehavior(int id, string target, double startingTime, double endingTime)
+        public GazeBehavior(int id, string target, long startingTime, long endingTime)
         {
             GazerID = id;
             Target = target;
@@ -23,7 +23,7 @@ namespace RoboticPlayer
             Duration = endingTime - startingTime;
         }
 
-        public GazeBehavior(int id, string target, double startingTime)
+        public GazeBehavior(int id, string target, long startingTime)
         {
             GazerID = id;
             Target = target;
@@ -32,7 +32,7 @@ namespace RoboticPlayer
             Duration = 0;
         }
 
-        public void UpdateEndtingTime(double endingTime)
+        public void UpdateEndtingTime(long endingTime)
         {
             EndingTime = endingTime;
             Duration = endingTime - StartingTime;

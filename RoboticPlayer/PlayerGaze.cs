@@ -13,15 +13,14 @@ namespace RoboticPlayer
         public string PlayerGazeAtRobot;
         public string Name;
         public GazeBehavior CurrentGazeBehaviour;
-        private double lastEventTime;
-        public double GAZE_ROBOT_AVG_DUR;
-        public double GAZE_SCREEN_AVG_DUR;
-        public double GAZE_ROBOT_PERIOD;
-        public double GAZE_SCREEN_PERIOD;
-        public int PERIOD_TIME_WINDOW = 10; //5 seconds
+        private long lastEventTime;
+        public long GAZE_ROBOT_AVG_DUR;
+        public long GAZE_SCREEN_AVG_DUR;
+        public long GAZE_ROBOT_PERIOD;
+        public long GAZE_SCREEN_PERIOD;
+        public long PERIOD_TIME_WINDOW = 10000; //10 seconds
         private List<GazeBehavior> gazeBehaviors;
         private List<GazeEvent> gazeEvents;
-        public Thread UpdatesDispatcher;
         public Thread GazeEventsDispatcher;
         public static Mutex mut = new Mutex();
         public bool SessionStarted;
@@ -39,8 +38,6 @@ namespace RoboticPlayer
             gazeEvents = new List<GazeEvent>();
             GazeEventsDispatcher = new Thread(DispacthGazeEvents);
             GazeEventsDispatcher.Start();
-            //UpdatesDispatcher = new Thread(Updates);
-            //UpdatesDispatcher.Start();
         }
 
         public bool IsGazingAtRobot()
@@ -49,7 +46,7 @@ namespace RoboticPlayer
         }
 
 
-        public void GazeEvent(string target, double timeMiliseconds)
+        public void GazeEvent(string target, long timeMiliseconds)
         {
             if (CurrentGazeBehaviour == null || CurrentGazeBehaviour.Target != target)
             {
@@ -72,27 +69,15 @@ namespace RoboticPlayer
             lastEventTime = timeMiliseconds;
         }
 
-        /*private void Updates()
-        {
-            while (true)
-            {
-                if (gazeBehaviors.Count > 0)
-                {
-                    UpdateGazeShiftRate();
-                }
-                Thread.Sleep(1000);
-            }
-        }*/
-
         public void UpdateRhythms()
         {
             if (SessionStarted && gazeBehaviors.Count > 0)
             {
-                double timeThreshold = lastEventTime - PERIOD_TIME_WINDOW;
+                long timeThreshold = lastEventTime - PERIOD_TIME_WINDOW;
                 int numGazeAtRobot = 0;
-                double durGazeAtRobot = 0;
+                long durGazeAtRobot = 0;
                 int numGazeAtMainscreen = 0;
-                double durGazeAtMainscreen = 0;
+                long durGazeAtMainscreen = 0;
                 if (CurrentGazeBehaviour.Target == PlayerGazeAtRobot)
                 {
                     numGazeAtRobot++;
@@ -128,7 +113,6 @@ namespace RoboticPlayer
                     GAZE_ROBOT_AVG_DUR = durGazeAtRobot;
                     GAZE_ROBOT_PERIOD = PERIOD_TIME_WINDOW;
                 }
-                GAZE_ROBOT_AVG_DUR = durGazeAtRobot;
 
                 if (numGazeAtMainscreen != 0)
                 {
@@ -139,16 +123,49 @@ namespace RoboticPlayer
                 else
                 {
                     GAZE_SCREEN_AVG_DUR = durGazeAtMainscreen;
-                    GAZE_SCREEN_AVG_DUR = PERIOD_TIME_WINDOW;
+                    GAZE_SCREEN_PERIOD = PERIOD_TIME_WINDOW;
                 }
+                //Console.WriteLine("++++++ " + GAZE_ROBOT_AVG_DUR + " " + GAZE_ROBOT_PERIOD + " " + GAZE_SCREEN_AVG_DUR + " " + GAZE_SCREEN_PERIOD);
             }
         }
+
+        public (string, int) EstimateNextGazeTarget()
+        {
+            string nextTarget = "";
+            int expectedPeriod = -1;
+
+            if (GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && GAZE_SCREEN_PERIOD < PERIOD_TIME_WINDOW)
+            {
+                if (GAZE_ROBOT_PERIOD < GAZE_SCREEN_PERIOD)
+                {
+                    nextTarget = Name;
+                    expectedPeriod = (int) GAZE_ROBOT_PERIOD;
+                }
+                else
+                {
+                    nextTarget = "mainscreen";
+                    expectedPeriod = (int) GAZE_SCREEN_PERIOD;
+                }
+            }
+            else if (GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW)
+            {
+                nextTarget = Name;
+                expectedPeriod = (int) GAZE_ROBOT_PERIOD;
+            }
+            else if (GAZE_SCREEN_PERIOD < PERIOD_TIME_WINDOW)
+            {
+                nextTarget = "mainscreen";
+                expectedPeriod = (int) GAZE_SCREEN_PERIOD;
+            }
+
+            return (nextTarget, expectedPeriod);
+        }
+
 
         internal void Dispose()
         {
             Console.WriteLine("------------------------- gazeBehaviors.size - " + gazeBehaviors.Count);
             GazeEventsDispatcher.Join();
-            //UpdatesDispatcher.Join();
         }
 
         private void DispacthGazeEvents()
