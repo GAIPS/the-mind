@@ -134,7 +134,7 @@ namespace RoboticPlayer
             string nextTarget = "";
             int expectedPeriod = -1;
 
-            if (GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && GAZE_SCREEN_PERIOD < PERIOD_TIME_WINDOW)
+            if (CurrentGazeBehaviour.Target != PlayerGazeAtRobot && GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != "mainscreen" && GAZE_SCREEN_PERIOD < PERIOD_TIME_WINDOW)
             {
                 if (GAZE_ROBOT_PERIOD < GAZE_SCREEN_PERIOD)
                 {
@@ -147,12 +147,12 @@ namespace RoboticPlayer
                     expectedPeriod = (int) GAZE_SCREEN_PERIOD;
                 }
             }
-            else if (GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW)
+            else if (GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != PlayerGazeAtRobot)
             {
                 nextTarget = Name;
                 expectedPeriod = (int) GAZE_ROBOT_PERIOD;
             }
-            else if (GAZE_SCREEN_PERIOD < PERIOD_TIME_WINDOW)
+            else if (GAZE_SCREEN_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != "mainscreen")
             {
                 nextTarget = "mainscreen";
                 expectedPeriod = (int) GAZE_SCREEN_PERIOD;
