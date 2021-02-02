@@ -99,7 +99,7 @@ namespace RoboticPlayer
         }
 
         public TheMindPublisher TMPublisher;
-        protected GazeController gazeController;
+        protected ReactiveGazeController gazeController;
         protected int ID;
         protected GameState _gameState;
         protected List<GameState> eventsList;
@@ -115,13 +115,24 @@ namespace RoboticPlayer
         protected Stopwatch sessionStartStopWatch;
         protected int nextTimeToPlay;
 
-        public AutonomousAgent(string clientName, string character, int playerID)
+        public AutonomousAgent(string clientName, string character, int playerID, string gazeType)
             : base(clientName, character)
         {
 
             SetPublisher<IAutonomousAgentPublisher>();
             TMPublisher = new TheMindPublisher(base.Publisher);
-            gazeController = new GazeController(this);
+            if (gazeType == "f")
+            {
+
+            }
+            else if (gazeType == "r")
+            {
+                gazeController = new ReactiveGazeController(this);
+            }
+            else if (gazeType == "p")
+            {
+                gazeController = new ProactiveGazeController(this);
+            }
             ID = playerID;
             TopOfThePile = 0;
             Pace = 1000;

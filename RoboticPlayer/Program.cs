@@ -13,10 +13,11 @@ namespace RoboticPlayer
             string clientName;
             string character;
             int playerID;
+            string gazeType;
 
-            if (args.Length != 3)
+            if (args.Length != 4 && args[4] != "f" && args[4] != "r" && args[4] != "p")
             {
-                Console.WriteLine("Usage: " + Environment.GetCommandLineArgs()[0] + " <ClientName> <CharacterName> <PlayerID>");
+                Console.WriteLine("Usage: " + Environment.GetCommandLineArgs()[0] + " <ClientName> <CharacterName> <PlayerID> [frp]");
                 return;
             }
             else
@@ -24,7 +25,8 @@ namespace RoboticPlayer
                 clientName = args[0];
                 character = args[1];
                 playerID = Int16.Parse(args[2]);
-                AutonomousAgent theMindPlayer = new PaceAdapter(clientName, character, playerID);
+                gazeType = args[3];
+                AutonomousAgent theMindPlayer = new PaceAdapter(clientName, character, playerID, gazeType);
                 
                 string command = Console.ReadLine();
                 while (command != "exit")

@@ -196,7 +196,7 @@ namespace RoboticPlayer
                         CurrentGazeBehaviour = new GazeBehavior(ID, ge.Target, ge.Timestamp);
                         if (ge.Target != "elsewhere")
                         {
-                            GazeController.LastMovingPlayer = this;
+                            ReactiveGazeController.LastMovingPlayer = this;
                         }
                     }
                     else if (ge.Target == CurrentGazeBehaviour.Target)

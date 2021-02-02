@@ -10,8 +10,8 @@ namespace RoboticPlayer
     {
 
 
-        public PaceAdapter(string clientName, string character, int playerID)
-            : base(clientName, character, playerID)
+        public PaceAdapter(string clientName, string character, int playerID, string gazeType)
+            : base(clientName, character, playerID, gazeType)
         {
 
         }
