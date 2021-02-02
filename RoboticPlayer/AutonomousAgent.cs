@@ -25,7 +25,7 @@ namespace RoboticPlayer
         StopMainLoop
     }
 
-    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, IGazeStateActions, ITargetEvents { }
+    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, IGazeStateActions { }
 
     class AutonomousAgent : ThalamusClient, IGMTablets, IGazeOpenFacePerceptions
     {
@@ -80,21 +80,6 @@ namespace RoboticPlayer
             public void GlanceAtTarget(string targetName)
             {
                 publisher.GlanceAtTarget(targetName);
-            }
-
-            public void TargetAngleInfo(string targetName, int X, int Y)
-            {
-                publisher.TargetAngleInfo(targetName, X, Y);
-            }
-
-            public void TargetLink(string targetName, string linkedTargetName)
-            {
-                publisher.TargetLink(targetName, linkedTargetName);
-            }
-
-            public void TargetScreenInfo(string targetName, int X, int Y)
-            {
-                publisher.TargetScreenInfo(targetName, X, Y);
             }
         }
 

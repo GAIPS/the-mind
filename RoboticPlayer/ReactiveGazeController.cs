@@ -20,7 +20,6 @@ namespace RoboticPlayer
         //private long previousGazeShitTime;
         protected string currentTarget;
         public bool SessionStarted;
-        private int PROACTIVE_THRESHOLD = 1500;//miliseconds
         protected string PROACTIVE_NEXT_TARGET;
         protected long PROACTIVE_NEXT_SHIFT;
         private int GAZE_MIN_DURATION = 1000;//miliseconds
