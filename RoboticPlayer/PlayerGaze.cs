@@ -11,11 +11,13 @@ namespace RoboticPlayer
     {
         public int ID;
         public string PlayerGazeAtRobot;
+        public string OtherPlayerName;
         public string Name;
         public GazeBehavior CurrentGazeBehaviour;
         private long lastEventTime;
         public long GAZE_ROBOT_AVG_DUR;
         public long GAZE_MAINSCREEN_AVG_DUR;
+        public long GAZE_OTHER_PLAYER_AVG_DUR;
         public long GAZE_ROBOT_PERIOD;
         public long GAZE_MAINSCREEN_PERIOD;
         public long GAZE_OTHER_PLAYER_PERIOD;
@@ -32,6 +34,14 @@ namespace RoboticPlayer
             ID = id;
             PlayerGazeAtRobot = "player2";
             Name = "player" + id;
+            if (id == 0)
+            {
+                OtherPlayerName = "player1";
+            }
+            else if (id == 1)
+            {
+                OtherPlayerName = "player0";
+            }
             CurrentGazeBehaviour = null;
             SessionStarted = false;
             buffer = new List<string>();
@@ -79,6 +89,8 @@ namespace RoboticPlayer
                 long durGazeAtRobot = 0;
                 int numGazeAtMainscreen = 0;
                 long durGazeAtMainscreen = 0;
+                int numGazeAtOtherPlayer = 0;
+                long durGazeAtOtherPlayer = 0;
                 if (CurrentGazeBehaviour.Target == PlayerGazeAtRobot)
                 {
                     numGazeAtRobot++;
@@ -88,6 +100,11 @@ namespace RoboticPlayer
                 {
                     numGazeAtMainscreen++;
                     durGazeAtMainscreen += CurrentGazeBehaviour.Duration;
+                }
+                if (CurrentGazeBehaviour.Target == OtherPlayerName)
+                {
+                    numGazeAtOtherPlayer++;
+                    durGazeAtOtherPlayer += CurrentGazeBehaviour.Duration;
                 }
                 for (int i = gazeBehaviors.Count - 1; i >= 0 && gazeBehaviors[i].EndingTime > timeThreshold; i--)
                 {
@@ -100,6 +117,11 @@ namespace RoboticPlayer
                     {
                         numGazeAtMainscreen++;
                         durGazeAtMainscreen += gazeBehaviors[i].Duration;
+                    }
+                    else if (gazeBehaviors[i].Target == OtherPlayerName)
+                    {
+                        numGazeAtOtherPlayer++;
+                        durGazeAtOtherPlayer += CurrentGazeBehaviour.Duration;
                     }
                 }
 
@@ -126,6 +148,18 @@ namespace RoboticPlayer
                     GAZE_MAINSCREEN_AVG_DUR = durGazeAtMainscreen;
                     GAZE_MAINSCREEN_PERIOD = PERIOD_TIME_WINDOW;
                 }
+
+                if (numGazeAtOtherPlayer != 0)
+                {
+                    durGazeAtOtherPlayer /= numGazeAtOtherPlayer;
+                    GAZE_OTHER_PLAYER_AVG_DUR = durGazeAtOtherPlayer;
+                    GAZE_OTHER_PLAYER_PERIOD = PERIOD_TIME_WINDOW / numGazeAtOtherPlayer;
+                }
+                else
+                {
+                    GAZE_OTHER_PLAYER_AVG_DUR = durGazeAtOtherPlayer;
+                    GAZE_OTHER_PLAYER_PERIOD = PERIOD_TIME_WINDOW;
+                }
                 //Console.WriteLine("++++++ " + GAZE_ROBOT_AVG_DUR + " " + GAZE_ROBOT_PERIOD + " " + GAZE_SCREEN_AVG_DUR + " " + GAZE_SCREEN_PERIOD);
             }
         }
@@ -135,17 +169,17 @@ namespace RoboticPlayer
             string nextTarget = "";
             int expectedPeriod = -1;
 
-            if (CurrentGazeBehaviour.Target != PlayerGazeAtRobot && GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != "mainscreen" && GAZE_MAINSCREEN_PERIOD < PERIOD_TIME_WINDOW)
+            if (CurrentGazeBehaviour.Target != PlayerGazeAtRobot && GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != OtherPlayerName && GAZE_OTHER_PLAYER_PERIOD < PERIOD_TIME_WINDOW)
             {
-                if (GAZE_ROBOT_PERIOD < GAZE_MAINSCREEN_PERIOD)
+                if (GAZE_ROBOT_PERIOD < GAZE_OTHER_PLAYER_PERIOD)
                 {
                     nextTarget = Name;
                     expectedPeriod = (int) GAZE_ROBOT_PERIOD;
                 }
                 else
                 {
-                    nextTarget = "mainscreen";
-                    expectedPeriod = (int) GAZE_MAINSCREEN_PERIOD;
+                    nextTarget = OtherPlayerName;
+                    expectedPeriod = (int) GAZE_OTHER_PLAYER_PERIOD;
                 }
             }
             else if (GAZE_ROBOT_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != PlayerGazeAtRobot)
@@ -153,10 +187,10 @@ namespace RoboticPlayer
                 nextTarget = Name;
                 expectedPeriod = (int) GAZE_ROBOT_PERIOD;
             }
-            else if (GAZE_MAINSCREEN_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != "mainscreen")
+            else if (GAZE_OTHER_PLAYER_PERIOD < PERIOD_TIME_WINDOW && CurrentGazeBehaviour.Target != OtherPlayerName)
             {
-                nextTarget = "mainscreen";
-                expectedPeriod = (int) GAZE_MAINSCREEN_PERIOD;
+                nextTarget = OtherPlayerName;
+                expectedPeriod = (int) GAZE_OTHER_PLAYER_PERIOD;
             }
 
             return (nextTarget, expectedPeriod);
