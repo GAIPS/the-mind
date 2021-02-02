@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +39,24 @@ public class GameManager : MonoBehaviour
     public Player[] players;
     public Pile pile;
     private int topOfThePile;
+    public static int CONDITION;
+    private int[][][] cardsPerLevelPerCondition = new int[][][] {
+        new int[][] {
+            new int[] { 11, 43, 12 },
+            new int[] { 26, 49, 24, 40, 25, 39 },
+            new int[] { 9, 18, 34, 8, 19, 35, 10, 25, 33 }
+        },
+        new int[][] {
+            new int[] { 12, 44, 13 },
+            new int[] { 27, 50, 25, 41, 26, 40 },
+            new int[] { 10, 19, 35, 9, 20, 36, 11, 26, 34 }
+        },
+        new int[][] {
+            new int[] { 10, 42, 11 },
+            new int[] { 25, 48, 23, 39, 24, 38 },
+            new int[] { 8, 17, 33, 7, 18, 34, 9, 24, 32 }
+        }
+    };
 
     private GameMasterThalamusConnector _thalamusConnector;
 
@@ -49,6 +68,7 @@ public class GameManager : MonoBehaviour
         _thalamusConnector = null;
         GameState = GameState.Connection;
         audioSource = GetComponent<AudioSource>();
+        CONDITION = -1;
     }
 
     // Update is called once per frame
@@ -261,15 +281,25 @@ public class GameManager : MonoBehaviour
     List<List<int>> DealCards()
     {
         List<List<int>> hands = new List<List<int>>();
-        List<int> cards = new List<int>();
-        while (cards.Count < NumPlayers * Level)
+        List<int> cards;
+        if (CONDITION == -1)
         {
-            int nextCard = Random.Range(1, 100);
-            if (!cards.Contains(nextCard))
+            cards = new List<int>();
+            while (cards.Count < NumPlayers * Level)
             {
-                cards.Add(nextCard);
+                int nextCard = Random.Range(1, 100);
+                if (!cards.Contains(nextCard))
+                {
+                    cards.Add(nextCard);
+                }
             }
         }
+        else
+        {
+            cards = new List<int>(cardsPerLevelPerCondition[CONDITION][Level - 1]);
+        }
+
+
         for (int i = 0; i < NumPlayers; i++)
         {
             List<int> hand = cards.GetRange(i * Level, Level);

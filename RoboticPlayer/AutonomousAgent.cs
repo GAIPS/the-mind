@@ -114,6 +114,7 @@ namespace RoboticPlayer
         protected Stopwatch lastCardStopWatch;
         protected Stopwatch sessionStartStopWatch;
         protected int nextTimeToPlay;
+        private string GazeType;
 
         public AutonomousAgent(string clientName, string character, int playerID, string gazeType)
             : base(clientName, character)
@@ -121,9 +122,9 @@ namespace RoboticPlayer
 
             SetPublisher<IAutonomousAgentPublisher>();
             TMPublisher = new TheMindPublisher(base.Publisher);
+            GazeType = gazeType;
             if (gazeType == "f")
             {
-
             }
             else if (gazeType == "r")
             {
@@ -227,7 +228,7 @@ namespace RoboticPlayer
 
         public void ConnectToGM()
         {
-            TMPublisher.ConnectToGM(ID, "Agent" + ID);
+            TMPublisher.ConnectToGM(ID, "Agent-" + GazeType);
         }
 
         public void StopMainLoop()

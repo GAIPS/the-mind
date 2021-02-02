@@ -1,11 +1,11 @@
-C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\obj\Debug\ThalamusGameMasterClient.csprojAssemblyReference.cache
-C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\ThalamusGameMasterClient.exe.config
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\ThalamusGameMasterClient.exe
-C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\ThalamusGameMasterClient.pdb
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\CookComputing.XmlRpcV2.dll
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\Thalamus.dll
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\TheMindThalamusMessages.dll
+C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\ThalamusGameMasterClient.exe.config
+C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\ThalamusGameMasterClient.pdb
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\bin\Debug\TheMindThalamusMessages.pdb
+C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\obj\Debug\ThalamusGameMasterClient.csprojAssemblyReference.cache
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\obj\Debug\ThalamusGameMasterClient.csproj.CopyComplete
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\obj\Debug\ThalamusGameMasterClient.exe
 C:\Users\Filipa\Devel\the-mind\ThalamusGameMasterClient\obj\Debug\ThalamusGameMasterClient.pdb

@@ -26,8 +26,9 @@ namespace RoboticPlayer
                 character = args[1];
                 playerID = Int16.Parse(args[2]);
                 gazeType = args[3];
-                AutonomousAgent theMindPlayer = new PaceAdapter(clientName, character, playerID, gazeType);
-                
+                AutonomousAgent theMindPlayer = new AutonomousAgent(clientName, character, playerID, gazeType);
+                //AutonomousAgent theMindPlayer = new PaceAdapter(clientName, character, playerID, gazeType);
+
                 string command = Console.ReadLine();
                 while (command != "exit")
                 {

@@ -59,6 +59,22 @@ public class Player : MonoBehaviour
     {
         IsConnected = true;
         Name = name;
+        string[] splitted = name.Split('-');
+        if (splitted.Length > 1)
+        {
+            if (splitted[1] == "f")
+            {
+                GameManager.CONDITION = 0;
+            }
+            else if (splitted[1] == "r")
+            {
+                GameManager.CONDITION = 1;
+            }
+            else if (splitted[1] == "p")
+            {
+                GameManager.CONDITION = 2;
+            }
+        }
     }
 
     public void RefocusSignal()
