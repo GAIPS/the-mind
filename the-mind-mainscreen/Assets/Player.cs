@@ -62,11 +62,11 @@ public class Player : MonoBehaviour
         string[] splitted = name.Split('-');
         if (splitted.Length > 1)
         {
-            if (splitted[1] == "f")
+            if (splitted[1] == "m")
             {
                 GameManager.CONDITION = 0;
             }
-            else if (splitted[1] == "r")
+            else if (splitted[1] == "mj")
             {
                 GameManager.CONDITION = 1;
             }

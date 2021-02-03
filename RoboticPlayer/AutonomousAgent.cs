@@ -111,13 +111,20 @@ namespace RoboticPlayer
             if (gazeType == "f")
             {
             }
-            else if (gazeType == "r")
+            else if (gazeType == "m")
             {
                 gazeController = new ReactiveGazeController(this);
+                gazeController.JOINT_ATTENTION = false;
+            }
+            else if (gazeType == "mj")
+            {
+                gazeController = new ReactiveGazeController(this);
+                gazeController.JOINT_ATTENTION = true;
             }
             else if (gazeType == "p")
             {
                 gazeController = new ProactiveGazeController(this);
+                gazeController.JOINT_ATTENTION = true;
             }
             ID = playerID;
             TopOfThePile = 0;

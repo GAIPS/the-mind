@@ -24,6 +24,7 @@ namespace RoboticPlayer
         protected long PROACTIVE_NEXT_SHIFT;
         private int GAZE_MIN_DURATION = 1000;//miliseconds
         private Random random;
+        public bool JOINT_ATTENTION;
 
         public ReactiveGazeController(AutonomousAgent thalamusClient)
         {
@@ -72,7 +73,7 @@ namespace RoboticPlayer
                             currentGazeDuration.Restart();
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
-                        else if (!LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != LastMovingPlayer.CurrentGazeBehaviour.Target)
+                        else if (JOINT_ATTENTION && !LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != LastMovingPlayer.CurrentGazeBehaviour.Target)
                         {
                             Console.WriteLine("------------------------ gaze at where " + LastMovingPlayer.Name + " is gazing " + LastMovingPlayer.CurrentGazeBehaviour.Target);
                             currentTarget = LastMovingPlayer.CurrentGazeBehaviour.Target;
@@ -80,8 +81,16 @@ namespace RoboticPlayer
                             currentGazeDuration.Restart();
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
+                        else if (!JOINT_ATTENTION && !LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != "mainscreen")
+                        {
+                            Console.WriteLine("------------------------ mutual gaze break");
+                            currentTarget = "mainscreen";
+                            aa.TMPublisher.GazeAtTarget("mainscreen");
+                            currentGazeDuration.Restart();
+                            NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
+                        }
 
-                        
+
                         //proactive
                         if (PROACTIVE_NEXT_SHIFT != -1 && currentGazeDuration.ElapsedMilliseconds >= PROACTIVE_NEXT_SHIFT)
                         {

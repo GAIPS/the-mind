@@ -15,7 +15,7 @@ namespace RoboticPlayer
             int playerID;
             string gazeType;
 
-            if (args.Length != 4 && args[4] != "f" && args[4] != "r" && args[4] != "p")
+            if (args.Length != 4 && args[4] != "m" && args[4] != "mj" && args[4] != "p")
             {
                 Console.WriteLine("Usage: " + Environment.GetCommandLineArgs()[0] + " <ClientName> <CharacterName> <PlayerID> [frp]");
                 return;
