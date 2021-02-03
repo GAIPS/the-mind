@@ -42,19 +42,19 @@ public class GameManager : MonoBehaviour
     public static int CONDITION;
     private int[][][] cardsPerLevelPerCondition = new int[][][] {
         new int[][] {
-            new int[] { 11, 43, 12 },
-            new int[] { 26, 49, 24, 40, 25, 39 },
-            new int[] { 9, 18, 34, 8, 19, 35, 10, 25, 33 }
+            new int[] { 39, 6, 17 },
+            new int[] { 11, 23, 12, 36, 10, 38 },
+            new int[] { 7, 32, 43, 8, 29, 41, 9, 20, 42 }
         },
         new int[][] {
-            new int[] { 12, 44, 13 },
-            new int[] { 27, 50, 25, 41, 26, 40 },
-            new int[] { 10, 19, 35, 9, 20, 36, 11, 26, 34 }
+            new int[] { 40, 7, 18 },
+            new int[] { 12, 24, 13, 37, 11, 39 },
+            new int[] { 8, 33, 44, 9, 30, 42, 10, 21, 43 }
         },
         new int[][] {
-            new int[] { 10, 42, 11 },
-            new int[] { 25, 48, 23, 39, 24, 38 },
-            new int[] { 8, 17, 33, 7, 18, 34, 9, 24, 32 }
+            new int[] { 38, 5, 16 },
+            new int[] { 10, 22, 11, 35, 9, 37 },
+            new int[] { 6, 31, 42, 7, 28, 40, 8, 19, 41 }
         }
     };
 
