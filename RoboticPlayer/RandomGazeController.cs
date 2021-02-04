@@ -38,20 +38,20 @@ namespace RoboticPlayer
                     {
                         string target = targets[random.Next(0, 3)];
                         Console.WriteLine("------------------------ gaze RANDOMLY at SCREEN");
-                        aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                        aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, (int) aa.SessionStartStopWatch.ElapsedMilliseconds);
                         currentTarget = target;
                         aa.TMPublisher.GazeAtTarget(currentTarget);
                         currentGazeDuration.Restart();
-                        aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                        aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, (int) aa.SessionStartStopWatch.ElapsedMilliseconds);
                         NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
 
                         if (target == SCREEN)
                         {
-                            nextgazeShift = random.Next((int)(AVG_DUR_SCREEN * 1.25), (int)(AVG_DUR_SCREEN * 0.75));
+                            nextgazeShift = random.Next((int)(AVG_DUR_SCREEN * 0.75), (int)(AVG_DUR_SCREEN * 1.25));
                         }
                         else
                         {
-                            nextgazeShift = random.Next((int)(AVG_DUR_PLAYER * 1.25), (int)(AVG_DUR_PLAYER * 0.75));
+                            nextgazeShift = random.Next((int)(AVG_DUR_PLAYER * 0.75), (int)(AVG_DUR_PLAYER * 1.25));
                         }
                     }
                 }

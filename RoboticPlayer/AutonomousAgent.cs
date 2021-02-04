@@ -27,8 +27,8 @@ namespace RoboticPlayer
 
     public interface IGazeBehaviours : IPerception
     {
-        void GazeBehaviourStarted(string gazer, string target, long timestamp);
-        void GazeBehaviourFinished(string gazer, string target, long timestamp);
+        void GazeBehaviourStarted(string gazer, string target, int timestamp);
+        void GazeBehaviourFinished(string gazer, string target, int timestamp);
 
     }
 
@@ -89,12 +89,12 @@ namespace RoboticPlayer
                 publisher.GlanceAtTarget(targetName);
             }
 
-            public void GazeBehaviourStarted(string gazer, string target, long timestamp)
+            public void GazeBehaviourStarted(string gazer, string target, int timestamp)
             {
                 publisher.GazeBehaviourStarted(gazer, target, timestamp);
             }
 
-            public void GazeBehaviourFinished(string gazer, string target, long timestamp)
+            public void GazeBehaviourFinished(string gazer, string target, int timestamp)
             {
                 publisher.GazeBehaviourFinished(gazer, target, timestamp);
             }

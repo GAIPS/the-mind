@@ -225,15 +225,15 @@ namespace RoboticPlayer
                     if (CurrentGazeBehaviour == null)
                     {
                         CurrentGazeBehaviour = new GazeBehavior(ID, ge.Target, ge.Timestamp);
-                        publisher.GazeBehaviourStarted(Name, ge.Target, ge.Timestamp);
+                        publisher.GazeBehaviourStarted(Name, ge.Target, (int)ge.Timestamp);
                     }
                     else if (ge.Target != CurrentGazeBehaviour.Target)
                     {
                         CurrentGazeBehaviour.UpdateEndtingTime(ge.Timestamp);
                         gazeBehaviors.Add(CurrentGazeBehaviour);
-                        publisher.GazeBehaviourStarted(Name, CurrentGazeBehaviour.Target, ge.Timestamp);
+                        publisher.GazeBehaviourStarted(Name, CurrentGazeBehaviour.Target, (int)ge.Timestamp);
                         CurrentGazeBehaviour = new GazeBehavior(ID, ge.Target, ge.Timestamp);
-                        publisher.GazeBehaviourStarted(Name, ge.Target, ge.Timestamp);
+                        publisher.GazeBehaviourStarted(Name, ge.Target, (int)ge.Timestamp);
                         if (ge.Target != "elsewhere")
                         {
                             ReactiveGazeController.LastMovingPlayer = this;

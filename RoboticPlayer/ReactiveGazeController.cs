@@ -66,31 +66,31 @@ namespace RoboticPlayer
                         if (LastMovingPlayer.IsGazingAtRobot() && currentTarget != LastMovingPlayer.Name)
                         {
                             Console.WriteLine("------------------------ gaze back " + LastMovingPlayer.Name);
-                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = LastMovingPlayer.Name;
                             aa.TMPublisher.GazeAtTarget(LastMovingPlayer.Name);
                             currentGazeDuration.Restart();
-                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
                         else if (JOINT_ATTENTION && !LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != LastMovingPlayer.CurrentGazeBehaviour.Target)
                         {
                             Console.WriteLine("------------------------ gaze at where " + LastMovingPlayer.Name + " is gazing " + LastMovingPlayer.CurrentGazeBehaviour.Target);
-                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = LastMovingPlayer.CurrentGazeBehaviour.Target;
                             aa.TMPublisher.GazeAtTarget(LastMovingPlayer.CurrentGazeBehaviour.Target);
                             currentGazeDuration.Restart();
-                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
                         else if (!JOINT_ATTENTION && !LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != "mainscreen")
                         {
                             Console.WriteLine("------------------------ mutual gaze break");
-                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = "mainscreen";
                             aa.TMPublisher.GazeAtTarget("mainscreen");
                             currentGazeDuration.Restart();
-                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
 
@@ -99,11 +99,11 @@ namespace RoboticPlayer
                         if (PROACTIVE_NEXT_SHIFT != -1 && currentGazeDuration.ElapsedMilliseconds >= PROACTIVE_NEXT_SHIFT)
                         {
                             Console.WriteLine(">>>>> PROACTIVE <<<<< gaze at " + PROACTIVE_NEXT_TARGET + " prev-dur " + currentGazeDuration.ElapsedMilliseconds);
-                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = PROACTIVE_NEXT_TARGET;
                             aa.TMPublisher.GazeAtTarget(PROACTIVE_NEXT_TARGET);
                             currentGazeDuration.Restart();
-                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, (int)aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
                     }
