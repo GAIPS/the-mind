@@ -25,7 +25,14 @@ namespace RoboticPlayer
         StopMainLoop
     }
 
-    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, IGazeStateActions { }
+    public interface IGazeBehaviours : IPerception
+    {
+        void GazeBehaviourStarted(string gazer, string target, long timestamp);
+        void GazeBehaviourFinished(string gazer, string target, long timestamp);
+
+    }
+
+    public interface IAutonomousAgentPublisher : IThalamusPublisher, ITabletsGM, IGazeStateActions, IGazeBehaviours { }
 
     class AutonomousAgent : ThalamusClient, IGMTablets, IGazeOpenFacePerceptions
     {
@@ -81,6 +88,16 @@ namespace RoboticPlayer
             {
                 publisher.GlanceAtTarget(targetName);
             }
+
+            public void GazeBehaviourStarted(string gazer, string target, long timestamp)
+            {
+                publisher.GazeBehaviourStarted(gazer, target, timestamp);
+            }
+
+            public void GazeBehaviourFinished(string gazer, string target, long timestamp)
+            {
+                publisher.GazeBehaviourFinished(gazer, target, timestamp);
+            }
         }
 
         public TheMindPublisher TMPublisher;
@@ -97,7 +114,7 @@ namespace RoboticPlayer
         protected List<int> cardsLeft;
         protected Stopwatch PlayStopWatch;
         protected Stopwatch lastCardStopWatch;
-        protected Stopwatch sessionStartStopWatch;
+        public Stopwatch SessionStartStopWatch;
         protected int nextTimeToPlay;
         private string GazeType;
 
@@ -108,8 +125,10 @@ namespace RoboticPlayer
             SetPublisher<IAutonomousAgentPublisher>();
             TMPublisher = new TheMindPublisher(base.Publisher);
             GazeType = gazeType;
-            if (gazeType == "f")
+            if (gazeType == "r")
             {
+                gazeController = new RandomGazeController(this);
+                gazeController.JOINT_ATTENTION = false;
             }
             else if (gazeType == "m")
             {
@@ -134,8 +153,8 @@ namespace RoboticPlayer
             randomNums = new Random();
             PlayStopWatch = new Stopwatch();
             lastCardStopWatch = new Stopwatch();
-            sessionStartStopWatch = new Stopwatch();
-            sessionStartStopWatch.Start();
+            SessionStartStopWatch = new Stopwatch();
+            SessionStartStopWatch.Start();
             nextTimeToPlay = -1;
             Thread mainLoopThread = new Thread(MainLoop);
             mainLoopThread.Start();
@@ -241,7 +260,7 @@ namespace RoboticPlayer
             mut.WaitOne();
             eventsList.Add(GameState.NextLevel);
             mut.ReleaseMutex();
-            sessionStartStopWatch.Restart();
+            SessionStartStopWatch.Restart();
         }
 
         public void StartLevel(int level, int teamLives, int[] p0Hand, int[] p1Hand, int[] p2Hand)
@@ -423,11 +442,11 @@ namespace RoboticPlayer
             {
                 if (gazeController.Player0.ID == faceId)
                 {
-                    gazeController.Player0.GazeEvent(target, sessionStartStopWatch.ElapsedMilliseconds);
+                    gazeController.Player0.GazeEvent(target, SessionStartStopWatch.ElapsedMilliseconds);
                 }
                 else if (gazeController.Player1.ID == faceId)
                 {
-                    gazeController.Player1.GazeEvent(target, sessionStartStopWatch.ElapsedMilliseconds);
+                    gazeController.Player1.GazeEvent(target, SessionStartStopWatch.ElapsedMilliseconds);
                 }
 
             }
@@ -448,7 +467,6 @@ namespace RoboticPlayer
             if (faceId == gazeController.Player0.ID)
             {
                 gazeController.Player0.SessionStarted = true;
-                gazeController.SessionStarted = true;
             }
             else if (faceId == gazeController.Player1.ID)
             {

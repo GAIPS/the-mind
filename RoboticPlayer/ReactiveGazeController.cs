@@ -10,35 +10,33 @@ namespace RoboticPlayer
 {
     class ReactiveGazeController
     {
-        private AutonomousAgent aa;
+        protected AutonomousAgent aa;
         private int ID;
         public PlayerGaze Player0;
         public PlayerGaze Player1;
         public static PlayerGaze LastMovingPlayer;
         private Thread mainLoop;
-        private Stopwatch currentGazeDuration;
+        protected Stopwatch currentGazeDuration;
         //private long previousGazeShitTime;
         protected string currentTarget;
         public bool SessionStarted;
         protected string PROACTIVE_NEXT_TARGET;
         protected long PROACTIVE_NEXT_SHIFT;
         private int GAZE_MIN_DURATION = 1000;//miliseconds
-        private Random random;
         public bool JOINT_ATTENTION;
 
         public ReactiveGazeController(AutonomousAgent thalamusClient)
         {
             aa = thalamusClient;
             ID = 2;
-            Player0 = new PlayerGaze(0);
-            Player1 = new PlayerGaze(1);
+            Player0 = new PlayerGaze(0, aa.TMPublisher);
+            Player1 = new PlayerGaze(1, aa.TMPublisher);
             LastMovingPlayer = Player0;
             currentTarget = "mainscreen";
             currentGazeDuration = new Stopwatch();
             currentGazeDuration.Start();
             mainLoop = new Thread(Update);
             mainLoop.Start();
-            random = new Random();
         }
 
         public void Dispose()
@@ -56,7 +54,7 @@ namespace RoboticPlayer
         }
 
 
-        private void Update()
+        public virtual void Update()
         {
             while (true)
             {
@@ -68,25 +66,31 @@ namespace RoboticPlayer
                         if (LastMovingPlayer.IsGazingAtRobot() && currentTarget != LastMovingPlayer.Name)
                         {
                             Console.WriteLine("------------------------ gaze back " + LastMovingPlayer.Name);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = LastMovingPlayer.Name;
                             aa.TMPublisher.GazeAtTarget(LastMovingPlayer.Name);
                             currentGazeDuration.Restart();
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
                         else if (JOINT_ATTENTION && !LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != LastMovingPlayer.CurrentGazeBehaviour.Target)
                         {
                             Console.WriteLine("------------------------ gaze at where " + LastMovingPlayer.Name + " is gazing " + LastMovingPlayer.CurrentGazeBehaviour.Target);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = LastMovingPlayer.CurrentGazeBehaviour.Target;
                             aa.TMPublisher.GazeAtTarget(LastMovingPlayer.CurrentGazeBehaviour.Target);
                             currentGazeDuration.Restart();
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
                         else if (!JOINT_ATTENTION && !LastMovingPlayer.IsGazingAtRobot() && LastMovingPlayer.CurrentGazeBehaviour.Target != "elsewhere" && currentTarget != "mainscreen")
                         {
                             Console.WriteLine("------------------------ mutual gaze break");
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = "mainscreen";
                             aa.TMPublisher.GazeAtTarget("mainscreen");
                             currentGazeDuration.Restart();
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
 
@@ -95,9 +99,11 @@ namespace RoboticPlayer
                         if (PROACTIVE_NEXT_SHIFT != -1 && currentGazeDuration.ElapsedMilliseconds >= PROACTIVE_NEXT_SHIFT)
                         {
                             Console.WriteLine(">>>>> PROACTIVE <<<<< gaze at " + PROACTIVE_NEXT_TARGET + " prev-dur " + currentGazeDuration.ElapsedMilliseconds);
+                            aa.TMPublisher.GazeBehaviourFinished("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             currentTarget = PROACTIVE_NEXT_TARGET;
                             aa.TMPublisher.GazeAtTarget(PROACTIVE_NEXT_TARGET);
                             currentGazeDuration.Restart();
+                            aa.TMPublisher.GazeBehaviourStarted("player2", currentTarget, aa.SessionStartStopWatch.ElapsedMilliseconds);
                             NextPractiveBehaviour(currentGazeDuration.ElapsedMilliseconds);
                         }
                     }

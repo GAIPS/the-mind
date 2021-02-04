@@ -28,9 +28,11 @@ namespace RoboticPlayer
         public static Mutex mut = new Mutex();
         public bool SessionStarted;
         private List<string> buffer;
+        private IAutonomousAgentPublisher publisher;
 
-        public PlayerGaze(int id)
+        public PlayerGaze(int id, IAutonomousAgentPublisher pub)
         {
+            publisher = pub;
             ID = id;
             PlayerGazeAtRobot = "player2";
             Name = "player" + id;
@@ -223,12 +225,15 @@ namespace RoboticPlayer
                     if (CurrentGazeBehaviour == null)
                     {
                         CurrentGazeBehaviour = new GazeBehavior(ID, ge.Target, ge.Timestamp);
+                        publisher.GazeBehaviourStarted(Name, ge.Target, ge.Timestamp);
                     }
                     else if (ge.Target != CurrentGazeBehaviour.Target)
                     {
                         CurrentGazeBehaviour.UpdateEndtingTime(ge.Timestamp);
                         gazeBehaviors.Add(CurrentGazeBehaviour);
+                        publisher.GazeBehaviourStarted(Name, CurrentGazeBehaviour.Target, ge.Timestamp);
                         CurrentGazeBehaviour = new GazeBehavior(ID, ge.Target, ge.Timestamp);
+                        publisher.GazeBehaviourStarted(Name, ge.Target, ge.Timestamp);
                         if (ge.Target != "elsewhere")
                         {
                             ReactiveGazeController.LastMovingPlayer = this;
