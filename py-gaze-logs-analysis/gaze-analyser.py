@@ -4,6 +4,29 @@ import math
 import numpy
 from cross_correlation_by_simon_ho import cross_correlation
 
+
+class GazeBehavior:
+	def __init__(self, gazer, target, starting_time, ending_time):
+		self.gazer = gazer
+		self.target = target
+		self.starting_time = starting_time
+		self.ending_time = ending_time
+		self.duration = ending_time - starting_time
+
+class CoOccurrenceGazeBehavior:
+	def __init__(self, initiator, follower, starting_time, ending_time):
+		self.initiator = initiator
+		self.follower = follower
+		self.starting_time = starting_time
+		self.ending_time = ending_time
+		self.duration = ending_time - starting_time
+
+def AvgDurCoGB(cogbs):
+	temp = []
+	for gb in cogbs:
+		temp.append(gb.duration)
+	return numpy.mean(temp)
+
 FRAMERATE = 25
 
 def isNaN(num):
@@ -35,14 +58,29 @@ def GetSignalArrayOfGazingAt(gbs, target, initial_timestamp, ending_timestamp):
 			array.append(0)
 	return array
 
+def GazeBehavioursCoOccurrence(gbs1, target1, gbs2, target2):
+	cooccurrences = []
+	for	bg1 in gbs1:
+		if bg1.target == target1:
+			for bg2 in gbs2:
+				if bg2.target == target2:
+					if bg2.starting_time >= bg1.ending_time:
+						break
+					elif bg2.starting_time >= bg1.starting_time and bg2.ending_time <= bg1.ending_time:
+						gb = CoOccurrenceGazeBehavior(bg1.gazer, bg2.gazer, bg2.starting_time, bg2.ending_time)
+						cooccurrences.append(gb)
+					elif bg2.starting_time >= bg1.starting_time and bg2.starting_time < bg1.ending_time and bg2.ending_time > bg1.ending_time:
+						gb = CoOccurrenceGazeBehavior(bg1.gazer, bg2.gazer, bg2.starting_time, bg1.ending_time)
+						cooccurrences.append(gb)
+					elif bg2.starting_time < bg1.starting_time and bg2.ending_time > bg1.starting_time and bg2.ending_time < bg1.ending_time:
+						gb = CoOccurrenceGazeBehavior(bg2.gazer, bg1.gazer, bg1.starting_time, bg2.ending_time)
+						cooccurrences.append(gb)
+					elif bg2.starting_time < bg1.starting_time and bg2.ending_time > bg1.starting_time and bg2.ending_time > bg1.ending_time:
+						gb = CoOccurrenceGazeBehavior(bg2.gazer, bg1.gazer, bg1.starting_time, bg1.ending_time)
+						cooccurrences.append(gb)
+	return cooccurrences
 
-class GazeBehavior:
-	def __init__(self, gazer, target, starting_time, ending_time):
-		self.gazer = gazer
-		self.target = target
-		self.starting_time = starting_time
-		self.ending_time = ending_time
-		self.duration = ending_time - starting_time
+
 
 for filename in os.listdir("./logs"):
 	reading_file = open("./logs/" + filename, "r")
@@ -116,13 +154,17 @@ for filename in os.listdir("./logs"):
 			player_gbs_per_target[targets[gb.target]].append(gb.duration)
 		for target in targets:
 			num_gazes = len(player_gbs_per_target[targets[target]])
-			if num_gazes > 0:
+			if num_gazes > 0: 
 				avg_dur = numpy.mean(player_gbs_per_target[targets[target]])
 			else:
 				avg_dur = 0
 			output_file.write(str(gazer) + "\t" + str(target) + "\t" + str(num_gazes) + "\t" + str(avg_dur) + "\n")
 
-	
+
+	print ">cooccurrenceGazeBehavior"
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "player0", players_gbs[gazers["player0"]], "player2")
+	print len(cogbs)
+	print AvgDurCoGB(cogbs)
 
 	player0_player1 = GetSignalArrayOfGazingAt(players_gbs[gazers["player0"]], "player1", initial_timestamp, ending_timestamp)
 	player0_player2 = GetSignalArrayOfGazingAt(players_gbs[gazers["player0"]], "player2", initial_timestamp, ending_timestamp)
