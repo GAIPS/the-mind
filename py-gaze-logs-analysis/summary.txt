@@ -1,0 +1,29 @@
+-----------------------------------
+| ThalamusMaster 2021/2/4 - 21:38 |
+-----------------------------------
+>gazer	target	num_gazes	avg_dur
+player2	player2	0	0
+player2	mainscreen	29	5038.689655172414
+player2	player0	30	2024.6666666666667
+player2	player1	34	1954.764705882353
+player2	elsewhere	0	0
+player0	player2	0	0
+player0	mainscreen	0	0
+player0	player0	0	0
+player0	player1	0	0
+player0	elsewhere	0	0
+player1	player2	0	0
+player1	mainscreen	0	0
+player1	player0	0	0
+player1	player1	0	0
+player1	elsewhere	0	0
+>GB	gazers_pair	max_R	max_lag_adj
+MUTUAL_GAZE	player2_player0	0.0	-50.0
+MUTUAL_GAZE	player2_player1	0.0	-50.0
+MUTUAL_GAZE	player0_player1	nan	-50.0
+JA_mainscreen	player2_player0	0.0	-50.0
+JA_mainscreen	player2_player1	0.0	-50.0
+JA_mainscreen	player0_player1	nan	-50.0
+JA_player1	player2_player0	0.0	-50.0
+JA_player0	player2_player1	0.0	-50.0
+JA_player2	player0_player1	nan	-50.0
