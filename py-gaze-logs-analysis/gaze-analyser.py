@@ -13,6 +13,10 @@ class GazeBehavior:
 		self.ending_time = ending_time
 		self.duration = ending_time - starting_time
 
+def PrintGBS(gbs):
+	for gb in gbs:
+		print ">>> " + gb.gazer + "->" + gb.target + " " + str(gb.starting_time) + "-" + str(gb.ending_time)
+
 class CoOccurrenceGazeBehavior:
 	def __init__(self, initiator, follower, starting_time, ending_time):
 		self.initiator = initiator
@@ -20,6 +24,10 @@ class CoOccurrenceGazeBehavior:
 		self.starting_time = starting_time
 		self.ending_time = ending_time
 		self.duration = ending_time - starting_time
+
+def PrintCoGBS(cogbs):
+	for cgb in cogbs:
+		print ">>>>>> " + cgb.initiator + "->" + cgb.follower + " " + str(cgb.starting_time) + "-" + str(cgb.ending_time)
 
 def AvgDurCoGB(cogbs):
 	temp = []
@@ -82,17 +90,15 @@ def GazeBehavioursCoOccurrence(gbs1, target1, gbs2, target2):
 
 
 
+output_file = open("summary.txt", "w")
 for filename in os.listdir("./logs"):
 	reading_file = open("./logs/" + filename, "r")
-	output_file = open("summary.txt", "w")
 	splited = filename.split(".")
 	name = splited[0]
 	splited = splited[1].split("at")
 	date = splited[0].split("-")
 	time = splited[1].split("-")
-	output_file.write("-----------------------------------\n")
-	output_file.write("| " + name + " " + date[0] + "/" + date[1] + "/" + date[2] + " - " + time[0] + ":" + time[1] + " |\n")
-	output_file.write("-----------------------------------\n")
+	condition = ""
 
 	count_gaze = 0
 	start = False
@@ -113,6 +119,13 @@ for filename in os.listdir("./logs"):
 	}
 
 	for line in reading_file:
+		#finish header with condition info
+		if condition == "" and len(line.split(" ")) < 4 and len(line.split(" ")[2].split(":")) > 3 and line.split(" ")[2].split(":")[2] == "RoboticPlayer" and line.split(" ")[2].split(":")[3] == "ITabletsGM.ConnectToGM":
+			params = line.split(" ")[2].split(":")[5][1:-3].split(";")
+			condition = params[1].split("=")[1]
+			output_file.write("----------------------------------------------\n")
+			output_file.write("| " + name + " " + date[0] + "/" + date[1] + "/" + date[2] + " - " + time[0] + ":" + time[1] + " - " + condition.upper() + " |\n")
+			output_file.write("----------------------------------------------\n")
 		#start to consider the gazebehaviours after the first startLevel
 		if len(line.split(" ")) < 4 and len(line.split(" ")[2].split(":")) > 3 and line.split(" ")[2].split(":")[2] == "GameMaster" and line.split(" ")[2].split(":")[3] == "IGMTablets.StartLevel":
 			start = True
@@ -161,10 +174,63 @@ for filename in os.listdir("./logs"):
 			output_file.write(str(gazer) + "\t" + str(target) + "\t" + str(num_gazes) + "\t" + str(avg_dur) + "\n")
 
 
-	print ">cooccurrenceGazeBehavior"
+	output_file.write(">cooccurrenceGazeBehavior" + "\t" + "sequence" + "\t" + "num_behav" + "\t" + "avg_dur" + "\n")
 	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "player0", players_gbs[gazers["player0"]], "player2")
-	print len(cogbs)
-	print AvgDurCoGB(cogbs)
+	temp1 = filter(lambda cogb: cogb.initiator == "player2", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player0", cogbs)
+	output_file.write("Total_MT" + "\t" + "player2_player0" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("MT" + "\t" + "player2_player0" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("MT" + "\t" + "player0_player2" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "player1", players_gbs[gazers["player1"]], "player2")
+	temp1 = filter(lambda cogb: cogb.initiator == "player2", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player1", cogbs)
+	output_file.write("Total_MT" + "\t" + "player2_player1" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("MT" + "\t" + "player2_player1" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("MT" + "\t" + "player1_player2" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player0"]], "player1", players_gbs[gazers["player1"]], "player0")
+	temp1 = filter(lambda cogb: cogb.initiator == "player0", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player1", cogbs)
+	output_file.write("Total_MT" + "\t" + "player0_player1" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("MT" + "\t" + "player0_player1" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("MT" + "\t" + "player1_player0" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "mainscreen", players_gbs[gazers["player0"]], "mainscreen")
+	temp1 = filter(lambda cogb: cogb.initiator == "player2", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player0", cogbs)
+	output_file.write("Total_JA" + "\t" + "player2_player0_mainscreen" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("JA" + "\t" + "player2_player0_mainscreen" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("JA" + "\t" + "player0_player2_mainscreen" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "mainscreen", players_gbs[gazers["player1"]], "mainscreen")
+	temp1 = filter(lambda cogb: cogb.initiator == "player2", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player1", cogbs)
+	output_file.write("Total_JA" + "\t" + "player2_player1_mainscreen" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("JA" + "\t" + "player2_player1_mainscreen" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("JA" + "\t" + "player1_player2_mainscreen" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player0"]], "mainscreen", players_gbs[gazers["player1"]], "mainscreen")
+	temp1 = filter(lambda cogb: cogb.initiator == "player0", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player1", cogbs)
+	output_file.write("Total_JA" + "\t" + "player0_player1_mainscreen" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("JA" + "\t" + "player0_player1_mainscreen" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("JA" + "\t" + "player1_player0_mainscreen" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "player1", players_gbs[gazers["player0"]], "player1")
+	temp1 = filter(lambda cogb: cogb.initiator == "player2", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player0", cogbs)
+	output_file.write("Total_JA" + "\t" + "player2_player0_player1" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("JA" + "\t" + "player2_player0_player1" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("JA" + "\t" + "player0_player2_player1" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player2"]], "player0", players_gbs[gazers["player1"]], "player0")
+	temp1 = filter(lambda cogb: cogb.initiator == "player2", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player1", cogbs)
+	output_file.write("Total_JA" + "\t" + "player2_player1_player0" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("JA" + "\t" + "player2_player1_player0" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("JA" + "\t" + "player1_player2_player0" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+	cogbs = GazeBehavioursCoOccurrence(players_gbs[gazers["player0"]], "player2", players_gbs[gazers["player1"]], "player2")
+	temp1 = filter(lambda cogb: cogb.initiator == "player0", cogbs)
+	temp2 = filter(lambda cogb: cogb.initiator == "player1", cogbs)
+	output_file.write("Total_JA" + "\t" + "player0_player1_player2" + "\t" + str(len(cogbs)) + "\t" + str(AvgDurCoGB(cogbs)) + "\n")
+	output_file.write("JA" + "\t" + "player0_player1_player2" + "\t" + str(len(temp1)) + "\t" + str(AvgDurCoGB(temp1)) + "\n")
+	output_file.write("JA" + "\t" + "player1_player0_player2" + "\t" + str(len(temp2)) + "\t" + str(AvgDurCoGB(temp2)) + "\n")
+
+
 
 	player0_player1 = GetSignalArrayOfGazingAt(players_gbs[gazers["player0"]], "player1", initial_timestamp, ending_timestamp)
 	player0_player2 = GetSignalArrayOfGazingAt(players_gbs[gazers["player0"]], "player2", initial_timestamp, ending_timestamp)
