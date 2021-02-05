@@ -231,7 +231,7 @@ namespace RoboticPlayer
                     {
                         CurrentGazeBehaviour.UpdateEndtingTime(ge.Timestamp);
                         gazeBehaviors.Add(CurrentGazeBehaviour);
-                        publisher.GazeBehaviourStarted(Name, CurrentGazeBehaviour.Target, (int)ge.Timestamp);
+                        publisher.GazeBehaviourFinished(Name, CurrentGazeBehaviour.Target, (int)ge.Timestamp);
                         CurrentGazeBehaviour = new GazeBehavior(ID, ge.Target, ge.Timestamp);
                         publisher.GazeBehaviourStarted(Name, ge.Target, (int)ge.Timestamp);
                         if (ge.Target != "elsewhere")
