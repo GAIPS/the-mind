@@ -49,19 +49,19 @@ namespace RoboticPlayer
             buffer = new List<string>();
             gazeBehaviors = new List<GazeBehavior>();
             gazeEvents = new List<GazeEvent>();
-            GazeEventsDispatcher = new Thread(DispacthGazeEvents);
-            GazeEventsDispatcher.Start();
+            //GazeEventsDispatcher = new Thread(DispacthGazeEvents);
+            //GazeEventsDispatcher.Start();
         }
 
         public bool IsGazingAtRobot()
         {
-            return CurrentGazeBehaviour.Target == PlayerGazeAtRobot;
+            return CurrentGazeBehaviour != null && CurrentGazeBehaviour.Target == PlayerGazeAtRobot;
         }
 
 
         public void GazeEvent(string target, long timeMiliseconds)
         {
-            if (CurrentGazeBehaviour == null || CurrentGazeBehaviour.Target != target)
+            /*if (CurrentGazeBehaviour == null || CurrentGazeBehaviour.Target != target)
             {
                 if (buffer.Count > 0 && buffer[0] != target)
                 {
@@ -79,7 +79,28 @@ namespace RoboticPlayer
                 gazeEvents.Add(ge);
                 mut.ReleaseMutex();
             }
-            lastEventTime = timeMiliseconds;
+            lastEventTime = timeMiliseconds;*/
+            if (CurrentGazeBehaviour == null)
+            {
+                CurrentGazeBehaviour = new GazeBehavior(ID, target, timeMiliseconds);
+                publisher.GazeBehaviourStarted(Name, target, (int)timeMiliseconds);
+            }
+            else if (target != CurrentGazeBehaviour.Target)
+            {
+                CurrentGazeBehaviour.UpdateEndtingTime(timeMiliseconds);
+                gazeBehaviors.Add(CurrentGazeBehaviour);
+                publisher.GazeBehaviourFinished(Name, CurrentGazeBehaviour.Target, (int)timeMiliseconds);
+                CurrentGazeBehaviour = new GazeBehavior(ID, target, timeMiliseconds);
+                publisher.GazeBehaviourStarted(Name, target, (int)timeMiliseconds);
+                if (target != "elsewhere")
+                {
+                    ReactiveGazeController.LastMovingPlayer = this;
+                }
+            }
+            else if (target == CurrentGazeBehaviour.Target)
+            {
+                CurrentGazeBehaviour.UpdateEndtingTime(timeMiliseconds);
+            }
         }
 
         public void UpdateRhythms()

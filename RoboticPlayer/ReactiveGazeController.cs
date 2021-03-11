@@ -31,7 +31,7 @@ namespace RoboticPlayer
             ID = 2;
             Player0 = new PlayerGaze(0, aa.TMPublisher);
             Player1 = new PlayerGaze(1, aa.TMPublisher);
-            LastMovingPlayer = Player0;
+            LastMovingPlayer = Player1;
             currentTarget = "mainscreen";
             currentGazeDuration = new Stopwatch();
             currentGazeDuration.Start();
@@ -60,7 +60,8 @@ namespace RoboticPlayer
             {
                 if (SessionStarted)
                 {
-                    if (currentGazeDuration.ElapsedMilliseconds >= GAZE_MIN_DURATION && Player0.SessionStarted && Player0.CurrentGazeBehaviour != null && Player1.SessionStarted && Player1.CurrentGazeBehaviour != null)
+                    //if (currentGazeDuration.ElapsedMilliseconds >= GAZE_MIN_DURATION && Player0.SessionStarted && Player0.CurrentGazeBehaviour != null && Player1.SessionStarted && Player1.CurrentGazeBehaviour != null)
+                    if (currentGazeDuration.ElapsedMilliseconds >= GAZE_MIN_DURATION && Player0.SessionStarted && Player1.SessionStarted && Player1.CurrentGazeBehaviour != null)
                     {
                         //reactive
                         if (LastMovingPlayer.IsGazingAtRobot() && currentTarget != LastMovingPlayer.Name)

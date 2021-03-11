@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RoboticPlayer
@@ -37,6 +38,7 @@ namespace RoboticPlayer
                         theMindPlayer.ConnectToGM();
                     }
                     command = Console.ReadLine();
+                    //Thread.Sleep(30000);
                 }
                 theMindPlayer.StopMainLoop();
 

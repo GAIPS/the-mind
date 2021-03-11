@@ -156,8 +156,8 @@ namespace RoboticPlayer
             SessionStartStopWatch = new Stopwatch();
             SessionStartStopWatch.Start();
             nextTimeToPlay = -1;
-            Thread mainLoopThread = new Thread(MainLoop);
-            mainLoopThread.Start();
+            //Thread mainLoopThread = new Thread(MainLoop);
+            //mainLoopThread.Start();
         }
 
         private void MainLoop()
@@ -229,6 +229,7 @@ namespace RoboticPlayer
                     }
                     mut.ReleaseMutex();
                 }
+                //Thread.Sleep(2000);
             }
         }
 
